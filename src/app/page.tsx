@@ -128,8 +128,8 @@ export default function HomePage() {
       <section className="py-32 px-6 lg:px-8 relative mesh-gold">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <div className="badge-pill badge-crimson mx-auto mb-6">
+            <div className="mb-16 max-w-2xl">
+              <div className="badge-pill badge-crimson mb-6">
                 What We Do
               </div>
               <h2
@@ -139,6 +139,10 @@ export default function HomePage() {
                 Building{" "}
                 <span className="text-gradient-crimson">Finance Acumen</span>
               </h2>
+              <p className="text-cream/35 mt-5 text-lg leading-relaxed">
+                From flagship competitions to published research — structured
+                pathways across every major finance discipline.
+              </p>
             </div>
           </ScrollReveal>
 
@@ -211,59 +215,64 @@ export default function HomePage() {
       <section className="py-32 px-6 lg:px-8 relative mesh-crimson grain">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <div className="badge-pill badge-gold mx-auto mb-6">
-                <Zap className="w-3 h-3" />
-                Our Impact
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Scale That <span className="text-gradient-gold">Matters</span>
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={200}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  value: "15+",
-                  label: "Events Annually",
-                  icon: Calendar,
-                  glow: "card-glow-gold",
-                },
-                {
-                  value: "800+",
-                  label: "Registrations",
-                  icon: Users,
-                  glow: "card-glow-crimson",
-                },
-                {
-                  value: "8+",
-                  label: "Industry Partners",
-                  icon: Building2,
-                  glow: "card-glow-gold",
-                },
-                {
-                  value: "15+",
-                  label: "Quant Strategies",
-                  icon: TrendingUp,
-                  glow: "card-glow-crimson",
-                },
-              ].map((stat) => (
-                <div key={stat.label} className={`${stat.glow} p-8 text-center`}>
-                  <stat.icon className="w-7 h-7 text-gold/60 mx-auto mb-4" />
-                  <div
-                    className="text-4xl font-extrabold text-cream mb-2"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-cream/30">{stat.label}</div>
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <div className="badge-pill badge-gold mb-6">
+                  <Zap className="w-3 h-3" />
+                  Our Impact
                 </div>
-              ))}
+                <h2
+                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Scale That{" "}
+                  <span className="text-gradient-gold">Matters</span>
+                </h2>
+                <p className="text-cream/35 mt-5 text-lg leading-relaxed max-w-md">
+                  Year after year, our events and initiatives reach hundreds of
+                  students and connect them with leading financial firms.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  {
+                    value: "15+",
+                    label: "Events Annually",
+                    icon: Calendar,
+                    glow: "card-glow-gold",
+                  },
+                  {
+                    value: "800+",
+                    label: "Registrations",
+                    icon: Users,
+                    glow: "card-glow-crimson",
+                  },
+                  {
+                    value: "8+",
+                    label: "Industry Partners",
+                    icon: Building2,
+                    glow: "card-glow-gold",
+                  },
+                  {
+                    value: "15+",
+                    label: "Quant Strategies",
+                    icon: TrendingUp,
+                    glow: "card-glow-crimson",
+                  },
+                ].map((stat) => (
+                  <div key={stat.label} className={`${stat.glow} p-6 text-center`}>
+                    <stat.icon className="w-6 h-6 text-gold/60 mx-auto mb-3" />
+                    <div
+                      className="text-3xl font-extrabold text-cream mb-1"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-cream/30">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -350,141 +359,66 @@ export default function HomePage() {
 
       <div className="divider-glow" />
 
-      {/* ===== INVESTMENT TEAM HIGHLIGHT ===== */}
-      <section className="py-32 px-6 lg:px-8 relative mesh-crimson grain">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <div className="badge-pill badge-crimson mb-6">
-                  <TrendingUp className="w-3 h-3" />
-                  Investment Team
-                </div>
-                <h2
-                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  Student-Run{" "}
-                  <span className="text-gradient-crimson">
-                    Investment Initiative
-                  </span>
-                </h2>
-                <p className="text-cream/35 mb-6 leading-relaxed text-lg">
-                  Our Investment Team runs structured research across equity,
-                  quantitative finance, and venture capital — developing 15+
-                  strategies and publishing market-leading analysis.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {["Equity Research", "Quant Finance", "Venture Capital"].map(
-                    (div) => (
-                      <span
-                        key={div}
-                        className="badge-pill badge-gold text-xs font-normal normal-case tracking-normal"
-                      >
-                        {div}
-                      </span>
-                    )
-                  )}
-                </div>
-                <Link href="/investment-team" className="btn-gold">
-                  Explore Investment Team{" "}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { value: "15+", label: "Quantitative Strategies" },
-                  { value: "3", label: "Structured Divisions" },
-                  { value: "20+", label: "Research Reports" },
-                  { value: "5+", label: "Blog Publications" },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="card-glow-crimson p-6 text-center"
-                  >
-                    <div
-                      className="text-3xl font-extrabold text-cream mb-1"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-cream/25">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <div className="divider" />
-
       {/* ===== PARTNERS HIGHLIGHT — LOGO GRID + GALLERY ===== */}
       <section className="py-32 px-6 lg:px-8 relative mesh-gold">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <div className="badge-pill badge-cream mx-auto mb-6">
-                <Building2 className="w-3 h-3" />
-                Our Partners
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Industry{" "}
-                <span className="text-gradient-gold">Collaborators</span>
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          {/* Logo Grid */}
-          <ScrollReveal delay={200}>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-16">
-              {sponsors.map((s) => (
-                <div key={s.id} className="partner-logo-card">
-                  <Image
-                    src={s.logo}
-                    alt={s.name}
-                    width={100}
-                    height={50}
-                    className="object-contain max-h-12"
-                  />
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
+              <div>
+                <div className="badge-pill badge-cream mb-6">
+                  <Building2 className="w-3 h-3" />
+                  Our Partners
                 </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          {/* Gallery */}
-          <ScrollReveal delay={400}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="gallery-image relative h-64 md:h-80">
-                <Image
-                  src="/finfestpubli.jpg"
-                  alt="FinFest audience at Finance Club events"
-                  fill
-                  className="object-cover rounded-xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                <h2
+                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Industry{" "}
+                  <span className="text-gradient-gold">Collaborators</span>
+                </h2>
               </div>
-              <div className="gallery-image relative h-64 md:h-80">
-                <Image
-                  src="/publi.jpg"
-                  alt="Event audience at Finance Club sessions"
-                  fill
-                  className="object-cover rounded-xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={500}>
-            <div className="text-center mt-12">
-              <Link href="/sponsors" className="btn-gold">
+              <Link href="/sponsors" className="btn-gold shrink-0">
                 Partner With Us <ArrowRight className="w-4 h-4" />
               </Link>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={200}>
+            <div className="grid lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {sponsors.map((s) => (
+                  <div key={s.id} className="partner-logo-card">
+                    <Image
+                      src={s.logo}
+                      alt={s.name}
+                      width={100}
+                      height={50}
+                      className="object-contain max-h-12"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="lg:col-span-5 space-y-4">
+                <div className="gallery-image relative h-48 sm:h-56">
+                  <Image
+                    src="/finfestpubli.jpg"
+                    alt="FinFest audience at Finance Club events"
+                    fill
+                    className="object-cover rounded-xl"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                </div>
+                <div className="gallery-image relative h-48 sm:h-56">
+                  <Image
+                    src="/publi.jpg"
+                    alt="Event audience at Finance Club sessions"
+                    fill
+                    className="object-cover rounded-xl"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>
