@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Handshake,
@@ -16,14 +16,39 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { sponsors } from "@/data/sponsors";
+import SponsorCarousel from "@/components/SponsorCarousel";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function PartnersPage() {
   const [formState, setFormState] = useState<"idle" | "sending" | "sent">("idle");
+  const fullHeading = "Partner With Finance Club";
+  const [typedHeading, setTypedHeading] = useState("");
+  const [typingDone, setTypingDone] = useState(false);
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setTypedHeading(fullHeading.slice(0, i));
+      if (i >= fullHeading.length) {
+        clearInterval(interval);
+        setTypingDone(true);
+      }
+    }, 90);
+    return () => clearInterval(interval);
+  }, []);
+  const partnerWithLen = "Partner With ".length;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
+  const heroCollageImages = [
+    "/partner_1.png",
+    "/partner_2.jpeg",
+    "/partner_3.jpeg",
+    "/partner_4.jpeg",
+    "/partner_5.jpeg",
+    "/partner_6.jpeg",
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +61,7 @@ export default function PartnersPage() {
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nCompany: ${company || "N/A"}\n\nMessage:\n${message}`
     );
-    window.location.href = `mailto:kunalgore07@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:convener.finance.iitb@gmail.com?subject=${subject}&body=${body}`;
 
     setTimeout(() => {
       setFormState("sent");
@@ -73,10 +98,34 @@ export default function PartnersPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6 lg:px-8 mesh-hero grain overflow-hidden">
-        <div className="accent-orb-gold bottom-0 left-[30%]" />
-        <div className="accent-orb-crimson top-0 right-[10%]" />
-        <div className="relative z-10 max-w-4xl mx-auto">
+      <section className="relative min-h-screen pt-32 pb-20 px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 hidden sm:grid grid-cols-3 grid-rows-2 gap-0">
+          {heroCollageImages.map((src, index) => (
+            <div key={src} className="relative min-h-0 min-w-0">
+              <Image
+                src={src}
+                alt={`Partner collage ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="33vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-0 sm:hidden">
+          <Image
+            src="/partner_1.png"
+            alt="Partner collage background"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/70 sm:bg-black/75" />
+        <div className="absolute inset-0 pointer-events-none opacity-35 bg-[radial-gradient(circle_at_top_left,rgba(245,183,49,0.12),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(27,107,64,0.14),transparent_28%)]" />
+        {/* <div className="relative z-10 max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="badge-pill badge-gold mb-6">
               <Handshake className="w-3 h-3" /> Partnerships
@@ -92,12 +141,49 @@ export default function PartnersPage() {
                 IIT Bombay
               </span>
             </h1>
-            <p className="text-lg text-cream/35 max-w-2xl leading-relaxed">
+            <p className="text-lg text-cream/70 max-w-2xl leading-relaxed">
               Collaborate with IIT Bombay&apos;s premier finance society to access
               top talent, build your brand, and create impactful engagements.
             </p>
           </ScrollReveal>
-        </div>
+        </div> */}
+        <div className="relative z-10 max-w-4xl mx-auto">
+  <ScrollReveal>
+    <div className="backdrop-blur-md bg-black/40 border border-cream/10 rounded-3xl px-8 py-10 sm:px-10 sm:py-12">
+      <div className="badge-pill badge-gold mb-6">
+        <Handshake className="w-3 h-3" /> Partnerships
+      </div>
+      <h1
+        className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-tight mb-6 min-h-[1.2em] sm:min-h-[1.2em]"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        <span className="text-cream">
+          {typedHeading.slice(0, partnerWithLen)}
+        </span>
+        <span className="text-gradient-gold">
+          {typedHeading.slice(partnerWithLen)}
+        </span>
+        <span className="inline-block w-[2px] h-[0.9em] bg-gold align-middle ml-1 animate-pulse" />
+        <br />
+        <span
+          className={`text-cream/50 text-3xl sm:text-4xl inline-block transition-all duration-1000 ease-out ${
+            typingDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+          }`}
+        >
+          IIT Bombay
+        </span>
+      </h1>
+      <p
+        className={`text-xl text-cream/85 max-w-2xl leading-relaxed transition-all duration-1200 ease-out ${
+          typingDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        }`}
+      >
+        Collaborate with IIT Bombay&apos;s premier finance society to access
+        top talent, build your brand and create impactful engagements.
+      </p>
+    </div>
+  </ScrollReveal>
+</div>
       </section>
 
       <div className="divider" />
@@ -169,32 +255,8 @@ export default function PartnersPage() {
               </p>
             </div>
           </ScrollReveal>
-
           <ScrollReveal delay={200}>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-4xl mx-auto">
-              {sponsors.map((s) => (
-                <a
-                  key={s.id}
-                  href={s.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="partner-logo-card group"
-                >
-                  <div className="flex flex-col items-center gap-3">
-                    <Image
-                      src={s.logo}
-                      alt={s.name}
-                      width={80}
-                      height={48}
-                      className="object-contain max-h-10"
-                    />
-                    <span className="text-xs text-cream/20 group-hover:text-cream/50 transition-colors font-medium">
-                      {s.name}
-                    </span>
-                  </div>
-                </a>
-              ))}
-            </div>
+            <SponsorCarousel items={sponsors} />
           </ScrollReveal>
         </div>
       </section>
@@ -267,8 +329,16 @@ export default function PartnersPage() {
         <div className="accent-orb-gold top-0 right-1/4" />
         <div className="max-w-3xl mx-auto relative z-10">
           <ScrollReveal>
-            <div className="gradient-border p-8 sm:p-14 bg-[#0D0A0A]">
-              <div className="text-center mb-10">
+            <div className="gradient-border relative overflow-hidden p-8 sm:p-14 bg-[#0D0A0A]">
+  <Image
+    src="/art1.JPG"
+    alt=""
+    fill
+    className="object-cover opacity-[0.2] pointer-events-none select-none"
+    sizes="(max-width: 1024px) 100vw, 800px"
+  />
+  <div className="absolute inset-0 bg-[#0D0A0A]/80 pointer-events-none" />
+  <div className="relative z-10 text-center mb-10">
                 <Handshake className="w-12 h-12 text-gold mx-auto mb-6" />
                 <h2
                   className="text-3xl font-extrabold mb-3"
@@ -276,7 +346,7 @@ export default function PartnersPage() {
                 >
                   Get in <span className="text-gradient-gold">Touch</span>
                 </h2>
-                <p className="text-cream/25 max-w-md mx-auto">
+                <p className="text-cream/40 max-w-md mx-auto">
                   Interested in partnering with us? Fill out the form below and
                   we&apos;ll get back to you.
                 </p>
@@ -305,7 +375,7 @@ export default function PartnersPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-xs font-semibold text-cream/40 uppercase tracking-wider mb-2 block">
+                      <label className="text-xs font-semibold text-cream/80 uppercase tracking-wider mb-2 block">
                         Your Name *
                       </label>
                       <input
@@ -318,7 +388,7 @@ export default function PartnersPage() {
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-semibold text-cream/40 uppercase tracking-wider mb-2 block">
+                      <label className="text-xs font-semibold text-cream/80 uppercase tracking-wider mb-2 block">
                         Email *
                       </label>
                       <input
@@ -332,7 +402,7 @@ export default function PartnersPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-cream/40 uppercase tracking-wider mb-2 block">
+                    <label className="text-xs font-semibold text-cream/80 uppercase tracking-wider mb-2 block">
                       Company / Organisation
                     </label>
                     <input
@@ -344,7 +414,7 @@ export default function PartnersPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-cream/40 uppercase tracking-wider mb-2 block">
+                    <label className="text-xs font-semibold text-cream/80 uppercase tracking-wider mb-2 block">
                       Message *
                     </label>
                     <textarea
@@ -379,11 +449,11 @@ export default function PartnersPage() {
                 </h3>
                 <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
                   <a
-                    href="mailto:kunalgore07@gmail.com"
+                    href="convener.finance.iitb@gmail.com"
                     className="flex items-center gap-2 text-cream/25 hover:text-gold transition-colors"
                   >
                     <Mail className="w-4 h-4 text-gold/30" />{" "}
-                    kunalgore07@gmail.com
+                    convener.finance.iitb@gmail.com
                   </a>
                   <a
                     href="tel:+919876543210"

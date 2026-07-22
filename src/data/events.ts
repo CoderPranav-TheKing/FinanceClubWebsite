@@ -82,24 +82,6 @@ export const clubEvents: ClubEvent[] = [
     partnerName: "CFA Institute",
   },
   {
-    id: "comp-6",
-    name: "Wall Street IRL",
-    category: "competitions",
-    description:
-      "A simulation-style competition recreating the fast-paced environment of Wall Street trading floors.",
-    participationScale: "100+ participants",
-    outcome: "Experience in fast decision-making under market pressure.",
-  },
-  {
-    id: "comp-7",
-    name: "Strategy & Finance Games",
-    category: "competitions",
-    description:
-      "Interactive finance-themed strategy games designed to teach core financial concepts through gameplay.",
-    participationScale: "250+ participants",
-    outcome: "Gamified learning of portfolio management and market dynamics.",
-  },
-  {
     id: "comp-8",
     name: "Trading Simulation Events",
     category: "competitions",
@@ -112,10 +94,10 @@ export const clubEvents: ClubEvent[] = [
   // ── BOOTCAMPS ──
   {
     id: "boot-1",
-    name: "Learners' Space — Essentials of Finance",
+    name: "Learners' Space - Fundamentals of Finance",
     category: "bootcamps",
     description:
-      "A multi-week structured curriculum introducing students to the fundamentals of finance — from time value of money to portfolio theory.",
+      "A multi-week structured curriculum introducing students to the basics of finance - from time value of money to portfolio theory.",
     participationScale: "800+ registrations",
     outcome: "Strong foundational knowledge in core finance concepts.",
   },
@@ -130,17 +112,6 @@ export const clubEvents: ClubEvent[] = [
   },
 
   // ── SESSIONS ──
-  {
-    id: "sess-1",
-    name: "Barclays — Careers in Finance",
-    category: "sessions",
-    description:
-      "An industry session by Barclays professionals on career paths in global investment banking and markets.",
-    participationScale: "250+ attendees",
-    outcome: "Clarity on IB recruitment and day-to-day roles at a bulge-bracket bank.",
-    partnerLogo: "/barclays.png",
-    partnerName: "Barclays",
-  },
   {
     id: "sess-2",
     name: "Citadel Securities Session",
@@ -171,15 +142,6 @@ export const clubEvents: ClubEvent[] = [
     outcome: "Understanding of M&A mechanics and deal execution.",
   },
   {
-    id: "sess-5",
-    name: "Structured Products Session",
-    category: "sessions",
-    description:
-      "An advanced session on structured products, securitisation, and derivative-based instruments.",
-    participationScale: "120+ attendees",
-    outcome: "Knowledge of exotic financial instruments and their risk profiles.",
-  },
-  {
     id: "sess-6",
     name: "Corporate Careers in Finance",
     category: "sessions",
@@ -198,16 +160,7 @@ export const clubEvents: ClubEvent[] = [
       "An exclusive workshop on PE deal sourcing, evaluation, and portfolio management led by Warburg Pincus professionals.",
     participationScale: "100+ attendees",
     outcome: "Practical understanding of PE investment lifecycle.",
-  },
-  {
-    id: "work-2",
-    name: "CBDC Outreach — RBI",
-    category: "workshops",
-    description:
-      "A workshop on Central Bank Digital Currencies in collaboration with the Reserve Bank of India.",
-    participationScale: "150+ attendees",
-    outcome: "Understanding of digital currency frameworks and monetary policy implications.",
-  },
+  },  
 
   // ── CONFERENCES ──
   {
@@ -215,7 +168,7 @@ export const clubEvents: ClubEvent[] = [
     name: "FinFest",
     category: "conferences",
     description:
-      "Finance Club's flagship annual conference featuring keynote speakers, workshops, competitions, and networking with industry leaders.",
+      "Finance Club's flagship annual conference featuring keynote speakers, workshops, competitions and networking with industry leaders.",
     participationScale: "500+ participants",
     outcome: "Comprehensive exposure to the finance industry across multiple verticals.",
   },
@@ -226,7 +179,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Keynote Speaker Sessions",
     category: "finfest",
     description:
-      "Talks by industry titans — CXOs, fund managers, and policy makers sharing insights on markets and careers.",
+      "Talks by industry titans - CXOs, fund managers and policy makers sharing insights on markets and careers.",
     participationScale: "400+ attendees",
     outcome: "Inspiration and network-building with top finance professionals.",
   },
@@ -235,7 +188,7 @@ export const clubEvents: ClubEvent[] = [
     name: "FinFest Workshops",
     category: "finfest",
     description:
-      "Intensive hands-on workshops during FinFest covering financial modelling, quant strategies, and trading.",
+      "Intensive hands-on workshops during FinFest covering financial modelling, quant strategies and trading.",
     participationScale: "200+ participants",
     outcome: "Skill-building in high-demand finance areas.",
   },
@@ -244,7 +197,7 @@ export const clubEvents: ClubEvent[] = [
     name: "FinFest Competitions",
     category: "finfest",
     description:
-      "Multiple competitive tracks including trading, case studies, and quizzes with significant prize pools.",
+      "Multiple competitive tracks including trading, case studies and quizzes with significant prize pools.",
     participationScale: "300+ participants",
     outcome: "Competitive benchmarking against top finance talent nationally.",
   },
@@ -253,7 +206,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Finance Games at FinFest",
     category: "finfest",
     description:
-      "Interactive games simulating market scenarios — from options trading to macro forecasting.",
+      "Interactive games simulating market scenarios - from options trading to macro forecasting. Market Mayhem and Forensic Files were the standout games.",
     participationScale: "250+ participants",
     outcome: "Fun, gamified finance learning experience.",
   },
@@ -264,7 +217,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Internship Preparation Programme",
     category: "miscellaneous",
     description:
-      "Structured guidance sessions for students targeting summer internships in finance — covering resume, technicals, and interviews.",
+      "Structured guidance sessions for students targeting summer internships in finance — covering resume, technicals and interviews.",
     participationScale: "300+ students",
     outcome: "Higher conversion rates for finance internship applications.",
   },
@@ -273,7 +226,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Placement Preparation Programme",
     category: "miscellaneous",
     description:
-      "Mock interviews, group discussions, and case-study practice for final-year placement season.",
+      "Mock interviews, group discussions and case-study practice for final-year placement season.",
     participationScale: "200+ students",
     outcome: "Thorough preparation for Day-0/Day-1 placement processes.",
   },

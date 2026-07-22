@@ -35,10 +35,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <header className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">{post.title}</h1>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <User className="w-3.5 h-3.5 text-gold" />
-              {post.author}
-            </span>
+            
             <span className="flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5 text-gold" />
               {new Date(post.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}

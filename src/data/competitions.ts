@@ -18,6 +18,42 @@ export interface Competition {
 
 export const competitions: Competition[] = [
   {
+    id: "pm-2026",
+    slug: "portfolio-management",
+    name: "Portfolio Management Competition",
+    shortDescription: "A portfolio construction and management challenge for aspiring investors.",
+    description:
+      "Details for this competition will be announced soon. This placeholder page indicates the competition is under development and will include full rules, timelines and submission guidelines.",
+    status: "upcoming",
+    registrationDeadline: "2026-07-10",
+    submissionDeadline: "2026-07-20",
+    resultsDate: "2026-07-30",
+    rules: [
+      "Details will be published soon.",
+    ],
+    allowTeams: true,
+    maxTeamSize: 4,
+    image: "/competitions/portfolio.jpg",
+  },
+  {
+    id: "finsearch-2026",
+    slug: "finsearch",
+    name: "FinSearch",
+    shortDescription: "A multi-round research and stock-pitch challenge.",
+    description:
+      "Details for this competition will be announced soon. This placeholder page indicates the competition is under development and will include full rules, timelines and submission guidelines.",
+    status: "upcoming",
+    registrationDeadline: "2026-07-15",
+    submissionDeadline: "2026-06-25",
+    resultsDate: "2026-07-05",
+    rules: [
+      "Details will be published soon.",
+    ],
+    allowTeams: false,
+    maxTeamSize: 1,
+    image: "/competitions/finsearch.jpg",
+  },
+  {
     id: "1",
     slug: "erc-2026",
     name: "Equity Research Competition 2026",
@@ -26,7 +62,7 @@ export const competitions: Competition[] = [
     description:
       "The Equity Research Competition is Finance Club's flagship competition. Participants analyse a publicly listed company, building a comprehensive financial model and presenting a detailed equity research report with a buy, sell, or hold recommendation. Teams are evaluated on the depth of analysis, quality of financial modelling, and clarity of presentation.",
     status: "active",
-    registrationDeadline: "2026-04-01",
+    registrationDeadline: "2026-07-01",
     submissionDeadline: "2026-04-15",
     resultsDate: "2026-04-25",
     rules: [
@@ -87,6 +123,26 @@ export const competitions: Competition[] = [
     partnerName: "Citadel",
   },
   {
+    id: "citadel-trader-2026",
+    slug: "citadel-trader-id",
+    name: "Citadel Trader ID Challenge",
+    shortDescription: "A trading and market-making challenge with quantitative components.",
+    description:
+      "Details for this competition will be announced soon. This placeholder page indicates the competition is under development and will include full rules, timelines and submission guidelines.",
+    status: "upcoming",
+    registrationDeadline: "2026-11-01",
+    submissionDeadline: "2026-11-20",
+    resultsDate: "2026-11-30",
+    rules: [
+      "Details will be published soon.",
+    ],
+    allowTeams: false,
+    maxTeamSize: 1,
+    image: "/competitions/citadel.jpg",
+    partnerLogo: "/citadel.png",
+    partnerName: "Citadel",
+  },
+  {
     id: "4",
     slug: "imc-simulation-2026",
     name: "IMC Trading Simulation",
@@ -111,6 +167,24 @@ export const competitions: Competition[] = [
     partnerName: "IMC Trading",
   },
   {
+    id: "ibcc-2027",
+    slug: "investment-banking-case",
+    name: "Investment Banking Case Competition",
+    shortDescription: "Transaction-focused M&A and pitch cases for aspiring bankers.",
+    description:
+      "Details for this competition will be announced soon. This placeholder page indicates the competition is under development and will include full rules, timelines and submission guidelines.",
+    status: "upcoming",
+    registrationDeadline: "2027-01-05",
+    submissionDeadline: "2027-01-20",
+    resultsDate: "2027-01-30",
+    rules: [
+      "Details will be published soon.",
+    ],
+    allowTeams: true,
+    maxTeamSize: 4,
+    image: "/competitions/ibcc.jpg",
+  },
+  {
     id: "5",
     slug: "finance-quiz-cfa-2025",
     name: "Finance Quiz — CFA Collaboration",
@@ -133,71 +207,5 @@ export const competitions: Competition[] = [
     image: "/competitions/quiz.jpg",
     partnerLogo: "/cfa_institute.png",
     partnerName: "CFA Institute",
-  },
-  {
-    id: "6",
-    slug: "wall-street-irl-2025",
-    name: "Wall Street IRL",
-    shortDescription:
-      "A simulation recreating the fast-paced environment of Wall Street trading floors.",
-    description:
-      "A simulation-style competition recreating the fast-paced environment of Wall Street trading floors. Participants take on roles of traders, market makers, and analysts in a live-action format.",
-    status: "past",
-    registrationDeadline: "2025-09-01",
-    submissionDeadline: "2025-09-10",
-    resultsDate: "2025-09-15",
-    rules: [
-      "Teams of 4–5 members",
-      "Roles assigned at the start",
-      "Live simulation: 2 hours",
-      "Scoring based on team P&L and communication effectiveness",
-    ],
-    allowTeams: true,
-    maxTeamSize: 5,
-    image: "/competitions/wallstreet.jpg",
-  },
-  {
-    id: "7",
-    slug: "stockwise-2025",
-    name: "StockWise",
-    shortDescription:
-      "A stock-picking competition testing fundamental analysis and conviction.",
-    description:
-      "StockWise is a stock-picking competition where participants select a portfolio of stocks and defend their picks through a multi-round evaluation process.",
-    status: "past",
-    registrationDeadline: "2025-10-01",
-    submissionDeadline: "2025-10-15",
-    resultsDate: "2025-10-25",
-    rules: [
-      "Individual participation",
-      "Portfolio of 5 stocks",
-      "Must submit written rationale for each pick",
-      "Evaluated on returns + thesis quality",
-    ],
-    allowTeams: false,
-    maxTeamSize: 1,
-    image: "/competitions/stockwise.jpg",
-  },
-  {
-    id: "8",
-    slug: "strategy-games-2025",
-    name: "Strategy & Finance Games",
-    shortDescription:
-      "Interactive finance-themed strategy games teaching core financial concepts through gameplay.",
-    description:
-      "Interactive finance-themed strategy games designed to teach core financial concepts through gameplay. From options pricing boards to macro forecasting simulations.",
-    status: "past",
-    registrationDeadline: "2025-08-15",
-    submissionDeadline: "2025-08-20",
-    resultsDate: "2025-08-25",
-    rules: [
-      "Open to all — no prerequisites",
-      "Multiple game stations",
-      "Leaderboard scoring",
-      "Prizes for top scorers at each station",
-    ],
-    allowTeams: false,
-    maxTeamSize: 1,
-    image: "/competitions/games.jpg",
   },
 ];

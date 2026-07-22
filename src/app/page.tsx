@@ -1,6 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import LogoCarousel from "@/components/LogoCarousel";
+import HeroMoneyPile from "@/components/HeroMoneyPile";
+import FinanceWheel from "@/components/FinanceWheel";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -24,6 +28,8 @@ import { sponsors } from "@/data/sponsors";
 import { competitions } from "@/data/competitions";
 import { blogPosts } from "@/data/blogs";
 import ScrollReveal from "@/components/ScrollReveal";
+import RoadmapTimeline from "@/components/competitions/RoadmapTimeline";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 export default function HomePage() {
   const activeCompetitions = competitions.filter(
@@ -31,498 +37,498 @@ export default function HomePage() {
   );
   const latestBlogs = blogPosts.slice(0, 3);
 
+  const PLACEHOLDER = "Peak club?";
+  const REAL = "Finance Club";
+  const REAL_SPLIT = 7; 
+  const LINE2 = "IIT BOMBAY";
+
+  const TYPE_SPEED = 80;
+  const PAUSE_BEFORE_FADE = 800;
+  const FADE_DURATION = 400;
+  const PAUSE_BEFORE_LINE2 = 300;
+  const PAUSE_BEFORE_REST = 400;
+
+  // Phases: "type1" -> "fade1" -> "type2" -> "line2" -> "done"
+  const [phase, setPhase] = useState("type1");
+  const [typedPlaceholder, setTypedPlaceholder] = useState(0);
+  const [typedReal, setTypedReal] = useState(0);
+  const [typedLine2, setTypedLine2] = useState(0);
+  const [textOpacity, setTextOpacity] = useState(1);
+  const [showRest, setShowRest] = useState(false);
+
+  // Phase 1: Type "Peak club?"
+  useEffect(() => {
+    if (phase !== "type1") return;
+    if (typedPlaceholder < PLACEHOLDER.length) {
+      const t = setTimeout(() => setTypedPlaceholder((c) => c + 1), TYPE_SPEED);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      setTextOpacity(0);
+      setPhase("fade1");
+    }, PAUSE_BEFORE_FADE);
+    return () => clearTimeout(t);
+  }, [phase, typedPlaceholder]);
+
+  // Phase 2: Wait for fade out, switch text config, fade back in
+  useEffect(() => {
+    if (phase !== "fade1") return;
+    const t = setTimeout(() => {
+      setTextOpacity(1);
+      setPhase("type2");
+    }, FADE_DURATION);
+    return () => clearTimeout(t);
+  }, [phase]);
+
+  // Phase 3: Type "Finance Club"
+  useEffect(() => {
+    if (phase !== "type2") return;
+    if (typedReal < REAL.length) {
+      const t = setTimeout(() => setTypedReal((c) => c + 1), TYPE_SPEED);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => setPhase("line2"), PAUSE_BEFORE_LINE2);
+    return () => clearTimeout(t);
+  }, [phase, typedReal]);
+
+  // Phase 4: Type "IIT BOMBAY" and unlock the rest of the page
+  useEffect(() => {
+    if (phase !== "line2") return;
+    
+    if (typedLine2 < LINE2.length) {
+      const t = setTimeout(() => setTypedLine2((c) => c + 1), TYPE_SPEED);
+      return () => clearTimeout(t);
+    }
+    
+    // Both states are set at the same time so the cleanup doesn't abort the transition
+    setPhase("done");
+    setShowRest(true);
+  }, [phase, typedLine2]);
+
+  const isShowingPlaceholder = phase === "type1" || phase === "fade1";
+  const line1Done = phase === "type2" || phase === "line2" || phase === "done";
+  const line2Done = typedLine2 >= LINE2.length;
+
   return (
-    <div>
-      {/* ===== HERO — FULL SCREEN IMAGE ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
-        <Image
-          src="/bg1.png"
-          alt="Finance Club IIT Bombay"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-          quality={90}
-        />
-        {/* Dark overlay */}
-        <div className="hero-image-overlay" />
-        {/* Grain */}
-        <div
-          className="absolute inset-0 z-[2] pointer-events-none"
-          style={{
-            background:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E\")",
-            opacity: 0.35,
-          }}
-        />
+    <>
+      <div>
+        {/* ===== HERO — FULL SCREEN IMAGE ===== */}
+        {/* ===== HERO — FULL SCREEN IMAGE ===== */}
+<section className="relative min-h-screen w-full flex items-start overflow-hidden">
+  {/* Background Image Container */}
+  <div className="absolute inset-0 w-full h-full">
+    <Image
+      src="/bg1.png"
+      alt="Finance Club IIT Bombay"
+      fill
+      className="object-cover"
+      priority
+      sizes="100vw"
+      quality={90}
+    />
+    <div className="hero-image-overlay" />
+    <div
+      className="absolute inset-0 z-[2] pointer-events-none"
+      style={{
+        background:
+          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E\")",
+        opacity: 0.35,
+      }}
+    />
+    <div className="accent-orb-gold top-[10%] right-[5%] z-[2]" />
+    <div className="accent-orb-crimson bottom-[15%] left-[5%] z-[2]" style={{ animationDelay: "1.5s" }} />
+  </div>
 
-        {/* Accent orbs */}
-        <div className="accent-orb-gold top-[10%] right-[5%] z-[2]" />
-        <div
-          className="accent-orb-crimson bottom-[15%] left-[5%] z-[2]"
-          style={{ animationDelay: "1.5s" }}
-        />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20">
-          <div className="max-w-3xl animate-slide-up">
-            <div className="badge-pill badge-gold mb-8">
-              <Sparkles className="w-3 h-3" />
-              IIT Bombay&apos;s Premier Finance Society
-            </div>
-
-            <h1
-              className="text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold tracking-[-0.03em] leading-[1.05] mb-6"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              <span className="text-gradient-gold">Finance</span>{" "}
-              <span className="text-cream">Club</span>
-              <br />
-              <span className="text-cream/40 text-4xl sm:text-5xl lg:text-6xl">
-                IIT Bombay
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-cream/50 max-w-lg mb-10 leading-relaxed">
-              Building structured pathways into finance careers through
-              world-class competitions, research, and industry exposure.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/competitions" className="btn-gold">
-                <Trophy className="w-4 h-4" />
-                Explore Competitions
-              </Link>
-              <Link href="/resources" className="btn-ghost">
-                View Resources
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* Stats strip */}
-            <div className="flex items-center gap-8 mt-16 pt-8 border-t border-cream/[0.06]">
-              {[
-                { value: "15+", label: "Events Annually" },
-                { value: "800+", label: "Registrations" },
-                { value: "8+", label: "Industry Partners" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div
-                    className="text-2xl font-extrabold text-gold"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-cream/30 mt-0.5">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* ===== WHAT WE DO — BENTO GRID ===== */}
-      <section className="py-32 px-6 lg:px-8 relative mesh-gold">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="mb-16 max-w-2xl">
-              <div className="badge-pill badge-crimson mb-6">
-                What We Do
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Building{" "}
-                <span className="text-gradient-crimson">Finance Acumen</span>
-              </h2>
-              <p className="text-cream/35 mt-5 text-lg leading-relaxed">
-                From flagship competitions to published research — structured
-                pathways across every major finance discipline.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={200}>
-            <div className="bento-grid">
-              {[
-                {
-                  icon: Trophy,
-                  title: "Competitions",
-                  desc: "Flagship events like ERC and FinSearch testing real-world finance skills against top institutions.",
-                  color: "text-gold",
-                },
-                {
-                  icon: Users,
-                  title: "Sessions & Bootcamps",
-                  desc: "Intensive workshops on financial modeling, valuation, and trading strategies.",
-                  color: "text-crimson-light",
-                },
-                {
-                  icon: Lightbulb,
-                  title: "Research",
-                  desc: "Deep-dive initiatives covering equity, macro, and alternative investment analysis.",
-                  color: "text-cream",
-                },
-                {
-                  icon: BookOpen,
-                  title: "Publications",
-                  desc: "Market reports, sector analysis, and curated primers for every finance domain.",
-                  color: "text-gold",
-                },
-                {
-                  icon: BarChart3,
-                  title: "Industry Connect",
-                  desc: "Guest lectures and sessions with professionals from leading financial firms.",
-                  color: "text-crimson-light",
-                },
-                {
-                  icon: Award,
-                  title: "Career Prep",
-                  desc: "Mock interviews, case studies, and placement guidance for finance roles.",
-                  color: "text-cream",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="group cursor-default hover:bg-[#141010] transition-colors duration-300 relative"
-                >
-                  <item.icon
-                    className={`w-6 h-6 ${item.color} mb-4 group-hover:scale-110 transition-transform duration-300`}
-                  />
-                  <h3
-                    className="font-bold text-lg mb-2 text-cream"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-cream/35 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <div className="divider-glow" />
-
-      {/* ===== IMPACT / SCALE ===== */}
-      <section className="py-32 px-6 lg:px-8 relative mesh-crimson grain">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <div className="badge-pill badge-gold mb-6">
-                  <Zap className="w-3 h-3" />
-                  Our Impact
-                </div>
-                <h2
-                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  Scale That{" "}
-                  <span className="text-gradient-gold">Matters</span>
-                </h2>
-                <p className="text-cream/35 mt-5 text-lg leading-relaxed max-w-md">
-                  Year after year, our events and initiatives reach hundreds of
-                  students and connect them with leading financial firms.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  {
-                    value: "15+",
-                    label: "Events Annually",
-                    icon: Calendar,
-                    glow: "card-glow-gold",
-                  },
-                  {
-                    value: "800+",
-                    label: "Registrations",
-                    icon: Users,
-                    glow: "card-glow-crimson",
-                  },
-                  {
-                    value: "8+",
-                    label: "Industry Partners",
-                    icon: Building2,
-                    glow: "card-glow-gold",
-                  },
-                  {
-                    value: "15+",
-                    label: "Quant Strategies",
-                    icon: TrendingUp,
-                    glow: "card-glow-crimson",
-                  },
-                ].map((stat) => (
-                  <div key={stat.label} className={`${stat.glow} p-6 text-center`}>
-                    <stat.icon className="w-6 h-6 text-gold/60 mx-auto mb-3" />
-                    <div
-                      className="text-3xl font-extrabold text-cream mb-1"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-cream/30">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      {/* ===== FEATURED COMPETITIONS ===== */}
-      <section className="py-32 px-6 lg:px-8 relative mesh-gold grain">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left */}
-            <ScrollReveal>
-              <div className="badge-pill badge-gold mb-6">
-                <Trophy className="w-3 h-3" /> Competitions
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Compete Against the{" "}
-                <span className="text-gradient-gold">Best Minds</span>
-              </h2>
-              <p className="text-cream/35 mb-8 leading-relaxed max-w-md text-lg">
-                Our flagship competitions attract top talent from premier
-                institutions across the country.
-              </p>
-              <Link href="/competitions" className="btn-crimson">
-                All Competitions <ArrowRight className="w-4 h-4" />
-              </Link>
-            </ScrollReveal>
-
-            {/* Right — Comp cards */}
-            <ScrollReveal delay={300}>
-              <div className="space-y-4">
-                {activeCompetitions.slice(0, 4).map((comp) => (
-                  <Link key={comp.id} href={`/competitions/${comp.slug}`}>
-                    <div className="card-glow-gold p-6 flex items-center justify-between group mb-4">
-                      <div className="flex items-center gap-4 min-w-0">
-                        {comp.partnerLogo && (
-                          <Image
-                            src={comp.partnerLogo}
-                            alt={comp.partnerName || ""}
-                            width={32}
-                            height={32}
-                            className="object-contain shrink-0 rounded"
-                          />
-                        )}
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2 mb-1.5">
-                            <span
-                              className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider ${
-                                comp.status === "active"
-                                  ? "text-gold"
-                                  : "text-cream/30"
-                              }`}
-                            >
-                              {comp.status === "active" && (
-                                <span className="w-1.5 h-1.5 rounded-full bg-gold animate-glow-pulse" />
-                              )}
-                              {comp.status}
-                            </span>
-                          </div>
-                          <h4
-                            className="font-bold text-cream group-hover:text-gold transition-colors truncate"
-                            style={{ fontFamily: "var(--font-display)" }}
-                          >
-                            {comp.name}
-                          </h4>
-                          <p className="text-xs text-cream/25 mt-1 line-clamp-1">
-                            {comp.shortDescription}
-                          </p>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-cream/15 group-hover:text-gold transition-colors shrink-0 ml-4" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      <div className="divider-glow" />
-
-      {/* ===== PARTNERS HIGHLIGHT — LOGO GRID + GALLERY ===== */}
-      <section className="py-32 px-6 lg:px-8 relative mesh-gold">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
-              <div>
-                <div className="badge-pill badge-cream mb-6">
-                  <Building2 className="w-3 h-3" />
-                  Our Partners
-                </div>
-                <h2
-                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  Industry{" "}
-                  <span className="text-gradient-gold">Collaborators</span>
-                </h2>
-              </div>
-              <Link href="/sponsors" className="btn-gold shrink-0">
-                Partner With Us <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={200}>
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {sponsors.map((s) => (
-                  <div key={s.id} className="partner-logo-card">
-                    <Image
-                      src={s.logo}
-                      alt={s.name}
-                      width={100}
-                      height={50}
-                      className="object-contain max-h-12"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              <div className="lg:col-span-5 space-y-4">
-                <div className="gallery-image relative h-48 sm:h-56">
-                  <Image
-                    src="/finfestpubli.jpg"
-                    alt="FinFest audience at Finance Club events"
-                    fill
-                    className="object-cover rounded-xl"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
-                </div>
-                <div className="gallery-image relative h-48 sm:h-56">
-                  <Image
-                    src="/publi.jpg"
-                    alt="Event audience at Finance Club sessions"
-                    fill
-                    className="object-cover rounded-xl"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <div className="divider-glow" />
-
-      {/* ===== LATEST BLOGS ===== */}
-      <section className="py-32 px-6 lg:px-8 relative">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="flex items-end justify-between mb-14">
-              <div>
-                <div className="badge-pill badge-crimson mb-6">Insights</div>
-                <h2
-                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  Latest from the{" "}
-                  <span className="text-gradient-crimson">Blog</span>
-                </h2>
-              </div>
-              <Link
-                href="/blogs"
-                className="hidden sm:flex btn-ghost text-sm py-2.5 px-5"
-              >
-                All Posts <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={200}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {latestBlogs.map((post, i) => (
-                <Link key={post.id} href={`/blogs/${post.slug}`}>
-                  <div
-                    className={`${
-                      i === 0 ? "card-glow-crimson" : "card-premium"
-                    } p-7 group h-full`}
-                  >
-                    <div className="text-[10px] text-cream/20 mb-3 font-medium uppercase tracking-wider">
-                      {new Date(post.date).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                      <span className="mx-1.5">·</span>
-                      {post.author}
-                    </div>
-                    <h3
-                      className="font-bold text-lg mb-3 text-cream group-hover:text-gold transition-colors"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-cream/25 line-clamp-3 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                    <span className="inline-flex items-center gap-1 text-xs text-gold/40 mt-5 group-hover:text-gold transition-colors font-semibold uppercase tracking-wider">
-                      Read <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      {/* ===== CTA ===== */}
-      <section className="py-32 px-6 lg:px-8 mesh-crimson grain relative">
-        <div className="accent-orb-gold top-0 left-1/4" />
-        <div className="accent-orb-crimson bottom-0 right-1/4" />
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <ScrollReveal>
-            <div className="gradient-border p-10 sm:p-16 bg-[#0D0A0A]">
-              <div className="badge-pill badge-gold mx-auto mb-6">
-                Join the Community
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-5"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Ready to{" "}
-                <span className="text-gradient-gold">Level Up</span>?
-              </h2>
-              <p className="text-cream/30 max-w-md mx-auto mb-10 leading-relaxed">
-                Compete in flagship events, access curated resources, and be
-                part of IIT Bombay&apos;s most active finance community.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <Link href="/competitions" className="btn-gold">
-                  <Trophy className="w-4 h-4" /> Competitions
-                </Link>
-                <Link href="/team" className="btn-crimson">
-                  Meet the Team
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+  {/* Content Layer */}
+  <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full pt-24 sm:pt-32 pb-16">
+    {/* Badge */}
+    <div className="badge-pill badge-gold mb-5 sm:mb-8 text-xs">
+      <Sparkles className="w-3.5 h-3.5"/>
+      IIT Bombay&apos;s Premier Finance Society
     </div>
+
+    {/* Main Headline */}
+    <h1
+      className="whitespace-normal sm:whitespace-nowrap font-extrabold tracking-[0.03em] sm:tracking-[0.08em] leading-[1.2]  mb-4 sm:mb-6 select-none pt-1 sm:pt-5"
+      style={{
+        fontFamily: "var(--font-rocksalt)",
+        fontSize: "clamp(4.2rem, 6.2vw, 7.0rem)",
+      }}
+    >
+      <span 
+        className="inline-block transition-opacity duration-300 min-h-[1.1em]"
+        style={{ opacity: textOpacity }}
+      >
+        {isShowingPlaceholder ? (
+          <span className="text-cream/50">
+            {PLACEHOLDER.slice(0, typedPlaceholder)}
+          </span>
+        ) : (
+          <>
+            <span className="text-gradient-gold">
+              {REAL.slice(0, Math.min(typedReal, REAL_SPLIT))}
+            </span>
+            <span className="text-cream">
+              {REAL.slice(REAL_SPLIT, typedReal)}
+            </span>
+          </>
+        )}
+        {!line1Done && (
+          <span className="inline-block w-[4px] h-[0.85em] bg-gold ml-1 align-middle animate-[blink_0.9s_steps(1)_infinite]" />
+        )}
+      </span>
+
+      <br />
+      <span
+        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-15"
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(1.75rem, 3.2vw, 3rem)",
+        }}
+      >
+        {LINE2.slice(0, typedLine2)}
+        {line1Done && !line2Done && (
+          <span className="inline-block w-[3px] h-[0.75em] bg-cream/40 ml-1 align-middle animate-[blink_0.9s_steps(1)_infinite]" />
+        )}
+      </span>
+    </h1>
+
+    {showRest && (
+      <div className="animate-slide-up">
+        {/* Paragraph */}
+        <p className="text-base sm:text-xl text-cream/90 sm:text-cream/80 max-w-lg mb-6 sm:mb-10 leading-relaxed font-normal">
+          Building structured pathways into finance careers through
+          world-class competitions, research and industry exposure.
+        </p>
+
+        {/* ===== ALIGNED METRICS & ACTIONS ROW ===== */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 max-w-7xl pt-15">
+          {/* Glass Stats Grid Box */}
+          <div className="backdrop-blur-md bg-black/30 border border-cream/10 rounded-2xl py-4 sm:py-6 grid grid-cols-3 divide-x divide-cream/10 w-full lg:w-auto lg:min-w-[500px] shrink-0">
+            {[
+              { value: "15+", label: "Events Annually" },
+              { value: "1000+", label: "Registrations" },
+              { value: "8+", label: "Industry Partners" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center px-1.5 sm:px-4">
+                <div
+                  className="text-2xl sm:text-3xl font-extrabold text-gold mb-0.5"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  <AnimatedCounter value={stat.value} />
+                </div>
+                <div className="text-[9px] sm:text-xs text-cream/50 uppercase tracking-wider font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Action Buttons: Side-by-side compact on mobile, original layout on desktop */}
+          <div className="flex flex-row items-center gap-3 sm:gap-4 justify-start lg:justify-end w-full lg:w-auto lg:pb-1 lg:pr-2 lg:px-85">
+            <Link href="/competitions" className="btn-gold flex-1 sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
+              <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span>Explore Competitions</span>
+            </Link>
+            <Link href="/resources" className="btn-ghost flex-1 sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
+              <span>View Resources</span>
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+        {/* ===== WHAT WE DO — WHEEL ===== */}
+        <section className="py-10 px-6 lg:px-8 relative mesh-gold overflow-hidden">
+          <div className="accent-orb-gold top-[10%] left-[5%]" />
+          <div className="accent-orb-crimson bottom-[10%] right-[8%]" />
+
+          <div className="max-w-4xl mx-auto relative z-10 text-center">
+            <ScrollReveal>
+                <div className="badge-pill badge-gold mb-6 mx-auto">
+                  What We Do
+                </div>
+                <h2
+                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[0.02em]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Building{" "}
+                  <span className="text-gradient-gold">Finance Acumen</span>
+                </h2>
+                <p className="text-cream/35 mt-5 text-lg leading-relaxed max-w-2xl mx-auto">
+                  From flagship competitions to published research - structured
+                  pathways across every major finance discipline. Hover over any
+                  sector to explore what it covers.
+                </p>
+            </ScrollReveal>
+              
+            <ScrollReveal delay={200}>
+              <div className="mt-24 sm:mt-28 pb-25">
+                <FinanceWheel />
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+         <section className="py-10 px-6 lg:px-8 relative mesh-gold overflow-hidden">
+
+
+          {/* ===== IMPACT / SCALE ===== */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-cream/10">
+              <Image
+                src="/art5.jpg"
+                alt=""
+                fill
+                className="object-cover opacity-[0.8] pointer-events-none select-none"
+                sizes="(max-width: 1024px) 100vw, 1200px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#141010]/90 via-[#141010]/85 to-[#141010]/95 pointer-events-none" />
+
+              <ScrollReveal>
+                <div className="grid lg:grid-cols-2 gap-16 items-center pt-12 pb-12 px-8 sm:px-12">
+                  <div>
+                    <div className="badge-pill badge-gold mb-6">
+                      <Zap className="w-3 h-3" />
+                      Our Impact
+                    </div>
+                    <h2
+                      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      Scale That <span className="text-gradient-gold">Matters</span>
+                    </h2>
+                    <p className="text-cream/60 mt-5 text-lg leading-relaxed max-w-md">
+                      Year after year, our events and initiatives reach hundreds of
+                      students and connect them with leading financial firms.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { value: "15+", label: "Events Annually", icon: Calendar, glow: "card-glow-gold" },
+                      { value: "800+", label: "Registrations", icon: Users, glow: "card-glow-crimson" },
+                      { value: "8+", label: "Industry Partners", icon: Building2, glow: "card-glow-gold" },
+                      { value: "15+", label: "Quant Strategies", icon: TrendingUp, glow: "card-glow-crimson" },
+                    ].map((stat) => (
+                      <div key={stat.label} className={`${stat.glow} p-6 text-center`}>
+                        <stat.icon className="w-6 h-6 text-gold/60 mx-auto mb-3" />
+                        <div
+                          className="text-3xl font-extrabold text-cream mb-1"
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          <AnimatedCounter value={stat.value} />
+                        </div>
+                        <div className="text-xs text-cream/60">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        
+
+          {/* ===== FEATURED COMPETITIONS — ROADMAP ===== */}
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div className="lg:col-span-4">
+      <div className="badge-pill badge-gold mb-6">Competitions</div>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-[0.02em] leading-[1.35]" style={{ fontFamily: "var(--font-display)" }}>
+        Compete Against the <span className="text-gradient-gold">Best Minds</span>
+      </h2>
+      <p className="text-cream/35 mb-6">
+        Our flagship competitions create a structured pathway into finance throughout the academic year.
+      </p>
+      <Link href="/competitions" className="btn-crimson inline-flex items-center gap-2">
+        View All Competitions
+      </Link>
+    </div>
+
+    <div className="lg:col-span-8">
+      <div className="card-premium p-4 sm:p-6 rounded-2xl border border-cream/10">
+        <div className="relative">
+          <ScrollReveal>
+            {/* Height is dynamic (auto) on mobile, fixed on desktop */}
+            <div className="h-auto md:h-[420px] lg:h-[520px]">
+              <RoadmapTimeline />
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        </section>
+
+        <div className="divider-glow" />
+
+        {/* ===== PARTNERS HIGHLIGHT ===== */}
+        <section className="relative py-32 px-6 lg:px-8 overflow-hidden">
+          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
+            <div className="relative col-span-1 row-span-2">
+              <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="relative col-span-1 row-span-1">
+              <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="relative col-span-1 row-span-1">
+              <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+            </div>
+          </div>
+
+          <div className="absolute inset-0 bg-black/82" />
+          <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(245,183,49,0.12),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(27,107,64,0.14),transparent_28%)]" />
+
+          <div className="relative z-10 max-w-6xl mx-auto">
+            <ScrollReveal>
+              <div className="backdrop-blur-md bg-black/50 border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-14">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
+                  <div>
+                    <div className="badge-pill badge-cream mb-6">
+                      <Building2 className="w-3 h-3" />
+                      Our Partners
+                    </div>
+                    <h2
+                      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      Industry{" "}
+                      <span className="text-gradient-gold">Collaborators</span>
+                    </h2>
+                  </div>
+                  <Link href="/sponsors" className="btn-gold shrink-0">
+                    Partner With Us <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <LogoCarousel />
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* ===== LATEST BLOGS ===== */}
+        <section className="relative py-8 px-6 lg:px-8 overflow-hidden">
+          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
+            <div className="relative col-span-1 row-span-2">
+              <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="relative col-span-1 row-span-1">
+              <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="relative col-span-1 row-span-1">
+              <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
+            </div>
+          </div>
+
+          <div className="absolute inset-0 bg-black/82" />
+          <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(27,107,64,0.14),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(245,183,49,0.12),transparent_28%)]" />
+
+          <div className="relative z-10 max-w-6xl mx-auto">
+            <ScrollReveal>
+              <div className="backdrop-blur-md bg-black/50 border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-14">
+                <div className="flex items-end justify-between mb-14">
+                  <div>
+                    <div className="badge-pill badge-crimson mb-6">Insights</div>
+                    <h2
+                      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      Latest from the{" "}
+                      <span className="text-gradient-crimson">Blog</span>
+                    </h2>
+                  </div>
+                  <Link
+                    href="/blogs"
+                    className="hidden sm:flex btn-ghost text-sm py-2.5 px-5"
+                  >
+                    All Posts <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {latestBlogs.map((post, i) => (
+                    <Link key={post.id} href={`/blogs/${post.slug}`}>
+                      <div
+                        className={`${
+                          i === 0 ? "card-glow-crimson" : "card-premium"
+                        } p-7 group h-full`}
+                      >
+                        <div className="text-[10px] text-cream/20 mb-3 font-medium uppercase tracking-wider">
+                          {new Date(post.date).toLocaleDateString("en-IN", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                          <span className="mx-1.5">·</span>
+                        </div>
+                        <h3
+                          className="font-bold text-lg mb-3 text-cream group-hover:text-gold transition-colors"
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          {post.title}
+                        </h3>
+                        <p className="text-sm text-cream/25 line-clamp-3 leading-relaxed">
+                          {post.excerpt}
+                        </p>
+                        <span className="inline-flex items-center gap-1 text-xs text-gold/40 mt-5 group-hover:text-gold transition-colors font-semibold uppercase tracking-wider">
+                          Read <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <div className="divider" />
+
+        {/* ===== CTA ===== */}
+        <section className="py-32 px-6 lg:px-8 mesh-crimson grain relative">
+          <div className="accent-orb-gold top-0 left-1/4" />
+          <div className="accent-orb-crimson bottom-0 right-1/4" />
+          <div className="relative z-10 max-w-3xl mx-auto text-center">
+            <ScrollReveal>
+              <div className="gradient-border relative overflow-hidden p-10 sm:p-16 bg-[#0D0A0A]">
+                <Image
+                  src="/art2.jpg"
+                  alt=""
+                  fill
+                  className="object-cover opacity-[0.08] pointer-events-none select-none"
+                  sizes="(max-width: 1024px) 100vw, 800px"
+                />
+                <div className="absolute inset-0 bg-[#0D0A0A]/85 pointer-events-none" />
+                <div className="relative z-10 text-center">
+                  <div className="badge-pill badge-gold mx-auto mb-6">
+                    Join the Community
+                  </div>
+                  <h2
+                    className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-5"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    Ready to{" "}
+                    <span className="text-gradient-gold">Level Up</span>?
+                  </h2>
+                  <p className="text-cream/50 max-w-md mx-auto mb-10 leading-relaxed">
+                    Compete in flagship events, access curated resources and be
+                    part of IIT Bombay&apos;s most active finance community.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-4">
+                    <Link href="/competitions" className="btn-gold">
+                      <Trophy className="w-4 h-4" /> Competitions
+                    </Link>
+                    <Link href="/team" className="btn-crimson">
+                      Meet the Team
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

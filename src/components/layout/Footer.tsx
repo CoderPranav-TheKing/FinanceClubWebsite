@@ -17,7 +17,6 @@ const footerLinks = [
     links: [
       { label: "Team", href: "/team" },
       { label: "Sponsors", href: "/sponsors" },
-      { label: "Announcements", href: "/announcements" },
     ],
   },
 ];
@@ -39,12 +38,12 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm text-cream/25 max-w-xs mb-6 leading-relaxed">
-              Finance education, research, competitions, and industry exposure for IIT Bombay students.
+              Finance education, research, competitions and industry exposure for IIT Bombay students.
             </p>
             <div className="flex items-center gap-3">
               {[
                 { icon: Mail, href: "mailto:financeclub@iitb.ac.in", label: "Email" },
-                { icon: Instagram, href: "https://instagram.com/financeclubiitb", label: "Instagram" },
+                { icon: Instagram, href: "https://instagram.com/finance.iitb", label: "Instagram" },
                 { icon: Linkedin, href: "https://linkedin.com/company/finance-club-iitbombay", label: "LinkedIn" },
               ].map((s) => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
@@ -74,9 +73,9 @@ export default function Footer() {
 
         <div className="divider my-10" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-cream/15">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-cream/25">
           <span>&copy; {new Date().getFullYear()} Finance Club IIT Bombay</span>
-          <span>Built by the FC Tech Team</span>
+          <span>Built by the Finance Club IIT Bombay</span>
         </div>
       </div>
     </footer>

@@ -3,15 +3,43 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Aboreto } from 'next/font/google'
+import { Lato } from "next/font/google";
+import { Newsreader } from 'next/font/google'
+import { Rock_Salt } from 'next/font/google'
+
+const rockSalt = Rock_Salt({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-rocksalt',
+})
+
+const test = Newsreader({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-sans',
+})
+
+const test2 = Lato({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-display',
+})
+
+const fascinate = Aboreto({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-fascinate',
+})
 
 const inter = Inter({
-  variable: "--font-sans",
+  variable: "--font-extr",
   subsets: ["latin"],
   display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-display",
+  variable: "--font-ex",
   subsets: ["latin"],
   display: "swap",
 });
@@ -32,9 +60,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      <body className={`${inter.variable} ${fascinate.variable} ${rockSalt.variable} ${spaceGrotesk.variable} ${test.variable} ${test2.variable} antialiased`}>
         <Navbar />
-        <main className="min-h-screen pt-16">
+        <main className="min-h-screen">
           {children}
         </main>
         <Footer />

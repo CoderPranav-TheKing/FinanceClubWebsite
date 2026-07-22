@@ -27,6 +27,7 @@ export default function CompetitionDetailPage({ params }: { params: Promise<{ sl
   const isActive = competition.status === "active";
   const registrationOpen = new Date(competition.registrationDeadline) > new Date();
   const submissionOpen = new Date(competition.submissionDeadline) > new Date();
+  const openingSoon = competition.status === "upcoming";
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,6 +55,9 @@ export default function CompetitionDetailPage({ params }: { params: Promise<{ sl
             <Badge className={isActive ? "gradient-gold text-background" : competition.status === "upcoming" ? "border-teal text-teal" : "border-muted-foreground text-muted-foreground"}>
               {competition.status.charAt(0).toUpperCase() + competition.status.slice(1)}
             </Badge>
+            {openingSoon && (
+              <Badge className="border-gold text-gold">Coming Soon</Badge>
+            )}
             <span className="flex items-center gap-1 text-sm text-muted-foreground">
               {competition.allowTeams ? <Users className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
               {competition.allowTeams ? `Team (up to ${competition.maxTeamSize})` : "Individual"}
@@ -68,10 +72,9 @@ export default function CompetitionDetailPage({ params }: { params: Promise<{ sl
       <section className="py-12 px-4 bg-card/30">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">Timeline</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
-              { label: "Registration Opens", date: competition.registrationDeadline, icon: Calendar, active: registrationOpen },
-              { label: "Submission Deadline", date: competition.submissionDeadline, icon: Clock, active: submissionOpen },
+              { label: "Registration Opens", date: competition.registrationDeadline, icon: Calendar, active: true },
               { label: "Results Announcement", date: competition.resultsDate, icon: CheckCircle, active: false },
             ].map((item) => (
               <div key={item.label} className={`glass rounded-xl p-6 ${item.active ? "border-gold/30" : ""}`}>
@@ -106,6 +109,28 @@ export default function CompetitionDetailPage({ params }: { params: Promise<{ sl
       </section>
 
       {/* Registration Form */}
+      {openingSoon && (
+        <section className="py-12 px-4 bg-card/30">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4">Registration</h2>
+            <Card className="bg-card/50 border-border">
+              <CardContent className="p-6">
+                <p className="text-foreground/60">
+                  For registration and further details, please contact the club managers/conveners or visit our official Linktree.
+                </p>
+                <div className="mt-6">
+                  <Button asChild className="gradient-gold text-background font-semibold hover:opacity-90">
+                    <a href="https://www.instagram.com/finclub.iitb" target="_blank" rel="noopener noreferrer">
+                      Visit our Instagram
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
+
       {isActive && registrationOpen && (
         <section className="py-12 px-4 bg-card/30">
           <div className="max-w-2xl mx-auto">
