@@ -81,17 +81,17 @@ export default function PartnersPage() {
     {
       icon: Megaphone,
       title: "Large Event Reach",
-      desc: "Our events attract 800+ registrations annually with active participation from premier institutions.",
+      desc: "Our events attract 2000+ registrations annually with active participation students from all disciplines.",
     },
     {
       icon: Target,
       title: "Branding Opportunities",
-      desc: "Title sponsorships, logo placement, branded competitions, and social media exposure across our channels.",
+      desc: "Title sponsorships, logo placement, branded competitions and social media exposure across our channels.",
     },
     {
       icon: Briefcase,
       title: "Recruitment Pipeline",
-      desc: "Direct access to top finance-interested talent for internships, full-time roles, and campus hiring.",
+      desc: "Direct access to top finance-interested talent for internships, full-time roles and campus hiring.",
     },
   ];
 
@@ -154,7 +154,7 @@ export default function PartnersPage() {
         <Handshake className="w-3 h-3" /> Partnerships
       </div>
       <h1
-        className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-tight mb-6 min-h-[1.2em] sm:min-h-[1.2em]"
+        className="text-5xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-tight mb-6 min-h-[1.2em] sm:min-h-[1.2em]"
         style={{ fontFamily: "var(--font-display)" }}
       >
         <span className="text-cream">
@@ -166,7 +166,7 @@ export default function PartnersPage() {
         <span className="inline-block w-[2px] h-[0.9em] bg-gold align-middle ml-1 animate-pulse" />
         <br />
         <span
-          className={`text-cream/50 text-3xl sm:text-4xl inline-block transition-all duration-1000 ease-out ${
+          className={`text-cream/50 text-4xl sm:text-4xl inline-block transition-all duration-1000 ease-out ${
             typingDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         >
@@ -174,7 +174,7 @@ export default function PartnersPage() {
         </span>
       </h1>
       <p
-        className={`text-xl text-cream/85 max-w-2xl leading-relaxed transition-all duration-1200 ease-out ${
+        className={`text-2xl text-cream/85 max-w-2xl leading-relaxed transition-all duration-1200 ease-out ${
           typingDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >
@@ -197,7 +197,7 @@ export default function PartnersPage() {
                 Why Partner
               </div>
               <h2
-                className="text-3xl sm:text-4xl font-extrabold tracking-tight"
+                className="text-5xl sm:text-5xl font-extrabold tracking-tight"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 The{" "}
@@ -216,12 +216,12 @@ export default function PartnersPage() {
                     <item.icon className="w-6 h-6 text-gold group-hover:scale-110 transition-transform" />
                   </div>
                   <h3
-                    className="font-bold text-lg mb-2 text-cream"
+                    className="font-bold text-xl mb-2 text-cream"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {item.title}
                   </h3>
-                  <p className="text-sm text-cream/30 leading-relaxed">
+                  <p className="text-lg text-cream/60 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -234,32 +234,42 @@ export default function PartnersPage() {
       <div className="divider-glow" />
 
       {/* Past Partners */}
-      <section className="py-24 px-6 lg:px-8 mesh-crimson grain">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-14">
-              <div className="badge-pill badge-crimson mx-auto mb-6">
-                <Building2 className="w-3 h-3" />
-                Track Record
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl font-extrabold tracking-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Past{" "}
-                <span className="text-gradient-crimson">Collaborations</span>
-              </h2>
-              <p className="text-cream/25 mt-4 max-w-lg mx-auto">
-                Leading financial institutions that have partnered with
-                Finance Club for events, sessions, and competitions.
-              </p>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <SponsorCarousel items={sponsors} />
-          </ScrollReveal>
+<section className="py-24 px-6 lg:px-8 mesh-crimson grain relative overflow-hidden">
+  <Image
+    src="/partner_1.png"
+    alt=""
+    fill
+    className="object-cover opacity-[0.88] pointer-events-none select-none"
+    sizes="100vw"
+  />
+  <div className="absolute inset-0 bg-[#0D0A0A]/85 pointer-events-none" />
+  <div className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_top,rgba(27,107,64,0.15),transparent_45%)]" />
+
+  <div className="max-w-5xl mx-auto relative z-10">
+    <ScrollReveal>
+      <div className="text-center mb-14">
+        <div className="badge-pill badge-crimson mx-auto mb-6">
+          <Building2 className="w-3 h-3" />
+          Track Record
         </div>
-      </section>
+        <h2
+          className="text-5xl sm:text-5xl font-extrabold tracking-tight"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          Past{" "}
+          <span className="text-gradient-crimson">Collaborations</span>
+        </h2>
+        <p className="text-2xl text-cream/55 mt-4 max-w-xl mx-auto">
+          Leading financial institutions that have partnered with
+          Finance Club for events, sessions and competitions.
+        </p>
+      </div>
+    </ScrollReveal>
+    <ScrollReveal delay={200}>
+      <SponsorCarousel items={sponsors} />
+    </ScrollReveal>
+  </div>
+</section>
 
       <div className="divider" />
 
@@ -272,7 +282,7 @@ export default function PartnersPage() {
                 Gallery
               </div>
               <h2
-                className="text-3xl sm:text-4xl font-extrabold tracking-tight"
+                className="text-5xl sm:text-5xl font-extrabold tracking-tight"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Events in <span className="text-gradient-gold">Action</span>
@@ -291,10 +301,10 @@ export default function PartnersPage() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
-                  <div className="badge-pill badge-gold text-[10px] mb-2">
+                  <div className="badge-pill badge-gold text-[10px] mb-1">
                     FinFest
                   </div>
-                  <p className="text-sm text-cream/60">
+                  <p className="text-lg text-cream/70">
                     Our flagship annual conference attracting 500+ participants
                   </p>
                 </div>
@@ -311,7 +321,7 @@ export default function PartnersPage() {
                   <div className="badge-pill badge-crimson text-[10px] mb-2">
                     Industry Sessions
                   </div>
-                  <p className="text-sm text-cream/60">
+                  <p className="text-lg text-cream/70">
                     Guest lectures and workshops with top financial
                     institutions
                   </p>
@@ -341,12 +351,12 @@ export default function PartnersPage() {
   <div className="relative z-10 text-center mb-10">
                 <Handshake className="w-12 h-12 text-gold mx-auto mb-6" />
                 <h2
-                  className="text-3xl font-extrabold mb-3"
+                  className="text-5xl font-extrabold mb-3"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Get in <span className="text-gradient-gold">Touch</span>
                 </h2>
-                <p className="text-cream/40 max-w-md mx-auto">
+                <p className="text-cream/70 max-w-md mx-auto text-xl">
                   Interested in partnering with us? Fill out the form below and
                   we&apos;ll get back to you.
                 </p>
@@ -450,16 +460,16 @@ export default function PartnersPage() {
                 <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
                   <a
                     href="convener.finance.iitb@gmail.com"
-                    className="flex items-center gap-2 text-cream/25 hover:text-gold transition-colors"
+                    className="flex items-center gap-2 text-cream/45 hover:text-gold transition-colors"
                   >
                     <Mail className="w-4 h-4 text-gold/30" />{" "}
-                    convener.finance.iitb@gmail.com
+                    financeclub@iitb.ac.in
                   </a>
                   <a
                     href="tel:+919876543210"
-                    className="flex items-center gap-2 text-cream/25 hover:text-gold transition-colors"
+                    className="flex items-center gap-2 text-cream/45 hover:text-gold transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-gold/30" /> +91 98765 43210
+                    <Phone className="w-4 h-4 text-gold/30" /> +91 70209 22818 | +91 98104 65318
                   </a>
                 </div>
               </div>

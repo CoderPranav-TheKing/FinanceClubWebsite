@@ -24,7 +24,7 @@ export default function ManagerCard({ member, compact = false }: { member: typeo
         <h3 className={`font-bold ${compact ? "text-lg" : "text-2xl"} text-gold mb-1`} style={{ fontFamily: "var(--font-display)" }}>
           {member.name}
         </h3>
-        <p className="text-sm text-cream/60 mb-4">{member.role}</p>
+        <p className="text-lg text-cream/60 mb-4">{member.role}</p>
         <div className="space-y-2 text-xs">
           <a href={`tel:${member.phone}`} className="flex items-center gap-2 text-cream/70 hover:text-gold transition-colors">
             <Phone className="w-3.5 h-3.5 text-gold/60" />

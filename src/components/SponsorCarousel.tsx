@@ -86,7 +86,7 @@ export default function SponsorCarousel({ items }: { items: typeof sponsors }) {
                   height={100}
                   className="object-contain max-h-24 w-auto"
                 />
-                <span className="text-xs text-cream/40 font-medium">
+                <span className="text-xl text-cream/90 font-medium">
                   {s.name}
                 </span>
               </a>

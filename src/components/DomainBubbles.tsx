@@ -7,12 +7,13 @@ const domains = [
   { name: "Venture Capital", size: 160, filled: false },
   { name: "Quantitative Finance", size: 200, filled: true },
   { name: "Derivatives", size: 120, filled: false },
-  { name: "Macroeconomics", size: 170, filled: true },
-  { name: "Corporate Finance", size: 180, filled: false },
+  { name: "Portfolio Management", size: 280, filled: true },
+  { name: "Macroeconomics", size: 170, filled: false },
   { name: "Fintech", size: 110, filled: true },
+  { name: "Corporate Finance", size: 180, filled: false },
+   { name: "Risk Management", size: 155, filled: true },
   { name: "Sustainable Finance", size: 175, filled: false },
-  { name: "Risk Management", size: 155, filled: true },
-  { name: "Portfolio Management", size: 185, filled: false },
+  { name: "Legal Finance", size: 165, filled: true }, 
 ];
 
 export default function DomainBubbles() {
@@ -29,7 +30,7 @@ export default function DomainBubbles() {
           style={{
             width: d.size,
             height: d.size,
-            fontSize: Math.max(d.size / 11, 11),
+            fontSize: Math.max(d.size / 8.5, 14),
             animationDelay: `${(i % 6) * -1.2}s`,
           }}
         >

@@ -1,32 +1,53 @@
 "use client";
 
 import { use, useState } from "react";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, Calendar, Users, User, CheckCircle, Clock, FileUp, AlertCircle } from "lucide-react";
+import { notFound, useRouter } from "next/navigation";
+import Image from "next/image";
+import {
+  ArrowLeft,
+  Calendar,
+  Users,
+  User,
+  CheckCircle,
+} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+
 import { competitions } from "@/data/competitions";
 
-const ACCEPTED_TYPES = ".pdf,.ppt,.pptx,.zip,.py,.js,.ts,.c,.cpp,.java";
-const MAX_FILE_SIZE_MB = 50;
+const FINANCE_CLUB_LINKTREE =
+  "https://l.instagram.com/?u=https%3A%2F%2Flnk.bio%2Ffinanceclubiitb%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAafQ-_qN_4OhVuT9yScv0-xdgVCIM_ePnRks6ofMwi8uJkWNrACrKw7JB-cYEg_aem_bpUMoiyH9L5zryStaUVJ-Q&e=AUDKKIDci_XsqrCp-nzmr2egaO8ESKn7ZujI_PTsdzjrgtXVAvw4ogDoSCo_NeARi051m7DcxPiJI_BbCNq7XS8Ng7WhzI36fXRxjuMG8u7wpE799BR0j8xSPiILcARRe-lKgg7vnuIs";
 
-export default function CompetitionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default function CompetitionDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = use(params);
+  const router = useRouter();
+
   const competition = competitions.find((c) => c.slug === slug);
+
   const [showSuccess, setShowSuccess] = useState(false);
-  const [showSubmissionSuccess, setShowSubmissionSuccess] = useState(false);
 
   if (!competition) return notFound();
 
   const isActive = competition.status === "active";
-  const registrationOpen = new Date(competition.registrationDeadline) > new Date();
-  const submissionOpen = new Date(competition.submissionDeadline) > new Date();
+
+  const registrationOpen =
+    new Date(competition.registrationDeadline) > new Date();
+
   const openingSoon = competition.status === "upcoming";
 
   const handleRegister = (e: React.FormEvent) => {
@@ -34,140 +55,343 @@ export default function CompetitionDetailPage({ params }: { params: Promise<{ sl
     setShowSuccess(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowSubmissionSuccess(true);
+  const handleBackToCompetitions = () => {
+    router.push("/competitions");
   };
 
+  const registrationDate = new Date(
+    competition.registrationDeadline
+  ).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const resultsDate = new Date(
+    competition.resultsDate
+  ).toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
-    <div className="relative">
-      {/* Back Link */}
-      <div className="max-w-5xl mx-auto px-4 pt-8">
-        <Button asChild variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-          <Link href="/competitions"><ArrowLeft className="w-4 h-4 mr-1" /> Back to Competitions</Link>
-        </Button>
-      </div>
+    <div className="relative min-h-screen bg-[#0D0A0A] text-cream">
+      {/* =========================================================
+          HERO BANNER
+      ========================================================= */}
 
-      {/* Header */}
-      <section className="py-12 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Badge className={isActive ? "gradient-gold text-background" : competition.status === "upcoming" ? "border-teal text-teal" : "border-muted-foreground text-muted-foreground"}>
-              {competition.status.charAt(0).toUpperCase() + competition.status.slice(1)}
-            </Badge>
-            {openingSoon && (
-              <Badge className="border-gold text-gold">Coming Soon</Badge>
-            )}
-            <span className="flex items-center gap-1 text-sm text-muted-foreground">
-              {competition.allowTeams ? <Users className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
-              {competition.allowTeams ? `Team (up to ${competition.maxTeamSize})` : "Individual"}
-            </span>
+      <section className="relative w-full aspect-[2560/1170] overflow-hidden">
+        <Image
+          src="/FinClubBanner.png"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+
+        {/* BACK BUTTON */}
+
+        <div className="absolute top-[4%] left-[3%] z-30">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={handleBackToCompetitions}
+            className="cursor-pointer text-white/80 hover:text-white bg-black/30 hover:bg-black/45 backdrop-blur-sm text-[clamp(11px,1.1vw,14px)] border border-white/10 transition-all"
+            style={{
+              fontFamily: "var(--font-display)",
+            }}
+          >
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            Back to Competitions
+          </Button>
+        </div>
+
+        {/* COMPETITION INFO */}
+
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-[56%] ml-auto pr-[5%] text-right">
+            {/* STATUS */}
+
+            <div className="flex flex-wrap items-center justify-end gap-2 mb-[1.2%]">
+              <Badge
+                className={`text-[clamp(10px,1vw,13px)] ${
+                  isActive
+                    ? "gradient-gold text-background"
+                    : competition.status === "upcoming"
+                    ? "border-teal text-teal"
+                    : "border-muted-foreground text-muted-foreground"
+                }`}
+                style={{
+                  fontFamily: "var(--font-display)",
+                }}
+              >
+                {competition.status.charAt(0).toUpperCase() +
+                  competition.status.slice(1)}
+              </Badge>
+
+              {openingSoon && (
+                <Badge
+                  className="border-gold text-gold text-[clamp(10px,1vw,13px)]"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                  }}
+                >
+                  Coming Soon
+                </Badge>
+              )}
+
+              <span
+                className="flex items-center gap-1 text-[clamp(10px,1vw,13px)] text-white/70"
+                style={{
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                {competition.allowTeams ? (
+                  <Users className="w-3.5 h-3.5" />
+                ) : (
+                  <User className="w-3.5 h-3.5" />
+                )}
+
+                {competition.allowTeams
+                  ? `Team (up to ${competition.maxTeamSize})`
+                  : "Individual"}
+              </span>
+            </div>
+
+            {/* COMPETITION TITLE */}
+
+            <h1
+              className="text-[clamp(1.6rem,4vw,4rem)] font-semibold leading-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+              style={{
+                fontFamily: "var(--font-display)",
+              }}
+            >
+              {competition.name}
+            </h1>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4">{competition.name}</h1>
-          <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">{competition.description}</p>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-12 px-4 bg-card/30">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8">Timeline</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              { label: "Registration Opens", date: competition.registrationDeadline, icon: Calendar, active: true },
-              { label: "Results Announcement", date: competition.resultsDate, icon: CheckCircle, active: false },
-            ].map((item) => (
-              <div key={item.label} className={`glass rounded-xl p-6 ${item.active ? "border-gold/30" : ""}`}>
-                <item.icon className={`w-6 h-6 mb-3 ${item.active ? "text-gold" : "text-muted-foreground"}`} />
-                <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
-                <p className="font-semibold">{new Date(item.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
-              </div>
-            ))}
+      {/* =========================================================
+          DESCRIPTION
+      ========================================================= */}
+
+      <section className="py-16 sm:py-20 px-6">
+        <div className="max-w-6xl mx-auto text-left">
+          <p
+            className="text-xl sm:text-2xl text-cream/60 max-w-6xl mx-auto leading-relaxed"
+            style={{
+              fontFamily: "var(--font-body)",
+            }}
+          >
+            {competition.description}
+          </p>
+        </div>
+      </section>
+
+      {/* =========================================================
+          TIMELINE
+      ========================================================= */}
+
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2
+            className="text-4xl sm:text-5xl text-[#F5E6D0] mb-12"
+            style={{
+              fontFamily: "var(--font-body)",
+            }}
+          >
+            Timeline
+          </h2>
+
+          <div className="rounded-[2rem] border border-gold/25 bg-[#110E0E] px-8 py-12 sm:px-14 sm:py-16 flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-0 sm:divide-x sm:divide-[#F5E6D0]/10">
+            {/* REGISTRATION DATE */}
+
+            <div className="flex-1 flex flex-col items-center px-6 sm:px-10">
+              <Calendar className="w-9 h-9 sm:w-10 sm:h-10 text-gold mb-6" />
+
+              <p
+                className="text-xs sm:text-sm uppercase tracking-[0.18em] text-cream/50 mb-3"
+                style={{
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                Registration Opens
+              </p>
+
+              <p
+                className="text-4xl sm:text-4xl lg:text-5xl leading-none text-[#F5E6D0]"
+                style={{
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                {registrationDate}
+              </p>
+            </div>
+
+            {/* RESULTS DATE */}
+
+            <div className="flex-1 flex flex-col items-center px-6 sm:px-10">
+              <CheckCircle className="w-9 h-9 sm:w-10 sm:h-10 text-gold/75 mb-6" />
+
+              <p
+                className="text-xs sm:text-sm uppercase tracking-[0.18em] text-cream/50 mb-3"
+                style={{
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                Results Announcement
+              </p>
+
+              <p
+                className="text-4xl sm:text-4xl lg:text-5xl leading-none text-[#F5E6D0]"
+                style={{
+                  fontFamily: "var(--font-body)",
+                }}
+              >
+                {resultsDate}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Rules */}
-      <section className="py-12 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Rules & Guidelines</h2>
-          <Card className="bg-card/50 border-border">
-            <CardContent className="p-6">
-              <ul className="space-y-3">
-                {competition.rules.map((rule, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <span className="w-6 h-6 rounded-full gradient-gold flex items-center justify-center text-xs font-bold text-background shrink-0 mt-0.5">
-                      {i + 1}
-                    </span>
-                    {rule}
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Registration Form */}
-      {openingSoon && (
-        <section className="py-12 px-4 bg-card/30">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-4">Registration</h2>
-            <Card className="bg-card/50 border-border">
-              <CardContent className="p-6">
-                <p className="text-foreground/60">
-                  For registration and further details, please contact the club managers/conveners or visit our official Linktree.
-                </p>
-                <div className="mt-6">
-                  <Button asChild className="gradient-gold text-background font-semibold hover:opacity-90">
-                    <a href="https://www.instagram.com/finclub.iitb" target="_blank" rel="noopener noreferrer">
-                      Visit our Instagram
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      )}
+      {/* =========================================================
+          ACTIVE COMPETITION REGISTRATION
+      ========================================================= */}
 
       {isActive && registrationOpen && (
-        <section className="py-12 px-4 bg-card/30">
+        <section className="py-16 px-4 sm:px-6">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">Register Now</h2>
-            <Card className="bg-card/50 border-border">
-              <CardContent className="p-6">
-                <form onSubmit={handleRegister} className="space-y-4">
+            <h2
+              className="text-4xl sm:text-5xl font-semibold text-[#F5E6D0] text-center mb-10"
+              style={{
+                fontFamily: "var(--font-body)",
+              }}
+            >
+              Register Now
+            </h2>
+
+            <Card className="bg-[#151111] border-gold/15 rounded-[2rem]">
+              <CardContent className="p-6 sm:p-10">
+                <form onSubmit={handleRegister} className="space-y-5">
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block">Full Name *</label>
-                    <Input placeholder="Your name" required className="bg-input border-border" />
+                    <label
+                      className="text-sm text-cream/70 mb-2 block"
+                      style={{
+                        fontFamily: "var(--font-body)",
+                      }}
+                    >
+                      Full Name *
+                    </label>
+
+                    <Input
+                      placeholder="Your name"
+                      required
+                      className="bg-black/20 border-white/10"
+                    />
                   </div>
+
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block">Email *</label>
-                    <Input type="email" placeholder="your.email@iitb.ac.in" required className="bg-input border-border" />
+                    <label
+                      className="text-sm text-cream/70 mb-2 block"
+                      style={{
+                        fontFamily: "var(--font-body)",
+                      }}
+                    >
+                      Email *
+                    </label>
+
+                    <Input
+                      type="email"
+                      placeholder="your.email@iitb.ac.in"
+                      required
+                      className="bg-black/20 border-white/10"
+                    />
                   </div>
+
                   {competition.allowTeams && (
                     <>
-                      <Separator />
+                      <Separator className="bg-white/10 my-6" />
+
                       <div>
-                        <label className="text-sm font-medium mb-1.5 block">Team Name *</label>
-                        <Input placeholder="Your team name" required className="bg-input border-border" />
+                        <label
+                          className="text-sm text-cream/70 mb-2 block"
+                          style={{
+                            fontFamily: "var(--font-body)",
+                          }}
+                        >
+                          Team Name *
+                        </label>
+
+                        <Input
+                          placeholder="Your team name"
+                          required
+                          className="bg-black/20 border-white/10"
+                        />
                       </div>
-                      {Array.from({ length: competition.maxTeamSize - 1 }, (_, i) => (
-                        <div key={i} className="grid grid-cols-2 gap-3">
-                          <div>
-                            <label className="text-sm font-medium mb-1.5 block">Member {i + 2} Name {i === 0 ? "*" : ""}</label>
-                            <Input placeholder={`Member ${i + 2}`} required={i === 0} className="bg-input border-border" />
+
+                      {Array.from(
+                        {
+                          length: competition.maxTeamSize - 1,
+                        },
+                        (_, i) => (
+                          <div
+                            key={i}
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                          >
+                            <div>
+                              <label
+                                className="text-sm text-cream/70 mb-2 block"
+                                style={{
+                                  fontFamily: "var(--font-body)",
+                                }}
+                              >
+                                Member {i + 2} Name{" "}
+                                {i === 0 ? "*" : ""}
+                              </label>
+
+                              <Input
+                                placeholder={`Member ${i + 2}`}
+                                required={i === 0}
+                                className="bg-black/20 border-white/10"
+                              />
+                            </div>
+
+                            <div>
+                              <label
+                                className="text-sm text-cream/70 mb-2 block"
+                                style={{
+                                  fontFamily: "var(--font-body)",
+                                }}
+                              >
+                                Member {i + 2} Email{" "}
+                                {i === 0 ? "*" : ""}
+                              </label>
+
+                              <Input
+                                type="email"
+                                placeholder="email@iitb.ac.in"
+                                required={i === 0}
+                                className="bg-black/20 border-white/10"
+                              />
+                            </div>
                           </div>
-                          <div>
-                            <label className="text-sm font-medium mb-1.5 block">Member {i + 2} Email {i === 0 ? "*" : ""}</label>
-                            <Input type="email" placeholder="email@iitb.ac.in" required={i === 0} className="bg-input border-border" />
-                          </div>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </>
                   )}
-                  <Button type="submit" className="w-full gradient-gold text-background font-semibold hover:opacity-90">
+
+                  <Button
+                    type="submit"
+                    className="w-full gradient-gold text-[#1A1208] hover:opacity-90 py-6 text-base sm:text-lg rounded-xl mt-3"
+                    style={{
+                      fontFamily: "var(--font-display)",
+                    }}
+                  >
                     Register
                   </Button>
                 </form>
@@ -177,84 +401,86 @@ export default function CompetitionDetailPage({ params }: { params: Promise<{ sl
         </section>
       )}
 
-      {/* Submission Section */}
-      {isActive && (
-        <section className="py-12 px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">Submit Your Work</h2>
-            {submissionOpen ? (
-              <Card className="bg-card/50 border-border">
-                <CardContent className="p-6">
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Team / Participant Name *</label>
-                      <Input placeholder="Your team or name" required className="bg-input border-border" />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Submission File *</label>
-                      <Input
-                        type="file"
-                        accept={ACCEPTED_TYPES}
-                        required
-                        className="bg-input border-border file:text-gold file:bg-transparent file:border-0 file:font-medium"
-                      />
-                      <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" />
-                        Max {MAX_FILE_SIZE_MB}MB. Accepted: PDF, PPT, PPTX, ZIP, code files.
-                      </p>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Comments (optional)</label>
-                      <Textarea placeholder="Any additional notes..." className="bg-input border-border" />
-                    </div>
-                    <Button type="submit" className="w-full gradient-gold text-background font-semibold hover:opacity-90">
-                      <FileUp className="w-4 h-4 mr-2" />
-                      Submit
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            ) : (
-              <Card className="bg-card/30 border-border">
-                <CardContent className="p-8 text-center">
-                  <Clock className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
-                  <p className="text-muted-foreground">Submissions are closed.</p>
-                  <p className="text-xs text-muted-foreground mt-1">Deadline was {new Date(competition.submissionDeadline).toLocaleDateString("en-IN")}</p>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </section>
-      )}
+      {/* =========================================================
+          FIND OUT MORE
+      ========================================================= */}
 
-      {/* Success Dialogs */}
+      <section className="px-6 sm:px-8 pt-20 pb-28 sm:pt-24 sm:pb-36">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2
+            className="text-4xl sm:text-5xl tracking-tight text-[#F5E6D0] mb-7"
+            style={{
+              fontFamily: "var(--font-display)",
+            }}
+          >
+            Want to Know More?
+          </h2>
+
+          <p
+            className="max-w-3xl mx-auto text-xl sm:text-2xl leading-relaxed text-cream/55 mb-11"
+            style={{
+              fontFamily: "var(--font-body)",
+            }}
+          >
+            Find further details, updates, and information about this
+            competition through Finance Club IIT Bombay.
+          </p>
+
+          <Button
+            asChild
+            size="lg"
+            className="gradient-gold text-[#1A1208] hover:opacity-90 px-8 sm:px-10 py-6 sm:py-7 text-base sm:text-lg rounded-2xl"
+            style={{
+              fontFamily: "var(--font-body)",
+            }}
+          >
+            <a
+              href={FINANCE_CLUB_LINKTREE}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Find More About the Competition Here
+            </a>
+          </Button>
+        </div>
+      </section>
+
+      {/* =========================================================
+          REGISTRATION SUCCESS DIALOG
+      ========================================================= */}
+
       <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
-        <DialogContent className="bg-card border-border">
+        <DialogContent className="bg-[#151111] border-gold/20">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+            <DialogTitle
+              className="flex items-center gap-2 text-[#F5E6D0]"
+              style={{
+                fontFamily: "var(--font-display)",
+              }}
+            >
               <CheckCircle className="w-5 h-5 text-green-500" />
               Registration Successful
             </DialogTitle>
-            <DialogDescription>
+
+            <DialogDescription
+              className="text-cream/50"
+              style={{
+                fontFamily: "var(--font-body)",
+              }}
+            >
               Your registration has been recorded successfully. Good luck!
             </DialogDescription>
           </DialogHeader>
-          <Button onClick={() => setShowSuccess(false)} className="gradient-gold text-background">Close</Button>
-        </DialogContent>
-      </Dialog>
 
-      <Dialog open={showSubmissionSuccess} onOpenChange={setShowSubmissionSuccess}>
-        <DialogContent className="bg-card border-border">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-500" />
-              Submission Successful
-            </DialogTitle>
-            <DialogDescription>
-              Your submission has been recorded successfully.
-            </DialogDescription>
-          </DialogHeader>
-          <Button onClick={() => setShowSubmissionSuccess(false)} className="gradient-gold text-background">Close</Button>
+          <Button
+            onClick={() => setShowSuccess(false)}
+            className="gradient-gold text-[#1A1208] hover:opacity-90"
+            style={{
+              fontFamily: "var(--font-display)",
+            }}
+          >
+            Close
+          </Button>
         </DialogContent>
       </Dialog>
     </div>

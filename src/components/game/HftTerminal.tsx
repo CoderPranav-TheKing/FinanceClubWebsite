@@ -23,18 +23,19 @@ type LbResponse = {
   user: { rank: number; percentile: number; total_wins: number; high_score: number } | null;
 };
 
-export default function HftTerminal() {
+export default function TickerGame() {
   useNavbarHeight();
 
-  
   const [screen, setScreen] = useState<Screen>("intro");
   const [traderName, setTraderName] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [nameLocked, setNameLocked] = useState(false);
 
   const [registering, setRegistering] = useState(false);
   const [registerError, setRegisterError] = useState<string | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const chartWrapRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<HftEngine | null>(null);
 
   const [snapshot, setSnapshot] = useState<TickSnapshot | null>(null);
@@ -54,13 +55,19 @@ export default function HftTerminal() {
 
   // ── Persistent anonymous identity, generated once on first load ──
   useEffect(() => {
-    let id = localStorage.getItem("hft_session_id");
-    if (!id) {
-      id = crypto.randomUUID();
-      localStorage.setItem("hft_session_id", id);
-    }
-    setSessionId(id);
-  }, []);
+  let id = localStorage.getItem("hft_session_id");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("hft_session_id", id);
+  }
+  setSessionId(id);
+
+  const savedName = localStorage.getItem("hft_trader_name");
+  if (savedName) {
+    setTraderName(savedName);
+    setNameLocked(true);
+  }
+}, []);
 
   // ── Game engine lifecycle ──
   useEffect(() => {
@@ -132,6 +139,16 @@ export default function HftTerminal() {
     };
   }, [screen, sessionId]);
 
+  // ── Keep the canvas in sync with its container's actual box, not just
+  //    the window — the flex layout can change the chart's size without
+  //    the window itself resizing (e.g. the HUD growing by a line). ──
+  useEffect(() => {
+    if (screen !== "game" || !chartWrapRef.current) return;
+    const ro = new ResizeObserver(() => engineRef.current?.resize());
+    ro.observe(chartWrapRef.current);
+    return () => ro.disconnect();
+  }, [screen]);
+
   // ── Leaderboard fetch, whenever that screen opens ──
   useEffect(() => {
     if (screen !== "leaderboard" || !sessionId) return;
@@ -167,7 +184,9 @@ export default function HftTerminal() {
       }
 
       setRegistering(false);
-      setScreen("game");
+      localStorage.setItem("hft_trader_name", traderName.trim());
+setScreen("game");
+      
     } catch {
       setRegisterError("Network error — check your connection and try again.");
       setRegistering(false);
@@ -182,6 +201,15 @@ export default function HftTerminal() {
     setLbReturnScreen(from);
     setScreen("leaderboard");
   }
+  function handleResetIdentity() {
+  const newId = crypto.randomUUID();
+  localStorage.setItem("hft_session_id", newId);
+  localStorage.removeItem("hft_trader_name");
+  setSessionId(newId);
+  setTraderName("");
+  setNameLocked(false);
+  setRegisterError(null);
+}
 
   const isWin = (gameSummary?.wins ?? 0) >= WIN_THRESHOLD;
   const recapTitle = !gameSummary
@@ -194,39 +222,48 @@ export default function HftTerminal() {
 
   const myNameUpper = traderName.trim().toUpperCase();
 
+  // best-of-book: engine pushes asks farthest→nearest and bids nearest→farthest
+  const bestAsk = snapshot?.orderBook.asks[snapshot.orderBook.asks.length - 1];
+  const bestBid = snapshot?.orderBook.bids[0];
+
   return (
     <div id="app">
-     
-
       {/* ══ SCREEN 1 — INTRO ══ */}
       {screen === "intro" && (
         <div className="screen active" id="s-intro">
-          <div className="brand-cap">PREMIER TRADING SOCIETY</div>
-          <div className="ticker-badge">INDEX</div>
+          <div className="brand-cap">IITB Finance Club</div>
+          <div className="ticker-badge">BOMBAY EXCHANGE</div>
           <div className="hero-title">
-            HIGH-FREQ
+            THE TICKER
             <br />
-            TRADING
-            <br />
-            CHALLENGE
+            GAME
           </div>
 
           <div className="name-card">
             <span className="name-lbl">▸ TRADER IDENTIFICATION</span>
             <input
-              className="name-inp"
-              id="trader-name"
-              type="text"
-              maxLength={18}
-              placeholder="e.g. ROHAN_K"
-              autoComplete="off"
-              spellCheck={false}
-              value={traderName}
-              onChange={(e) => {
-                setTraderName(e.target.value);
-                setRegisterError(null);
-              }}
-            />
+  className="name-inp"
+  id="trader-name"
+  type="text"
+  maxLength={18}
+  placeholder="e.g. ROHAN_K"
+  autoComplete="off"
+  spellCheck={false}
+  disabled={nameLocked}
+  value={traderName}
+  onChange={(e) => {
+    setTraderName(e.target.value);
+    setRegisterError(null);
+  }}
+/>
+{nameLocked && (
+  <button
+    onClick={handleResetIdentity}
+    style={{ background: "none", border: "none", color: "var(--dim)", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: 1, marginTop: 8, cursor: "pointer", textDecoration: "underline" }}
+  >
+    Not you? Reset identity
+  </button>
+)}
             {registerError && (
               <div style={{ color: "var(--red)", fontFamily: "var(--mono)", fontSize: 11, marginTop: 8 }}>
                 {registerError}
@@ -254,110 +291,105 @@ export default function HftTerminal() {
         </div>
       )}
 
-      {/* ══ SCREEN 2 — TRADING FLOOR ══ */}
+      {/* ══ SCREEN 2 — TRADING FLOOR (fits the viewport, no scroll) ══ */}
       {screen === "game" && (
-        <div className="screen active" id="s-game" style={{ justifyContent: "flex-start" }}>
-          <div className="hdr">
-            <div className="hdr-logo">INDEX <em>HFT</em></div>
-            <div className="hdr-meta">
-              <span className="live-dot" />LIVE MARKET
-              <br />
-              NSE · EQUITY
+        <div className="screen active" id="s-game">
+          <div className="hud">
+            <div className="hud-row hud-brand-row">
+              <span className="hud-brand">TICKER <em>GAME</em></span>
+              <span className="hud-live"><span className="live-dot" />LIVE · NSE EQUITY</span>
+            </div>
+            <div className="hud-row hud-price-row">
+              <span className={"price-main " + (snapshot?.isUp ? "up" : "dn")}>
+                ₹{snapshot ? snapshot.price.toFixed(2) : "0.00"}
+              </span>
+              <span className={"price-chg " + (snapshot?.isUp ? "up" : "dn")}>
+                {snapshot?.changePct ?? "+0.00%"}
+              </span>
+              <div className="hud-mini-stats">
+                <span className="hud-stat">RND <b className="a">{(snapshot?.round ?? 0) + 1}/5</b></span>
+                <span className="hud-stat">P&amp;L <b className={(snapshot?.pnl ?? 0) >= 0 ? "g" : "r"}>{(snapshot?.pnl ?? 0) >= 0 ? "+" : "−"}₹{Math.abs(snapshot?.pnl ?? 0)}</b></span>
+                <span className="hud-stat">WIN <b className="g">{snapshot?.wins ?? 0}</b></span>
+                <span className="hud-stat">LAT <b className="a">{snapshot?.bestLatencyMs != null ? `${snapshot.bestLatencyMs}ms` : "--ms"}</b></span>
+              </div>
             </div>
           </div>
 
-          <div className="price-strip">
-            <span className={"price-main " + (snapshot?.isUp ? "up" : "dn")}>
-              ₹{snapshot ? snapshot.price.toFixed(2) : "0.00"}
-            </span>
-            <span className={"price-chg " + (snapshot?.isUp ? "up" : "dn")}>
-              {snapshot?.changePct ?? "+0.00%"}
-            </span>
-            <span className="price-sym">INDEX / INR</span>
-          </div>
+          <div className="game-area">
+            <div className="chart-col">
+              <div className="chart-wrap" ref={chartWrapRef}>
+                <canvas ref={canvasRef} id="chart" />
+                <span className="bz-label">BUY ZONE</span>
 
-          <div className="chart-wrap">
-            <canvas ref={canvasRef} id="chart" />
-            <span className="bz-label" style={{ top: "50%" }}>BUY ZONE</span>
-          </div>
+                {bestBid && (
+                  <div className="market-chip mc-bid">
+                    <span className="mc-lbl">BID</span>
+                    <span className="mc-val">{bestBid.price}</span>
+                  </div>
+                )}
+                {bestAsk && (
+                  <div className="market-chip mc-ask">
+                    <span className="mc-lbl">ASK</span>
+                    <span className="mc-val">{bestAsk.price}</span>
+                  </div>
+                )}
 
-          <div className="lat-strip">
-            <span>SYS LAT: <span className="lat-val">{snapshot?.sysLatencyMs ?? "--"}ms</span></span>
-            <span>TICK <span className="lat-tick">#{snapshot?.tickCount ?? 0}</span></span>
-            <span>VOL: {snapshot?.volatilityLabel ?? "LOW"}</span>
-          </div>
-
-          <div className="ob-wrap">
-            <div>
-              <div className="ob-col-hdr">ASKS (SELL)</div>
-              {snapshot?.orderBook.asks.map((a, i) => (
-                <div key={i} className="ob-row ob-ask">
-                  <span className="ob-price">{a.price}</span>
-                  <span className="ob-vol">{a.vol}</span>
-                </div>
-              ))}
-            </div>
-            <div className="ob-mid">
-              <div className="ob-spread-lbl">SPREAD</div>
-              <div className="ob-spread-val">₹{snapshot?.orderBook.spread ?? "—"}</div>
-            </div>
-            <div>
-              <div className="ob-col-hdr" style={{ textAlign: "right" }}>BIDS (BUY)</div>
-              {snapshot?.orderBook.bids.map((b, i) => (
-                <div key={i} className="ob-row ob-bid">
-                  <span className="ob-price">{b.price}</span>
-                  <span className="ob-vol">{b.vol}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="stats-grid">
-            <div className="stat-cell"><span className="stat-lbl">ROUND</span><span className="stat-val a">{(snapshot?.round ?? 0) + 1}/5</span></div>
-            <div className="stat-cell"><span className="stat-lbl">P&amp;L</span><span className={"stat-val " + ((snapshot?.pnl ?? 0) >= 0 ? "g" : "r")}>{(snapshot?.pnl ?? 0) >= 0 ? "+" : "−"}₹{Math.abs(snapshot?.pnl ?? 0)}</span></div>
-            <div className="stat-cell"><span className="stat-lbl">WINS</span><span className="stat-val g">{snapshot?.wins ?? 0}</span></div>
-            <div className="stat-cell"><span className="stat-lbl">BEST LAT</span><span className="stat-val a">{snapshot?.bestLatencyMs != null ? `${snapshot.bestLatencyMs}ms` : "--ms"}</span></div>
-          </div>
-
-          <div className="rnd-bar">
-            <span className="rnd-lbl">ATTEMPTS</span>
-            <div className="pips">
-              {results.map((r, i) => (
                 <div
-                  key={i}
                   className={
-                    "pip " +
-                    (r?.result === "win" ? "w" : r?.result === "loss" ? "l" : i === (snapshot?.round ?? 0) ? "cur" : "")
+                    "result-toast " +
+                    (phase === "result" && lastResult ? (lastResult.result === "win" ? "w show" : "l show") : "")
                   }
-                />
-              ))}
-            </div>
-          </div>
+                >
+                  {lastResult &&
+                    (lastResult.result === "win"
+                      ? `⚡ HIT! +₹${lastResult.amount} · ${lastResult.latencyMs}ms`
+                      : `✗ SLIPPAGE −₹${lastResult.amount}`)}
+                </div>
+              </div>
 
-          <div className={"flash-box " + (phase === "result" && lastResult ? (lastResult.result === "win" ? "w" : "l") : "")} style={{ display: phase === "result" && lastResult ? "block" : "none" }}>
-            {lastResult && (lastResult.result === "win"
-              ? `⚡ HIT! +₹${lastResult.amount} ARB PROFIT · ${lastResult.latencyMs}ms`
-              : `✗ SLIPPAGE! −₹${lastResult.amount}`)}
-          </div>
-
-          <div className="buy-area">
-            <div className="zone-row">
-              <div className={"zone-indicator" + (snapshot?.inZone ? " on" : "")} />
-              <span className="zone-txt" style={{ color: snapshot?.inZone ? "var(--green)" : "var(--dim)" }}>
-                {snapshot?.inZone ? "⚡ IN BUY ZONE — EXECUTE NOW!" : "WAIT FOR BUY ZONE"}
-              </span>
-              <span className="zone-range">
-                ₹{snapshot?.buyZoneLow.toFixed(1) ?? "--"}–{snapshot?.buyZoneHigh.toFixed(1) ?? "--"}
-              </span>
+              <div className="market-info-row">
+                <span>SYS <b className="a">{snapshot?.sysLatencyMs ?? "--"}ms</b></span>
+                <span>TICK <b>#{snapshot?.tickCount ?? 0}</b></span>
+                <span>VOL <b>{snapshot?.volatilityLabel ?? "LOW"}</b></span>
+                <span>SPREAD <b className="a">₹{snapshot?.orderBook.spread ?? "—"}</b></span>
+              </div>
             </div>
-            <button id="buy-btn" className={snapshot?.inZone && phase === "ready" ? "in-zone" : ""} onClick={handleBuy} disabled={phase !== "ready"}>
-              {phase === "countdown" ? (
-                <>NEXT IN {countdown}s...<span className="btn-sub">PREPARE YOUR POSITION</span></>
-              ) : (
-                <>⚡ BUY<span className="btn-sub">EXECUTE MARKET ORDER</span></>
-              )}
-            </button>
-            <div className="hint">TAP WHEN PRICE ENTERS GREEN ZONE ↑</div>
+
+            <div className="action-col">
+              <div className="pips-block">
+                <span className="rnd-lbl">ATTEMPTS</span>
+                <div className="pips">
+                  {results.map((r, i) => (
+                    <div
+                      key={i}
+                      className={
+                        "pip " +
+                        (r?.result === "win" ? "w" : r?.result === "loss" ? "l" : i === (snapshot?.round ?? 0) ? "cur" : "")
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="buy-area">
+                <div className="zone-row">
+                  <div className={"zone-indicator" + (snapshot?.inZone ? " on" : "")} />
+                  <span className="zone-txt" style={{ color: snapshot?.inZone ? "var(--green)" : "var(--dim)" }}>
+                    {snapshot?.inZone ? "⚡ IN BUY ZONE" : "WAIT FOR BUY ZONE"}
+                  </span>
+                  <span className="zone-range">
+                    ₹{snapshot?.buyZoneLow.toFixed(1) ?? "--"}–{snapshot?.buyZoneHigh.toFixed(1) ?? "--"}
+                  </span>
+                </div>
+                <button id="buy-btn" className={snapshot?.inZone && phase === "ready" ? "in-zone" : ""} onClick={handleBuy} disabled={phase !== "ready"}>
+                  {phase === "countdown" ? (
+                    <>NEXT IN {countdown}s<span className="btn-sub">PREPARE YOUR POSITION</span></>
+                  ) : (
+                    <>⚡ BUY<span className="btn-sub">EXECUTE MARKET ORDER</span></>
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -405,7 +437,7 @@ export default function HftTerminal() {
           <button className="btn-primary" style={{ fontSize: 13, letterSpacing: 2, padding: 14 }} onClick={() => openLeaderboard("recap")}>
             📊 VIEW LEADERBOARD
           </button>
-          <button className="btn-ghost" onClick={() => setScreen("intro")}>↺ RETRADE THE SESSION</button>
+          <button className="btn-ghost" onClick={() => setScreen("game")}>↺ RETRADE THE SESSION</button>
         </div>
       )}
 
@@ -415,7 +447,7 @@ export default function HftTerminal() {
           <div className="lb-hdr">
             <div>
               <div className="lb-title">LEADERBOARD</div>
-              <div className="lb-sub">INDEX HFT · ALL TRADERS</div>
+              <div className="lb-sub">THE TICKER GAME · ALL TRADERS</div>
             </div>
             <button className="lb-close-btn" onClick={() => setScreen(lbReturnScreen)}>
               ✕ CLOSE

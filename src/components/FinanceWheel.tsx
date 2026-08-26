@@ -10,39 +10,56 @@ const SECTORS = [
     title: "Competitions",
     desc: "Flagship events like ERC and FinSearch testing real-world finance skills against top institutions.",
     image: "/partner_1.png",
+    imageScale: 1,
+    imageX: 0,
+    imageY: 0,
   },
   {
     icon: Users,
     title: "Sessions & Bootcamps",
-    desc: "Intensive workshops on financial modeling, valuation, and trading strategies.",
+    desc: "Intensive workshops on financial modeling, valuation and trading strategies.",
     image: "/partner_2.jpeg",
+    imageScale: 1.1,
+    imageX: 0,
+    imageY: -5,
   },
   {
     icon: Lightbulb,
     title: "Research",
-    desc: "Deep-dive initiatives covering equity, macro, and alternative investment analysis.",
+    desc: "Deep-dive initiatives covering equity, macro and alternative investment analysis.",
     image: "/partner_3.jpeg",
+    imageScale: 1.1,
+    imageX: 5,
+    imageY: 35,
   },
   {
     icon: BookOpen,
     title: "Publications",
-    desc: "Market reports, sector analysis, and curated primers for every finance domain.",
+    desc: "Market reports, sector analysis and curated primers for every finance domain.",
     image: "/partner_4.jpeg",
+    imageScale: 1.08,
+    imageX: 0,
+    imageY: -5,
   },
   {
     icon: BarChart3,
     title: "Industry Connect",
     desc: "Guest lectures and sessions with professionals from leading financial firms.",
     image: "/partner_5.jpeg",
+    imageScale: 1.05,
+    imageX: 0,
+    imageY: -5,
   },
   {
     icon: Award,
     title: "Career Prep",
-    desc: "Mock interviews, case studies, and placement guidance for finance roles.",
+    desc: "Mock interviews, case studies and placement guidance for finance roles.",
     image: "/partner_6.jpeg",
+    imageScale: 1.55,
+    imageX: 0,
+    imageY: -22,
   },
 ];
-
 const SECTOR_COUNT = SECTORS.length;
 const ANGLE_STEP = 360 / SECTOR_COUNT;
 const START_OFFSET = -90;
@@ -90,14 +107,18 @@ export default function FinanceWheel() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <Image
-                src={sector.image}
-                alt=""
-                fill
-                className={`object-cover transition-transform duration-500 ease-out ${
-                  isHovered ? "scale-110" : "scale-100"
-                }`}
-                sizes="620px"
-              />
+  src={sector.image}
+  alt=""
+  fill
+  className="object-cover transition-transform duration-500 ease-out"
+  style={{
+    transform: `
+      translate(${sector.imageX}%, ${sector.imageY}%)
+      scale(${isHovered ? sector.imageScale + 0.08 : sector.imageScale})
+    `,
+  }}
+  sizes="620px"
+/>
               <div
                 className={`absolute inset-0 transition-colors duration-300 ${
                   isHovered ? "bg-black/40" : "bg-black/62"
@@ -110,14 +131,14 @@ export default function FinanceWheel() {
                   left: `${labelPos.left}%`,
                   top: `${labelPos.top}%`,
                   transform: "translate(-50%, -50%)",
-                  width: "26%",
+                  width: "34%",
                 }}
               >
                 <sector.icon className="w-5 h-5 text-gold mb-1.5" />
                 <span
-                  className="font-bold text-[11px] sm:text-xs text-cream leading-tight"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
+  className="font-bold text-sm sm:text-lg lg:text-xl text-cream leading-tight whitespace-nowrap"
+  style={{ fontFamily: "var(--font-display)" }}
+>
                   {sector.title}
                 </span>
               </div>
@@ -171,11 +192,11 @@ export default function FinanceWheel() {
               left: `${petalPos.left}%`,
               top: `${petalPos.top}%`,
               transform: "translate(-50%, -50%)",
-              width: "38%",
+              width: "55%",
             }}
           >
-            <div className="card-glow-gold rounded-2xl p-4 sm:p-5 text-center shadow-2xl">
-              <p className="text-[10px] sm:text-sm text-cream/80 leading-relaxed">
+            <div className="card-glow-gold rounded-2xl p-5 sm:p-6  text-center shadow-2xl">
+              <p className="text-[20px] sm:text-lg text-cream/80 leading-relaxed">
                 {sector.desc}
               </p>
             </div>

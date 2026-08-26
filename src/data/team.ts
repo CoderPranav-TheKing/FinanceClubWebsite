@@ -26,7 +26,7 @@ export const teamMembers: TeamMember[] = [
     name: "Shreya Goyal",
     role: "Club Manager",
     category: "manager",
-    photo: "/shreyagoyal.png",
+    photo: "/shreyagoyal.jpeg",
     phone: "+91 98104 65318",
     email: "financeclub@iitb.ac.in",
     linkedin: "https://www.linkedin.com/in/shreya-goyal-07a4122b6/",

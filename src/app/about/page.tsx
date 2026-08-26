@@ -64,21 +64,20 @@ export default function AboutPage() {
       <div className="absolute inset-0 bg-gradient-to-br from-[#141010]/90 via-[#141010]/85 to-[#141010]/95 pointer-events-none" />
 
       <div className="relative z-10">
-        <h2 className="text-2xl font-extrabold text-gradient-gold mb-6" style={{ fontFamily: "var(--font-display)" }}>Who We Are</h2>
-        <div className="space-y-4 text-cream/70 leading-relaxed">
-          <p className='text-lg'>
+        <h2 className="text-6xl font-extrabold text-gradient-gold mb-6" style={{ fontFamily: "var(--font-display)" }}>Who We Are</h2>
+        <div className="space-y-4 text-cream/90 leading-relaxed">
+          <p className='text-xl'>
             Finance Club IIT Bombay is the institute&apos;s foremost student body dedicated to finance
-            education, research and industry interaction. A team of passionate students cultivating
+            education, research and industry interaction. We are a team of passionate students cultivating
             financial literacy and analytical skills across the IITB community.
           </p>
-          <p className='text-lg'>
+          <p className='text-xl'>
             Through competitions, bootcamps, guest lectures and publications, we provide hands-on
             exposure to real-world finance : from equity research and trading to private equity,
             venture capital and quantitative finance.
           </p>
-          <p className='text-lg'>
-            Our events attract participation from top institutions across India and our collaborations
-            with leading financial firms create valuable networking opportunities.
+          <p className='text-xl'>
+            Our events bring together an ambitious community of students at IIT Bombay, while our collaborations with leading financial firms create valuable opportunities for networking and industry engagement.
           </p>
         </div>
       </div>
@@ -106,7 +105,7 @@ export default function AboutPage() {
   <div className="relative z-10 max-w-6xl mx-auto">
     <div className="text-center mb-14">
       <div className="badge-pill badge-crimson mx-auto mb-6">Our Activities</div>
-      <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+      <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
         What We <span className="text-gradient-crimson">Do</span>
       </h2>
     </div>
@@ -124,8 +123,8 @@ export default function AboutPage() {
       className="card-premium p-8 group cursor-default hover:bg-[#141010] transition-colors duration-300"
     >
       <item.icon className={`w-6 h-6 ${item.color} mb-4 group-hover:scale-110 transition-transform`} />
-      <h3 className="font-bold text-lg mb-2 text-cream" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
-      <p className="text-sm text-cream/50 leading-relaxed">{item.desc}</p>
+      <h3 className="font-bold text-2xl mb-2 text-cream" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
+      <p className="text-lg text-cream/60 leading-relaxed">{item.desc}</p>
     </div>
   ))}
 </div>
@@ -139,7 +138,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <div className="badge-pill badge-cream mx-auto mb-6">Domains</div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+            <h2 className="text-6xl sm:text-5xl font-extrabold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
               Areas We <span className="text-gradient-gold">Explore</span>
             </h2>
           </div>
@@ -160,10 +159,10 @@ export default function AboutPage() {
                 className="object-cover opacity-[0.08] pointer-events-none select-none"
                 sizes="(max-width: 1024px) 100vw, 800px"
               />
-            <h2 className="text-3xl font-extrabold tracking-tight mb-4" style={{ fontFamily: "var(--font-display)" }}>
+            <h2 className="text-5xl font-extrabold tracking-tight mb-4" style={{ fontFamily: "var(--font-display)" }}>
               Know the <span className="text-gradient-gold">Team</span>
             </h2>
-            <p className="text-cream/50 max-w-md mx-auto mb-8">
+            <p className="text-cream/50 max-w-md mx-auto mb-8 text-xl">
               Faces behind the club - leading initiatives that impact thousands of students.
             </p>
             <Link href="/team" className="btn-gold">

@@ -7,8 +7,10 @@ import { Aboreto } from 'next/font/google'
 import { Lato } from "next/font/google";
 import { Newsreader } from 'next/font/google'
 import { Rock_Salt } from 'next/font/google'
+import { Kdam_Thmor_Pro } from 'next/font/google'
+import {Bungee_Inline} from 'next/font/google'
 
-const rockSalt = Rock_Salt({
+const rockSalt = Kdam_Thmor_Pro({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-rocksalt',

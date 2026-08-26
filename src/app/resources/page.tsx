@@ -128,8 +128,8 @@ export default function ResourcesPage() {
                       <Icon className="w-5 h-5 text-gold/60 group-hover:text-gold transition-colors" />
                       <span className="badge-pill badge-cream text-[9px]">{resource.category.replace(/-/g, " ")}</span>
                     </div>
-                    <h3 className="font-bold mb-2 text-cream group-hover:text-gold transition-colors" style={{ fontFamily: "var(--font-display)" }}>{resource.title}</h3>
-                    <p className="text-xs text-cream/25 leading-relaxed mb-3">{resource.description}</p>
+                    <h3 className="font-bold mb-2 text-cream group-hover:text-gold transition-colors text-lg" style={{ fontFamily: "var(--font-display)" }}>{resource.title}</h3>
+                    <p className="text-s text-cream/65 leading-relaxed mb-3">{resource.description}</p>
                     <span className="inline-flex items-center gap-1 text-[10px] text-gold/30 group-hover:text-gold transition-colors font-semibold uppercase tracking-wider">
                       <ExternalLink className="w-3 h-3" /> Open
                     </span>
@@ -172,7 +172,7 @@ export default function ResourcesPage() {
       Finance Learning{" "}
       <span className="text-gradient-crimson">Roadmap</span>
     </h2>
-    <p className="text-cream/60 max-w-2xl mx-auto">
+    <p className="text-cream/80 max-w-2xl mx-auto text-xl">
       A curated path for students starting out in finance - from market
       basics to placement-ready technicals and the CFA track. Click any
       sector to explore.

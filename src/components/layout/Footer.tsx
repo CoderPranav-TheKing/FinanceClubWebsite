@@ -33,11 +33,11 @@ export default function Footer() {
                 <Image src="/logo.jpg" alt="Finance Club" fill className="object-cover" sizes="40px" />
               </div>
               <div>
-                <span className="font-bold text-cream block" style={{ fontFamily: "var(--font-display)" }}>Finance Club</span>
-                <span className="text-[10px] text-cream/20 uppercase tracking-widest">IIT Bombay</span>
+                <span className="font-bold text-cream block text-lg" style={{ fontFamily: "var(--font-display)" }}>Finance Club</span>
+                <span className="text-[15 px] text-cream/20 uppercase tracking-widest">IIT Bombay</span>
               </div>
             </Link>
-            <p className="text-sm text-cream/25 max-w-xs mb-6 leading-relaxed">
+            <p className="text-lg text-cream/55 max-w-xs mb-6 leading-relaxed">
               Finance education, research, competitions and industry exposure for IIT Bombay students.
             </p>
             <div className="flex items-center gap-3">
@@ -47,7 +47,7 @@ export default function Footer() {
                 { icon: Linkedin, href: "https://linkedin.com/company/finance-club-iitbombay", label: "LinkedIn" },
               ].map((s) => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                  className="w-9 h-9 rounded-full border border-cream/[0.06] flex items-center justify-center text-cream/25 hover:text-gold hover:border-gold/20 transition-all">
+                  className="w-9 h-9 rounded-full border border-cream/[0.06] flex items-center justify-center text-cream/55 hover:text-gold hover:border-gold/20 transition-all">
                   <s.icon className="w-4 h-4" />
                 </a>
               ))}
@@ -57,11 +57,11 @@ export default function Footer() {
           {/* Links */}
           {footerLinks.map((group) => (
             <div key={group.title}>
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold/50 mb-4">{group.title}</h4>
+              <h4 className="text-[15px] font-bold uppercase tracking-[0.2em] text-gold/50 mb-4">{group.title}</h4>
               <ul className="space-y-2.5">
                 {group.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-cream/25 hover:text-cream transition-colors">
+                    <Link href={link.href} className="text-lg text-cream/45 hover:text-cream transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -73,9 +73,9 @@ export default function Footer() {
 
         <div className="divider my-10" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-cream/25">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[15px] text-cream/55">
           <span>&copy; {new Date().getFullYear()} Finance Club IIT Bombay</span>
-          <span>Built by the Finance Club IIT Bombay</span>
+          <span>Built by the Finance Club, IIT Bombay</span>
         </div>
       </div>
     </footer>

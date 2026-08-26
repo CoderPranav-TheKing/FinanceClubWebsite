@@ -46,7 +46,7 @@ export default function HomePage() {
   const PAUSE_BEFORE_FADE = 800;
   const FADE_DURATION = 400;
   const PAUSE_BEFORE_LINE2 = 300;
-  const PAUSE_BEFORE_REST = 400;
+  const PAUSE_BEFORE_REST = 1000;
 
   // Phases: "type1" -> "fade1" -> "type2" -> "line2" -> "done"
   const [phase, setPhase] = useState("type1");
@@ -92,18 +92,27 @@ export default function HomePage() {
   }, [phase, typedReal]);
 
   // Phase 4: Type "IIT BOMBAY" and unlock the rest of the page
-  useEffect(() => {
-    if (phase !== "line2") return;
-    
-    if (typedLine2 < LINE2.length) {
-      const t = setTimeout(() => setTypedLine2((c) => c + 1), TYPE_SPEED);
-      return () => clearTimeout(t);
-    }
-    
-    // Both states are set at the same time so the cleanup doesn't abort the transition
+  // Phase 4: Type "IIT BOMBAY", then pause before revealing the rest
+useEffect(() => {
+  if (phase !== "line2") return;
+
+  if (typedLine2 < LINE2.length) {
+    const t = setTimeout(
+      () => setTypedLine2((c) => c + 1),
+      TYPE_SPEED
+    );
+
+    return () => clearTimeout(t);
+  }
+
+  // Give the completed title some breathing room
+  const t = setTimeout(() => {
     setPhase("done");
     setShowRest(true);
-  }, [phase, typedLine2]);
+  }, PAUSE_BEFORE_REST);
+
+  return () => clearTimeout(t);
+}, [phase, typedLine2]);
 
   const isShowingPlaceholder = phase === "type1" || phase === "fade1";
   const line1Done = phase === "type2" || phase === "line2" || phase === "done";
@@ -140,20 +149,20 @@ export default function HomePage() {
   </div>
 
   {/* Content Layer */}
-  <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full pt-24 sm:pt-32 pb-16">
+  <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full pt-24 sm:pt-32 pb-16 xl:-translate-x-10">
     {/* Badge */}
-    <div className="badge-pill badge-gold mb-5 sm:mb-8 text-xs">
-      <Sparkles className="w-3.5 h-3.5"/>
-      IIT Bombay&apos;s Premier Finance Society
-    </div>
+<div className="badge-pill badge-gold mb-5 sm:mb-8 text-sm sm:text-base px-4 py-1.5">
+  <Sparkles className="w-7 h-7"/>
+  IIT Bombay&apos;s Premier Finance Society
+</div>
 
     {/* Main Headline */}
     <h1
-      className="whitespace-normal sm:whitespace-nowrap font-extrabold tracking-[0.03em] sm:tracking-[0.08em] leading-[1.2]  mb-4 sm:mb-6 select-none pt-1 sm:pt-5"
+      className="whitespace-normal sm:whitespace-nowrap font-extrabold tracking-[0.03em] sm:tracking-[0.08em] leading-[1.2]  mb-4 sm:mb-6 select-none pt-0 sm:pt-1"
       style={{
-        fontFamily: "var(--font-rocksalt)",
-        fontSize: "clamp(4.2rem, 6.2vw, 7.0rem)",
-      }}
+  fontFamily: "var(--font-rocksalt)",
+  fontSize: "clamp(4.8rem, 7vw, 9rem)",
+}}
     >
       <span 
         className="inline-block transition-opacity duration-300 min-h-[1.1em]"
@@ -180,7 +189,7 @@ export default function HomePage() {
 
       <br />
       <span
-        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-15"
+        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-10"
         style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(1.75rem, 3.2vw, 3rem)",
@@ -196,13 +205,13 @@ export default function HomePage() {
     {showRest && (
       <div className="animate-slide-up">
         {/* Paragraph */}
-        <p className="text-base sm:text-xl text-cream/90 sm:text-cream/80 max-w-lg mb-6 sm:mb-10 leading-relaxed font-normal">
+        <p className="text-base sm:text-2xl text-cream/90 sm:text-cream/80 max-w-2xl mb-6 sm:mb-10 leading-relaxed font-normal">
           Building structured pathways into finance careers through
           world-class competitions, research and industry exposure.
         </p>
 
         {/* ===== ALIGNED METRICS & ACTIONS ROW ===== */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 max-w-7xl pt-15">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 max-w-15xl pt-10">
           {/* Glass Stats Grid Box */}
           <div className="backdrop-blur-md bg-black/30 border border-cream/10 rounded-2xl py-4 sm:py-6 grid grid-cols-3 divide-x divide-cream/10 w-full lg:w-auto lg:min-w-[500px] shrink-0">
             {[
@@ -255,7 +264,7 @@ export default function HomePage() {
                   Building{" "}
                   <span className="text-gradient-gold">Finance Acumen</span>
                 </h2>
-                <p className="text-cream/35 mt-5 text-lg leading-relaxed max-w-2xl mx-auto">
+                <p className="text-cream/35 mt-5 text-2xl leading-relaxed max-w-4xl mx-auto">
                   From flagship competitions to published research - structured
                   pathways across every major finance discipline. Hover over any
                   sector to explore what it covers.
@@ -297,7 +306,7 @@ export default function HomePage() {
                     >
                       Scale That <span className="text-gradient-gold">Matters</span>
                     </h2>
-                    <p className="text-cream/60 mt-5 text-lg leading-relaxed max-w-md">
+                    <p className="text-cream/60 mt-5 text-2xl leading-relaxed max-w-md">
                       Year after year, our events and initiatives reach hundreds of
                       students and connect them with leading financial firms.
                     </p>
@@ -308,7 +317,7 @@ export default function HomePage() {
                       { value: "15+", label: "Events Annually", icon: Calendar, glow: "card-glow-gold" },
                       { value: "800+", label: "Registrations", icon: Users, glow: "card-glow-crimson" },
                       { value: "8+", label: "Industry Partners", icon: Building2, glow: "card-glow-gold" },
-                      { value: "15+", label: "Quant Strategies", icon: TrendingUp, glow: "card-glow-crimson" },
+                      { value: "20+", label: "Sessions and Workshops", icon: TrendingUp, glow: "card-glow-crimson" },
                     ].map((stat) => (
                       <div key={stat.label} className={`${stat.glow} p-6 text-center`}>
                         <stat.icon className="w-6 h-6 text-gold/60 mx-auto mb-3" />
@@ -318,7 +327,7 @@ export default function HomePage() {
                         >
                           <AnimatedCounter value={stat.value} />
                         </div>
-                        <div className="text-xs text-cream/60">{stat.label}</div>
+                        <div className="text-lg text-cream/60">{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -332,158 +341,158 @@ export default function HomePage() {
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
     <div className="lg:col-span-4">
-      <div className="badge-pill badge-gold mb-6">Competitions</div>
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-[0.02em] leading-[1.35]" style={{ fontFamily: "var(--font-display)" }}>
-        Compete Against the <span className="text-gradient-gold">Best Minds</span>
-      </h2>
-      <p className="text-cream/35 mb-6">
-        Our flagship competitions create a structured pathway into finance throughout the academic year.
-      </p>
-      <Link href="/competitions" className="btn-crimson inline-flex items-center gap-2">
-        View All Competitions
-      </Link>
-    </div>
+        <div className="badge-pill badge-gold mb-6">Competitions</div>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 tracking-[0.02em] leading-[1.35]" style={{ fontFamily: "var(--font-display)" }}>
+          Compete Against the <span className="text-gradient-gold">Best Minds</span>
+        </h2>
+        <p className="text-cream/35 mb-6 text-xl">
+          Our flagship competitions create a structured pathway into finance throughout the academic year.
+        </p>
+        <Link href="/competitions" className="btn-crimson inline-flex items-center gap-2">
+          View All Competitions
+        </Link>
+      </div>
 
-    <div className="lg:col-span-8">
-      <div className="card-premium p-4 sm:p-6 rounded-2xl border border-cream/10">
-        <div className="relative">
-          <ScrollReveal>
-            {/* Height is dynamic (auto) on mobile, fixed on desktop */}
-            <div className="h-auto md:h-[420px] lg:h-[520px]">
-              <RoadmapTimeline />
-            </div>
-          </ScrollReveal>
+      <div className="lg:col-span-8">
+        <div className="card-premium p-4 sm:p-6 rounded-2xl border border-cream/10">
+          <div className="relative">
+            <ScrollReveal>
+              {/* Height is dynamic (auto) on mobile, fixed on desktop */}
+              <div className="h-auto md:h-[420px] lg:h-[520px]">
+                <RoadmapTimeline />
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-        </section>
+          </section>
 
-        <div className="divider-glow" />
+          <div className="divider-glow" />
 
-        {/* ===== PARTNERS HIGHLIGHT ===== */}
-        <section className="relative py-32 px-6 lg:px-8 overflow-hidden">
-          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
-            <div className="relative col-span-1 row-span-2">
-              <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
-            </div>
-            <div className="relative col-span-1 row-span-1">
-              <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
-            </div>
-            <div className="relative col-span-1 row-span-1">
-              <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black/82" />
-          <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(245,183,49,0.12),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(27,107,64,0.14),transparent_28%)]" />
-
-          <div className="relative z-10 max-w-6xl mx-auto">
-            <ScrollReveal>
-              <div className="backdrop-blur-md bg-black/50 border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-14">
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
-                  <div>
-                    <div className="badge-pill badge-cream mb-6">
-                      <Building2 className="w-3 h-3" />
-                      Our Partners
-                    </div>
-                    <h2
-                      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      Industry{" "}
-                      <span className="text-gradient-gold">Collaborators</span>
-                    </h2>
-                  </div>
-                  <Link href="/sponsors" className="btn-gold shrink-0">
-                    Partner With Us <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-
-                <LogoCarousel />
+          {/* ===== PARTNERS HIGHLIGHT ===== */}
+          <section className="relative py-32 px-6 lg:px-8 overflow-hidden">
+            <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
+              <div className="relative col-span-1 row-span-2">
+                <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
-            </ScrollReveal>
-          </div>
-        </section>
-
-        {/* ===== LATEST BLOGS ===== */}
-        <section className="relative py-8 px-6 lg:px-8 overflow-hidden">
-          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
-            <div className="relative col-span-1 row-span-2">
-              <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+              <div className="relative col-span-1 row-span-1">
+                <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
+              </div>
+              <div className="relative col-span-1 row-span-1">
+                <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+              </div>
             </div>
-            <div className="relative col-span-1 row-span-1">
-              <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
-            </div>
-            <div className="relative col-span-1 row-span-1">
-              <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
-            </div>
-          </div>
 
-          <div className="absolute inset-0 bg-black/82" />
-          <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(27,107,64,0.14),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(245,183,49,0.12),transparent_28%)]" />
+            <div className="absolute inset-0 bg-black/82" />
+            <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(245,183,49,0.12),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(27,107,64,0.14),transparent_28%)]" />
 
-          <div className="relative z-10 max-w-6xl mx-auto">
-            <ScrollReveal>
-              <div className="backdrop-blur-md bg-black/50 border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-14">
-                <div className="flex items-end justify-between mb-14">
-                  <div>
-                    <div className="badge-pill badge-crimson mb-6">Insights</div>
-                    <h2
-                      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      Latest from the{" "}
-                      <span className="text-gradient-crimson">Blog</span>
-                    </h2>
-                  </div>
-                  <Link
-                    href="/blogs"
-                    className="hidden sm:flex btn-ghost text-sm py-2.5 px-5"
-                  >
-                    All Posts <ChevronRight className="w-4 h-4" />
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {latestBlogs.map((post, i) => (
-                    <Link key={post.id} href={`/blogs/${post.slug}`}>
-                      <div
-                        className={`${
-                          i === 0 ? "card-glow-crimson" : "card-premium"
-                        } p-7 group h-full`}
-                      >
-                        <div className="text-[10px] text-cream/20 mb-3 font-medium uppercase tracking-wider">
-                          {new Date(post.date).toLocaleDateString("en-IN", {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          })}
-                          <span className="mx-1.5">·</span>
-                        </div>
-                        <h3
-                          className="font-bold text-lg mb-3 text-cream group-hover:text-gold transition-colors"
-                          style={{ fontFamily: "var(--font-display)" }}
-                        >
-                          {post.title}
-                        </h3>
-                        <p className="text-sm text-cream/25 line-clamp-3 leading-relaxed">
-                          {post.excerpt}
-                        </p>
-                        <span className="inline-flex items-center gap-1 text-xs text-gold/40 mt-5 group-hover:text-gold transition-colors font-semibold uppercase tracking-wider">
-                          Read <ArrowRight className="w-3 h-3" />
-                        </span>
+            <div className="relative z-10 max-w-[1300px] mx-auto">
+              <ScrollReveal>
+                <div className="backdrop-blur-md bg-black/50 border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-14">
+                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
+                    <div>
+                      <div className="badge-pill badge-cream mb-6">
+                        <Building2 className="w-3 h-3" />
+                        Our Partners
                       </div>
+                      <h2
+                        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
+                        Industry{" "}
+                        <span className="text-gradient-gold">Collaborators</span>
+                      </h2>
+                    </div>
+                    <Link href="/sponsors" className="btn-gold shrink-0">
+                      Partner With Us <ArrowRight className="w-4 h-4" />
                     </Link>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </section>
+                  </div>
 
-        <div className="divider" />
+                  <LogoCarousel />
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          {/* ===== LATEST BLOGS ===== */}
+          <section className="relative py-16 px-6 lg:px-8 overflow-hidden">
+            <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
+              <div className="relative col-span-1 row-span-2">
+                <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+              </div>
+              <div className="relative col-span-1 row-span-1">
+                <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
+              </div>
+              <div className="relative col-span-1 row-span-1">
+                <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
+              </div>
+            </div>
+
+            <div className="absolute inset-0 bg-black/82" />
+            <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top_left,rgba(27,107,64,0.14),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(245,183,49,0.12),transparent_28%)]" />
+
+            <div className="relative z-10 max-w-[1300px] mx-auto">
+              <ScrollReveal>
+                <div className="backdrop-blur-md bg-black/50 border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-14">
+                  <div className="flex items-end justify-between mb-14">
+                    <div>
+                      <div className="badge-pill badge-crimson mb-6">Insights</div>
+                      <h2
+                        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight"
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
+                        Latest from the{" "}
+                        <span className="text-gradient-crimson">Blog</span>
+                      </h2>
+                    </div>
+                    <Link
+                      href="/blogs"
+                      className="hidden sm:flex btn-ghost text-sm py-2.5 px-5"
+                    >
+                      All Posts <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {latestBlogs.map((post, i) => (
+                      <Link key={post.id} href={`/blogs/${post.slug}`}>
+                        <div
+                          className={`${
+                            i === 0 ? "card-glow-crimson" : "card-premium"
+                          } p-7 group h-full`}
+                        >
+                          <div className="text-[10px] text-cream/20 mb-3 font-medium uppercase tracking-wider">
+                            {new Date(post.date).toLocaleDateString("en-IN", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                            <span className="mx-1.5">·</span>
+                          </div>
+                          <h3
+                            className="font-bold text-xl mb-3 text-cream group-hover:text-gold transition-colors"
+                            style={{ fontFamily: "var(--font-display)" }}
+                          >
+                            {post.title}
+                          </h3>
+                          <p className="text-lg text-cream/25 line-clamp-3 leading-relaxed">
+                            {post.excerpt}
+                          </p>
+                          <span className="inline-flex items-center gap-1 text-xs text-gold/40 mt-5 group-hover:text-gold transition-colors font-semibold uppercase tracking-wider">
+                            Read <ArrowRight className="w-3 h-3" />
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          <div className="divider" />
 
         {/* ===== CTA ===== */}
         <section className="py-32 px-6 lg:px-8 mesh-crimson grain relative">
@@ -505,13 +514,13 @@ export default function HomePage() {
                     Join the Community
                   </div>
                   <h2
-                    className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-5"
+                    className="text-5xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight mb-5"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     Ready to{" "}
                     <span className="text-gradient-gold">Level Up</span>?
                   </h2>
-                  <p className="text-cream/50 max-w-md mx-auto mb-10 leading-relaxed">
+                  <p className="text-cream/50 max-w-3xl mx-auto mb-10 leading-relaxed text-xl">
                     Compete in flagship events, access curated resources and be
                     part of IIT Bombay&apos;s most active finance community.
                   </p>

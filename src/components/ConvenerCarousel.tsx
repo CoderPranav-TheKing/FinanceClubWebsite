@@ -16,7 +16,7 @@ export default function ConvenerCarousel({ conveners }: { conveners: typeof team
   const angleStep = 360 / n;
 
   useEffect(() => {
-    const speed = 0.2;
+    const speed = 0.6;
 
     const tick = () => {
       if (!isPausedRef.current) {

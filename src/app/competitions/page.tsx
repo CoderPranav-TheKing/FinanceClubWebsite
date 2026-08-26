@@ -60,24 +60,37 @@ const thisMonthItems = competitions
     status: comp.status // you can pass this along to adjust badges if needed
   }));
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
+function getEventHref(event: {
+  id: string;
+  name: string;
+  category: EventCategory;
+}) {
+  // Only competition cards have individual pages right now
+  if (event.category !== "competitions") {
+    return null;
+  }
 
-function getEventHref(eventName: string) {
-  const directMatch = competitions.find((competition) =>
-    competition.name.toLowerCase().includes(eventName.toLowerCase()) ||
-    eventName.toLowerCase().includes(competition.name.toLowerCase())
+  const aliases: Record<string, string> = {
+    "Citadel Trading ID Challenge": "citadel-trader-id",
+  };
+
+  // Handle known naming differences first
+  if (aliases[event.name]) {
+    return `/competitions/${aliases[event.name]}`;
+  }
+
+  // Match event names with competition data
+  const directMatch = competitions.find(
+    (competition) =>
+      competition.name.toLowerCase().includes(event.name.toLowerCase()) ||
+      event.name.toLowerCase().includes(competition.name.toLowerCase())
   );
 
   if (directMatch) {
     return `/competitions/${directMatch.slug}`;
   }
 
-  return `/competitions/${slugify(eventName)}`;
+  return null;
 }
 
 function CompetitionCard({
@@ -188,7 +201,7 @@ const typingDone = typed >= TYPED_TEXT.length;
           <Trophy className="w-3 h-3" /> Events & Competitions
         </div>
         <h1
-  className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[0.03em] leading-tight mb-6"
+  className="text-5xl sm:text-5xl lg:text-6xl font-extrabold tracking-[0.03em] leading-tight mb-6"
   style={{ fontFamily: "var(--font-display)" }}
 >
   <span className="text-gradient-gold">{TYPED_TEXT.slice(0, typed)}</span>
@@ -197,7 +210,7 @@ const typingDone = typed >= TYPED_TEXT.length;
   )}
 </h1>
 <p
-  className={`text-xl text-cream/85 max-w-2xl leading-relaxed transition-opacity duration-700 ${
+  className={`text-2xl text-cream/85 max-w-2xl leading-relaxed transition-opacity duration-700 ${
     showParagraph ? "opacity-100" : "opacity-0"
   }`}
 >
@@ -215,7 +228,7 @@ const typingDone = typed >= TYPED_TEXT.length;
       <div className="flex items-center justify-center gap-3 mb-4 text-center">
         <span className="w-2 h-2 rounded-full bg-gold animate-glow-pulse" />
         <h2
-          className="text-2xl font-bold text-gradient-gold"
+          className="text-3xl font-bold text-gradient-gold"
           style={{ fontFamily: "var(--font-display)" }}
         >
           This Month
@@ -310,44 +323,73 @@ const typingDone = typed >= TYPED_TEXT.length;
     <ScrollReveal delay={300}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredEvents.map((event) => {
-          const CatIcon = categoryIcons[event.category];
-          const href = getEventHref(event.name);
-          return (
-            <Link key={event.id} href={href} className="block h-full">
-              <div className="card-premium p-6 group hover:bg-[#141010] h-full">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="badge-pill badge-cream text-[9px] capitalize">
-                    <CatIcon className="w-3 h-3" />
-                    {event.category}
-                  </span>
-                  {event.partnerLogo && (
-                    <Image
-                      src={event.partnerLogo}
-                      alt={event.partnerName || ""}
-                      width={28}
-                      height={28}
-                      className="object-contain rounded"
-                    />
-                  )}
-                </div>
-                <h3
-                  className="font-bold text-lg mb-2 text-cream group-hover:text-gold transition-colors"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {event.name}
-                </h3>
-                <p className="text-xs text-cream/70 leading-relaxed mb-4 line-clamp-3">
-                  {event.description}
-                </p>
-                <div className="flex items-center justify-between text-[13px]">
-                  <span className="text-gold/60 font-semibold">
-                    {event.participationScale}
-                  </span>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
+  const CatIcon = categoryIcons[event.category];
+  const href = getEventHref(event);
+
+  const card = (
+    <div
+      className={`card-premium p-6 group h-full ${
+        href
+          ? "hover:bg-[#141010] cursor-pointer"
+          : ""
+      }`}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <span className="badge-pill badge-cream text-[9px] capitalize">
+          <CatIcon className="w-3 h-3" />
+          {event.category}
+        </span>
+
+        {event.partnerLogo ? (
+          <div className="relative w-10 h-10">
+            <Image
+              src={event.partnerLogo}
+              alt={event.partnerName || "Partner"}
+              fill
+              className="object-contain"
+              sizes="40px"
+            />
+          </div>
+        ) : (
+          <div />
+        )}
+      </div>
+
+      <h3
+        className={`font-bold text-xl mb-2 text-cream transition-colors ${
+          href ? "group-hover:text-gold" : ""
+        }`}
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        {event.name}
+      </h3>
+
+      <p className="text-lg text-cream/70 leading-relaxed mb-4 line-clamp-3">
+        {event.description}
+      </p>
+
+      <div className="flex items-center justify-between text-[13px]">
+        <span className="text-gold font-semibold">
+          {event.participationScale}
+        </span>
+
+        {href && (
+          <ArrowRight className="w-4 h-4 text-cream/50 group-hover:text-gold transition-colors" />
+        )}
+      </div>
+    </div>
+  );
+
+  return href ? (
+    <Link key={event.id} href={href} className="block h-full">
+      {card}
+    </Link>
+  ) : (
+    <div key={event.id} className="h-full">
+      {card}
+    </div>
+  );
+})}
       </div>
     </ScrollReveal>
 

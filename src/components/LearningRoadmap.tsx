@@ -36,7 +36,7 @@ const SECTIONS: RoadmapSection[] = [
     resources: [
       {
         title: "Zerodha Varsity",
-        desc: "The best free starting point for understanding Indian markets — stock market basics, fundamental and technical analysis, F&O, personal finance, and financial modelling, all in bite-sized modules with quizzes.",
+        desc: "The best free starting point for understanding Indian markets - stock market basics, fundamental and technical analysis, F&O, personal finance, and financial modelling, all in bite-sized modules with quizzes.",
         url: "https://zerodha.com/varsity/",
       },
       {
@@ -103,12 +103,12 @@ const SECTIONS: RoadmapSection[] = [
       {
         title: "The 400 Questions Guide",
         desc: "A free 200+ page guide covering fit and behavioral questions along with technicals across accounting, valuation, M&A, and LBOs (BIWS / Mergers & Inquisitions).",
-        url: "https://mergersandinquisitions.com/400-questions-investment-banking/",
+        url: "https://drive.google.com/file/d/1D6XMGgc2oImIWcIcqR3IzFujub2qWJnP/view?usp=sharing",
       },
       {
-        title: "The Red Book — WSP IB Interview Guide",
-        desc: "Over 1,000 real IB and PE interview questions and answers, organized by topic: accounting, valuation, M&A, LBO, industry-specific, and behavioral.",
-        url: "https://www.wallstreetprep.com/self-study-programs/the-red-book/",
+        title: "500+ Real IB & PE Interview Questions",
+        desc: "Over 500 real IB and PE interview questions and answers, organized by topic: accounting, valuation, M&A, LBO, industry-specific, and behavioral.",
+        url: "https://drive.google.com/file/d/1tVln8KG927yBmsj58H_VnSCQ7ui_RtuI/view?usp=sharing",
       },
       {
         title: "3-Statement Analysis",
@@ -157,7 +157,7 @@ const SECTIONS: RoadmapSection[] = [
       { title: "Investment Banking: Valuation, LBOs, M&A, and IPOs", author: "Rosenbaum & Pearl", desc: "The standard technical reference for IB." },
       { title: "Valuation: Measuring and Managing the Value of Companies", author: "McKinsey & Co. (Koller et al.)", desc: "The definitive corporate valuation reference." },
       { title: "Liar's Poker", author: "Michael Lewis", desc: "Wall Street culture and bond trading in the 1980s." },
-      { title: "Barbarians at the Gate", author: "Burrough & Helyar", desc: "The RJR Nabisco LBO — a classic PE case study." },
+      { title: "Barbarians at the Gate", author: "Burrough & Helyar", desc: "The RJR Nabisco LBO - a classic PE case study." },
       { title: "The Big Short", author: "Michael Lewis", desc: "The 2008 crisis, told through the people who saw it coming." },
     ],
   },
@@ -205,7 +205,7 @@ export default function LearningRoadmap() {
 
   return (
     <div className="relative">
-      <div className="relative mx-auto w-[320px] h-[320px] sm:w-[440px] sm:h-[440px] lg:w-[560px] lg:h-[560px]">
+      <div className="relative mx-auto w-[380px] h-[380px] sm:w-[540px] sm:h-[540px] lg:w-[660px] lg:h-[660px]">
         {SECTIONS.map((section, i) => {
           const startAngle = START_OFFSET + i * ANGLE_STEP + GAP_DEG / 2;
           const endAngle = START_OFFSET + (i + 1) * ANGLE_STEP - GAP_DEG / 2;
@@ -228,20 +228,20 @@ export default function LearningRoadmap() {
     left: `${labelPos.left}%`,
     top: `${labelPos.top}%`,
     transform: "translate(-50%, -50%)",
-    width: "26%",
+    width: "30%",
   }}
 >
-  <section.icon className="w-5 h-5 sm:w-6 sm:h-6 text-gold mb-1.5 transition-transform duration-300 group-hover:scale-110" />
+  <section.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-gold mb-2 transition-transform duration-300 group-hover:scale-110" />
   <span
-    className="font-bold text-[9px] sm:text-[10px] lg:text-[11px] text-cream leading-[1.15]"
+    className="font-bold text-[11px] sm:text-[13px] lg:text-[15px] text-cream leading-[1.2]"
     style={{ fontFamily: "var(--font-display)" }}
   >
-                  {section.label}
-                </span>
-                <span className="text-[9px] text-gold/50 mt-1 uppercase tracking-wider">
-                  {section.tagline}
-                </span>
-              </div>
+    {section.label}
+  </span>
+  <span className="text-[10px] sm:text-[11px] text-gold/50 mt-1 uppercase tracking-wider">
+    {section.tagline}
+  </span>
+</div>
             </button>
           );
         })}
@@ -302,7 +302,7 @@ export default function LearningRoadmap() {
                 {activeSection.resources.map((r) => (
                   <div key={r.title} className="card-glow-gold p-5">
                     <h4
-                      className="font-bold text-sm text-cream mb-1"
+                      className="font-bold text-lg text-cream mb-1"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {r.title}
@@ -310,7 +310,7 @@ export default function LearningRoadmap() {
                     {r.author && (
                       <p className="text-xs text-gold/60 mb-2">{r.author}</p>
                     )}
-                    <p className="text-xs text-cream/60 leading-relaxed mb-3">
+                    <p className="text-sm text-cream/80 leading-relaxed mb-3">
                       {r.desc}
                     </p>
                     {r.url && (

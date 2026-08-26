@@ -39,7 +39,7 @@ export default function TypewriterTeamTitle() {
       </h1>
 
       <p
-        className={`text-lg text-cream/85 max-w-2xl leading-relaxed transition-opacity duration-700 ${
+        className={`text-2xl text-cream/85 max-w-2xl leading-relaxed transition-opacity duration-700 ${
           showParagraph ? "opacity-100" : "opacity-0"
         }`}
       >

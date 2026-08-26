@@ -73,6 +73,15 @@ export const resources: Resource[] = [
     date: "2026-01-28",
   },
   {
+    id: "13",
+    title: "IBCC 2026 Winning Submissions",
+    description: "Top 2 Consolidated Investment Banking reports from this year's Investment Banking Case Competition.",
+    type: "pdf",
+    category: "Winning Submissions",
+    url: "https://drive.google.com/drive/folders/1UnxeuEV2fWvRvKE1nsKPF-Okq9STZmkL",
+    date: "2026-06-15",
+  },
+  {
     id: "7",
     title: "FinSearch 2025 Case Study Solutions",
     description: "Detailed solutions and analysis walkthrough for FinSearch 2025 case study rounds.",
