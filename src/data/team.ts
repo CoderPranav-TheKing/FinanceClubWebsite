@@ -48,7 +48,7 @@ export const teamMembers: TeamMember[] = [
     name: "Pranav Jaju",
     role: "Convener",
     category: "convener",
-    photo: "/pranavjaju.png",
+    photo: "/pranavjaju.jpg",
     phone: "+91 88069 22758",
     email: "pranavjaju13@gmail.com",
     linkedin: "https://www.linkedin.com/in/pranav-jaju-43b644376/",

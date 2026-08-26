@@ -15,7 +15,7 @@ export default function ManagerCard({ member, compact = false }: { member: typeo
         alt={member.name}
         fill
         sizes={compact ? "260px" : "300px"}
-        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        className="object-cover object-[center_15%] transition-transform duration-500 ease-out group-hover:scale-105"
         unoptimized
         priority={!compact}
       />
