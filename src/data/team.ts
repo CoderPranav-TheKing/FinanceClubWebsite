@@ -88,7 +88,7 @@ export const teamMembers: TeamMember[] = [
     name: "Akshat Verma",
     role: "Convener",
     category: "convener",
-    photo: "/akshatverma.jpeg",
+    photo: "/akshat.jpg",
     phone: "+91 92890 28166",
     email: "financeclub@iitb.ac.in",
     linkedin: "https://www.linkedin.com/in/akshat-verma-368070370/",

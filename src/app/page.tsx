@@ -37,7 +37,7 @@ export default function HomePage() {
   );
   const latestBlogs = blogPosts.slice(0, 3);
 
-  const PLACEHOLDER = "Peak club?";
+  const PLACEHOLDER = "Think Finance?";
   const REAL = "Finance Club";
   const REAL_SPLIT = 7; 
   const LINE2 = "IIT BOMBAY";

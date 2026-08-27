@@ -43,20 +43,20 @@ export const clubEvents: ClubEvent[] = [
 
   {
     id: "boot-1",
-    name: "Learners' Space — Fundamentals of Finance",
+    name: "Learners' Space - Fundamentals of Finance",
     category: "bootcamps",
     description:
-      "A four-week bootcamp covering core finance concepts, markets, asset classes, and analysis.",
+      "A four-week bootcamp covering core finance concepts, markets, asset classes and analysis.",
     participationScale: "820+ registrations",
     outcome: "90+ students completed the bootcamp and received a certificate of completion.",
   },
 
   {
     id: "sess-1",
-    name: "The Art of Fundraising — Venture Capital",
+    name: "The Art of Fundraising - Venture Capital",
     category: "sessions",
     description:
-      "A practical walkthrough of startup fundraising, evaluation, and the venture capital lifecycle.",
+      "A practical walkthrough of startup fundraising, evaluation and the venture capital lifecycle.",
     participationScale: "150+ attendees",
     outcome: "A practical foundation in venture investing and the investor mindset.",
   },
@@ -86,7 +86,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Private Equity Workshop (Warburg Pincus)",
     category: "workshops",
     description:
-      "An exclusive workshop exploring private equity deal sourcing, evaluation, and portfolio management.",
+      "An exclusive workshop exploring private equity deal sourcing, evaluation and portfolio management.",
     participationScale: "100+ attendees",
     outcome: "Practical understanding of PE investment lifecycle.",
   },
@@ -96,7 +96,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Citadel Securities Session",
     category: "sessions",
     description:
-      "An insider look at quantitative trading, market-making, and careers at Citadel Securities.",
+      "An insider look at quantitative trading, market-making and careers at Citadel Securities.",
     participationScale: "200+ attendees",
     outcome: "Understanding of quant trading infrastructure and recruiting pipeline.",
     partnerLogo: "/citadel.png",
@@ -108,7 +108,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Keynote Speaker Session",
     category: "finfest",
     description:
-      "A keynote on the future of finance, consulting, and the changing corporate landscape.",
+      "A keynote on the future of finance, consulting and the changing corporate landscape.",
     participationScale: "400+ attendees",
     outcome: "A firsthand, macro view of how real-world corporate strategy is made.",
   },
@@ -127,7 +127,7 @@ export const clubEvents: ClubEvent[] = [
 
   {
     id: "boot-2",
-    name: "Quant101 — Winter School of Quantitative Finance",
+    name: "Quant101 - Winter School of Quantitative Finance",
     category: "bootcamps",
     description:
       "A month-long introduction to quant finance, derivatives, risk, and algorithmic trading.",
@@ -151,17 +151,17 @@ export const clubEvents: ClubEvent[] = [
     name: "FinFest",
     category: "conferences",
     description:
-      "Finance Club's flagship three-day summit featuring competitions, speakers, workshops, and networking.",
+      "Finance Club's flagship three-day summit featuring competitions, speakers, workshops and networking.",
     participationScale: "500+ participants",
     outcome: "Comprehensive exposure to the finance industry across multiple verticals.",
   },
 
   {
     id: "comp-4",
-    name: "Finance Quiz — CFA Collaboration",
+    name: "Finance Quiz - CFA Collaboration",
     category: "competitions",
     description:
-      "A CFA-focused finance quiz testing investment, quantitative, and analytical knowledge.",
+      "A CFA-focused finance quiz testing investment, quantitative and analytical knowledge.",
     participationScale: "300+ participants",
     outcome: "Benchmarked readiness for globally recognised finance qualifications.",
     partnerLogo: "/cfa_institute.png",
@@ -173,7 +173,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Mergers & Acquisitions Session",
     category: "sessions",
     description:
-      "An introduction to M&A structures, synergies, valuations, and the deal advisory process.",
+      "An introduction to M&A structures, synergies, valuations and the deal advisory process.",
     participationScale: "160+ attendees",
     outcome: "Understanding of M&A mechanics and deal execution.",
   },
@@ -193,7 +193,7 @@ export const clubEvents: ClubEvent[] = [
     name: "FINMUN",
     category: "finfest",
     description:
-      "Finance Club's finance-focused MUN exploring global economics, trade, and policymaking.",
+      "Finance Club's finance-focused MUN exploring global economics, trade and policymaking.",
     participationScale: "200+ participants",
     outcome: "Sharper policy articulation and negotiation skills in complex financial-geopolitical scenarios.",
   },
@@ -203,7 +203,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Zerodha Varsity Quiz",
     category: "competitions",
     description:
-      "A competitive quiz testing financial concepts, markets, and real-world investing knowledge.",
+      "A competitive quiz testing financial concepts, markets and real-world investing knowledge.",
     participationScale: "200+ participants",
     outcome: "Strengthened analytical thinking and applied market knowledge.",
     partnerLogo: "/zerodha.png",
@@ -215,7 +215,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Finance Meets Sustainability",
     category: "sessions",
     description:
-      "An exploration of green finance, ESG investing, and the future of sustainable capital markets.",
+      "An exploration of green finance, ESG investing and the future of sustainable capital markets.",
     participationScale: "150+ attendees",
     outcome: "A nuanced understanding of sustainable finance and its intersection with policy.",
   },
@@ -235,7 +235,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Finance Guides",
     category: "miscellaneous",
     description:
-      "Practical guides covering market making, equity research, and Bloomberg Terminal workflows.",
+      "Practical guides covering market making, equity research and Bloomberg Terminal workflows.",
     participationScale: "1000+ downloads",
     outcome: "Self-paced learning resources accessible to the entire IITB community.",
   },
@@ -245,7 +245,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Portfolio Management Competition",
     category: "competitions",
     description:
-      "A portfolio-building challenge balancing client goals, risk, and long-term returns.",
+      "A portfolio-building challenge balancing client goals, risk and long-term returns.",
     participationScale: "320+ registrations",
     outcome: "Practical financial planning experience translating theory into client-centric strategy.",
     partnerName: "FPA Academy",
@@ -256,7 +256,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Corporate Careers in Finance",
     category: "sessions",
     description:
-      "A panel exploring careers in corporate finance, treasury, and FP&A across industries.",
+      "A panel exploring careers in corporate finance, treasury and FP&A across industries.",
     participationScale: "200+ attendees",
     outcome: "Broad perspective on non-IB finance career paths.",
   },
@@ -266,7 +266,7 @@ export const clubEvents: ClubEvent[] = [
     name: "FinFest Competitions",
     category: "finfest",
     description:
-      "Competitive challenges spanning forensic finance, fraud detection, and CFA-level concepts.",
+      "Competitive challenges spanning forensic finance, fraud detection and CFA-level concepts.",
     participationScale: "300+ participants",
     outcome: "Competitive benchmarking against top finance talent nationally.",
   },
@@ -276,7 +276,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Legal and Financial Frameworks for Businesses",
     category: "sessions",
     description:
-      "A startup-focused session on business structuring, funding, IP, taxation, and compliance.",
+      "A startup-focused session on business structuring, funding, IP, taxation and compliance.",
     participationScale: "120+ attendees",
     outcome: "Practical insight into setting up and managing a compliant, scalable venture.",
   },
@@ -297,7 +297,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Quantitative Equity Research and Trading",
     category: "sessions",
     description:
-      "A masterclass on factor models, data-driven strategies, and careers in quantitative finance.",
+      "A masterclass on factor models, data-driven strategies and careers in quantitative finance.",
     participationScale: "180+ attendees",
     outcome: "A strong conceptual and practical grounding in data-driven financial ecosystems.",
   },
@@ -317,7 +317,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Quantitative Arbitrage and Applied Relative Value",
     category: "sessions",
     description:
-      "An introduction to pairs trading, statistical arbitrage, and exploiting market inefficiencies.",
+      "An introduction to pairs trading, statistical arbitrage and exploiting market inefficiencies.",
     participationScale: "150+ attendees",
     outcome: "A structured perspective on quantitative strategies used in algorithmic trading.",
   },
@@ -327,7 +327,7 @@ export const clubEvents: ClubEvent[] = [
     name: "The Finance Bulletin",
     category: "miscellaneous",
     description:
-      "An insight-driven publication decoding markets, capital flows, innovation, and global finance.",
+      "An insight-driven publication decoding markets, capital flows, innovation and global finance.",
     participationScale: "7300+ Instagram, 5200+ LinkedIn followers",
     outcome: "Informed, trend-aware perspectives on global and domestic finance for students.",
   },
@@ -337,7 +337,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Session on CFA Journey",
     category: "sessions",
     description:
-      "A guide to the CFA journey, finance careers, scholarships, and professional certifications.",
+      "A guide to the CFA journey, finance careers, scholarships and professional certifications.",
     participationScale: "200+ attendees",
     outcome: "Clarity on career pathways and the role of professional certification in finance.",
     partnerLogo: "/cfa_institute.png",
@@ -349,7 +349,7 @@ export const clubEvents: ClubEvent[] = [
     name: "Speaker Session on Applied Risk in Quantitative Finance",
     category: "finfest",
     description:
-      "A practical session on measuring and managing market, credit, and financial risk.",
+      "A practical session on measuring and managing market, credit and financial risk.",
     participationScale: "150+ attendees",
     outcome: "A structured understanding of quantitative risk management in real financial decision-making.",
     partnerName: "IAQS",
@@ -367,7 +367,7 @@ export const clubEvents: ClubEvent[] = [
 
   {
     id: "misc-6",
-    name: "Did You Know — How Wars Shape Markets?",
+    name: "Did You Know - How Wars Shape Markets?",
     category: "miscellaneous",
     description:
       "An infographic series exploring how geopolitical conflicts influence markets and asset prices.",
@@ -388,10 +388,10 @@ export const clubEvents: ClubEvent[] = [
 
   {
     id: "sess-13",
-    name: "Beyond the Ticker — Deep Dive into Equity Research",
+    name: "Beyond the Ticker - Deep Dive into Equity Research",
     category: "sessions",
     description:
-      "A Bernstein panel on professional equity research, sales, and careers in the industry.",
+      "A Bernstein panel on professional equity research, sales and careers in the industry.",
     participationScale: "180+ attendees",
     outcome: "Realistic clarity on career pathways and recruitment expectations in equity research.",
     partnerName: "Bernstein",

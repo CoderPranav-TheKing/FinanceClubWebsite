@@ -183,47 +183,6 @@ export const competitions: Competition[] = [
   },
 
   {
-    id: "3",
-
-    slug: "citadel-trading-2026",
-
-    name: "Citadel Trading Competition",
-
-    shortDescription:
-      "A high-intensity trading challenge testing market-making intuition, risk management, and real-time decision-making.",
-
-    description:
-      "The Citadel Trading Competition is designed to simulate the fast-paced decision-making environment of professional trading. Participants analyse changing market conditions, identify opportunities, manage positions, and adapt their strategies in real time while operating under realistic constraints. The competition tests trading psychology, risk management, market awareness, and the ability to make disciplined decisions in dynamic market environments.",
-
-    status: "upcoming",
-
-    registrationDeadline: "2026-05-01",
-
-    submissionDeadline: "2026-05-15",
-
-    resultsDate: "2026-05-25",
-
-    rules: [
-      "Individual participation is required unless otherwise specified by the organisers.",
-      "Participants will compete using the designated trading or simulation platform.",
-      "All trading decisions must comply with the competition's risk limits and platform rules.",
-      "Participants are expected to manage positions dynamically as market conditions evolve.",
-      "Rankings will be determined according to the competition's prescribed performance criteria.",
-      "Any attempt to manipulate the platform or violate competition rules may result in disqualification.",
-    ],
-
-    allowTeams: false,
-
-    maxTeamSize: 1,
-
-    image: "/competitions/trading.jpg",
-
-    partnerLogo: "/citadel.png",
-
-    partnerName: "Citadel",
-  },
-
-  {
     id: "citadel-trader-2026",
 
     slug: "citadel-trader-id",
@@ -262,47 +221,6 @@ export const competitions: Competition[] = [
     partnerLogo: "/citadel.png",
 
     partnerName: "Citadel",
-  },
-
-  {
-    id: "4",
-
-    slug: "imc-simulation-2026",
-
-    name: "IMC Trading Simulation",
-
-    shortDescription:
-      "Experience a fast-paced trading environment while managing risk and making decisions across simulated markets.",
-
-    description:
-      "The IMC Trading Simulation gives participants a practical introduction to the decision-making environment of a professional trading desk. Teams compete in a simulated market environment, interpreting market information, managing risk, and responding to changing conditions in real time. The competition is designed to test analytical thinking, speed of execution, portfolio awareness, and disciplined risk management while giving participants an experiential understanding of modern trading.",
-
-    status: "upcoming",
-
-    registrationDeadline: "2026-05-10",
-
-    submissionDeadline: "2026-05-20",
-
-    resultsDate: "2026-05-30",
-
-    rules: [
-      "Teams of 2–3 members are allowed.",
-      "The competition will be conducted on the designated trading simulation platform.",
-      "Teams must operate within the prescribed portfolio and risk constraints.",
-      "Participants are responsible for monitoring positions and responding to changing market conditions.",
-      "The competition may include a fixed live trading window.",
-      "Final rankings will be determined according to the announced performance and risk criteria.",
-    ],
-
-    allowTeams: true,
-
-    maxTeamSize: 3,
-
-    image: "/competitions/trading.jpg",
-
-    partnerLogo: "/imc.png",
-
-    partnerName: "IMC Trading",
   },
 
   {
@@ -398,7 +316,7 @@ export const competitions: Competition[] = [
 
     status: "past",
 
-    registrationDeadline: "2025-08-01",
+    registrationDeadline: "2026-08-01",
 
     submissionDeadline: "2025-08-10",
 

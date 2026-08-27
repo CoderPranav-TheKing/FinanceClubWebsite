@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Hero content */}
             <div className="relative z-10 flex min-h-[340px] sm:min-h-[400px] items-end p-7 sm:p-12 lg:p-16">
 
-              <div className="max-w-4xl">
+              <div className="max-w-4xl pt-8">
 
                 {/* Blog label */}
                 <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(245,183,49,0.22)] bg-[rgba(245,183,49,0.07)] px-4 py-2 mb-6">
