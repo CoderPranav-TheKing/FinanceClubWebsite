@@ -8,9 +8,9 @@ import { Lato } from "next/font/google";
 import { Newsreader } from 'next/font/google'
 import { Rock_Salt } from 'next/font/google'
 import { Kdam_Thmor_Pro } from 'next/font/google'
-import {Bungee_Inline} from 'next/font/google'
+import {Prata} from 'next/font/google'
 
-const rockSalt = Kdam_Thmor_Pro({
+const rockSalt = Prata({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-rocksalt',

@@ -116,7 +116,7 @@ export default function AboutPage() {
     { icon: BarChart3, title: "Research", desc: "In-depth research covering equity markets, macro and sectors.", color: "text-cream" },
     { icon: Briefcase, title: "Industry Connect", desc: "Guest lectures and site visits with industry professionals.", color: "text-gold" },
     { icon: Globe, title: "Publications", desc: "Comprehensive primers, market analysis and learning pathways.", color: "text-crimson-light" },
-    { icon: TrendingUp, title: "Career Prep", desc: "Mock interviews, GDs and case studies for finance placements.", color: "text-cream" },
+    { icon: TrendingUp, title: "Career Prep", desc: "Curated Resources for interviews, GDs and case studies for finance placements.", color: "text-cream" },
   ].map((item) => (
     <div
       key={item.title}

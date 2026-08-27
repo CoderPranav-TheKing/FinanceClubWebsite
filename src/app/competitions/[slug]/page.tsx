@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use } from "react";
 import { notFound, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -8,21 +8,10 @@ import {
   Calendar,
   Users,
   User,
-  CheckCircle,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 
 import { competitions } from "@/data/competitions";
 
@@ -39,21 +28,11 @@ export default function CompetitionDetailPage({
 
   const competition = competitions.find((c) => c.slug === slug);
 
-  const [showSuccess, setShowSuccess] = useState(false);
-
   if (!competition) return notFound();
 
   const isActive = competition.status === "active";
 
-  const registrationOpen =
-    new Date(competition.registrationDeadline) > new Date();
-
   const openingSoon = competition.status === "upcoming";
-
-  const handleRegister = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowSuccess(true);
-  };
 
   const handleBackToCompetitions = () => {
     router.push("/competitions");
@@ -61,14 +40,6 @@ export default function CompetitionDetailPage({
 
   const registrationDate = new Date(
     competition.registrationDeadline
-  ).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  const resultsDate = new Date(
-    competition.resultsDate
   ).toLocaleDateString("en-IN", {
     day: "numeric",
     month: "long",
@@ -207,10 +178,8 @@ export default function CompetitionDetailPage({
             Timeline
           </h2>
 
-          <div className="rounded-[2rem] border border-gold/25 bg-[#110E0E] px-8 py-12 sm:px-14 sm:py-16 flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-0 sm:divide-x sm:divide-[#F5E6D0]/10">
-            {/* REGISTRATION DATE */}
-
-            <div className="flex-1 flex flex-col items-center px-6 sm:px-10">
+          <div className="rounded-[2rem] border border-gold/25 bg-[#110E0E] px-8 py-12 sm:px-14 sm:py-16 flex items-center justify-center">
+            <div className="flex flex-col items-center px-6 sm:px-10">
               <Calendar className="w-9 h-9 sm:w-10 sm:h-10 text-gold mb-6" />
 
               <p
@@ -219,7 +188,7 @@ export default function CompetitionDetailPage({
                   fontFamily: "var(--font-body)",
                 }}
               >
-                Registration Opens
+                Registration Deadline
               </p>
 
               <p
@@ -231,175 +200,9 @@ export default function CompetitionDetailPage({
                 {registrationDate}
               </p>
             </div>
-
-            {/* RESULTS DATE */}
-
-            <div className="flex-1 flex flex-col items-center px-6 sm:px-10">
-              <CheckCircle className="w-9 h-9 sm:w-10 sm:h-10 text-gold/75 mb-6" />
-
-              <p
-                className="text-xs sm:text-sm uppercase tracking-[0.18em] text-cream/50 mb-3"
-                style={{
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                Results Announcement
-              </p>
-
-              <p
-                className="text-4xl sm:text-4xl lg:text-5xl leading-none text-[#F5E6D0]"
-                style={{
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                {resultsDate}
-              </p>
-            </div>
           </div>
         </div>
       </section>
-
-      {/* =========================================================
-          ACTIVE COMPETITION REGISTRATION
-      ========================================================= */}
-
-      {isActive && registrationOpen && (
-        <section className="py-16 px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto">
-            <h2
-              className="text-4xl sm:text-5xl font-semibold text-[#F5E6D0] text-center mb-10"
-              style={{
-                fontFamily: "var(--font-body)",
-              }}
-            >
-              Register Now
-            </h2>
-
-            <Card className="bg-[#151111] border-gold/15 rounded-[2rem]">
-              <CardContent className="p-6 sm:p-10">
-                <form onSubmit={handleRegister} className="space-y-5">
-                  <div>
-                    <label
-                      className="text-sm text-cream/70 mb-2 block"
-                      style={{
-                        fontFamily: "var(--font-body)",
-                      }}
-                    >
-                      Full Name *
-                    </label>
-
-                    <Input
-                      placeholder="Your name"
-                      required
-                      className="bg-black/20 border-white/10"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      className="text-sm text-cream/70 mb-2 block"
-                      style={{
-                        fontFamily: "var(--font-body)",
-                      }}
-                    >
-                      Email *
-                    </label>
-
-                    <Input
-                      type="email"
-                      placeholder="your.email@iitb.ac.in"
-                      required
-                      className="bg-black/20 border-white/10"
-                    />
-                  </div>
-
-                  {competition.allowTeams && (
-                    <>
-                      <Separator className="bg-white/10 my-6" />
-
-                      <div>
-                        <label
-                          className="text-sm text-cream/70 mb-2 block"
-                          style={{
-                            fontFamily: "var(--font-body)",
-                          }}
-                        >
-                          Team Name *
-                        </label>
-
-                        <Input
-                          placeholder="Your team name"
-                          required
-                          className="bg-black/20 border-white/10"
-                        />
-                      </div>
-
-                      {Array.from(
-                        {
-                          length: competition.maxTeamSize - 1,
-                        },
-                        (_, i) => (
-                          <div
-                            key={i}
-                            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                          >
-                            <div>
-                              <label
-                                className="text-sm text-cream/70 mb-2 block"
-                                style={{
-                                  fontFamily: "var(--font-body)",
-                                }}
-                              >
-                                Member {i + 2} Name{" "}
-                                {i === 0 ? "*" : ""}
-                              </label>
-
-                              <Input
-                                placeholder={`Member ${i + 2}`}
-                                required={i === 0}
-                                className="bg-black/20 border-white/10"
-                              />
-                            </div>
-
-                            <div>
-                              <label
-                                className="text-sm text-cream/70 mb-2 block"
-                                style={{
-                                  fontFamily: "var(--font-body)",
-                                }}
-                              >
-                                Member {i + 2} Email{" "}
-                                {i === 0 ? "*" : ""}
-                              </label>
-
-                              <Input
-                                type="email"
-                                placeholder="email@iitb.ac.in"
-                                required={i === 0}
-                                className="bg-black/20 border-white/10"
-                              />
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </>
-                  )}
-
-                  <Button
-                    type="submit"
-                    className="w-full gradient-gold text-[#1A1208] hover:opacity-90 py-6 text-base sm:text-lg rounded-xl mt-3"
-                    style={{
-                      fontFamily: "var(--font-display)",
-                    }}
-                  >
-                    Register
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      )}
 
       {/* =========================================================
           FIND OUT MORE
@@ -444,45 +247,6 @@ export default function CompetitionDetailPage({
           </Button>
         </div>
       </section>
-
-      {/* =========================================================
-          REGISTRATION SUCCESS DIALOG
-      ========================================================= */}
-
-      <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
-        <DialogContent className="bg-[#151111] border-gold/20">
-          <DialogHeader>
-            <DialogTitle
-              className="flex items-center gap-2 text-[#F5E6D0]"
-              style={{
-                fontFamily: "var(--font-display)",
-              }}
-            >
-              <CheckCircle className="w-5 h-5 text-green-500" />
-              Registration Successful
-            </DialogTitle>
-
-            <DialogDescription
-              className="text-cream/50"
-              style={{
-                fontFamily: "var(--font-body)",
-              }}
-            >
-              Your registration has been recorded successfully. Good luck!
-            </DialogDescription>
-          </DialogHeader>
-
-          <Button
-            onClick={() => setShowSuccess(false)}
-            className="gradient-gold text-[#1A1208] hover:opacity-90"
-            style={{
-              fontFamily: "var(--font-display)",
-            }}
-          >
-            Close
-          </Button>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

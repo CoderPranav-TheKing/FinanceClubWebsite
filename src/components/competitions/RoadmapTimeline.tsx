@@ -557,7 +557,7 @@ export default function RoadmapTimeline() {
   /* ---------- autoscroll (bumped up a bit) ---------- */
   const pausedCompact = useAutoScrollLoop(x, containerRef, trackRef, {
     enabled: mounted && !isMobile && !isExpanded,
-    speed: 1.22,
+    speed: 2,
   });
 
   /* ---------- mobile vertical timeline ---------- */

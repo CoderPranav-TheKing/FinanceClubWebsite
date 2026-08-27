@@ -51,7 +51,7 @@ export const sponsors: Sponsor[] = [
   {
     id: "8",
     name: "CFA Institute",
-    logo: "/cfa_institute.png",
+    logo: "/cfa2.jpeg",
     website: "https://www.cfainstitute.org",
   },
 ];

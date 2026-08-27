@@ -62,7 +62,7 @@ export default function Navbar() {
             </div>
 
             <span
-              className="text-xs font-bold text-cream hidden sm:block"
+              className="text-sm font-bold text-cream hidden sm:block"
               style={{ fontFamily: "var(--font-display)" }}
             >
               FC

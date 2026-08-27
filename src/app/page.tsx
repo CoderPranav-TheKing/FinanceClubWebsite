@@ -158,10 +158,10 @@ useEffect(() => {
 
     {/* Main Headline */}
     <h1
-      className="whitespace-normal sm:whitespace-nowrap font-extrabold tracking-[0.03em] sm:tracking-[0.08em] leading-[1.2]  mb-4 sm:mb-6 select-none pt-0 sm:pt-1"
+      className="whitespace-normal sm:whitespace-nowrap font-extrabold tracking-[0.03em] sm:tracking-[0.08em] leading-[1.2]  mb-4 sm:mb-6 select-none pt-2 sm:pt-3"
       style={{
   fontFamily: "var(--font-rocksalt)",
-  fontSize: "clamp(4.8rem, 7vw, 9rem)",
+  fontSize: "clamp(4.8rem, 7.5vw, 9rem)",
 }}
     >
       <span 
@@ -189,7 +189,7 @@ useEffect(() => {
 
       <br />
       <span
-        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-10"
+        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-8"
         style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(1.75rem, 3.2vw, 3rem)",

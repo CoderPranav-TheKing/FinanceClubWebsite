@@ -37,10 +37,10 @@ export default function LogoCarousel() {
         const distanceFromFront = Math.abs(effective); // 0 = facing viewer, 180 = facing away
 
         const opacity = 1 - Math.min(distanceFromFront / 140, 0.85);
-        const brightness = 0.5 + 0.5 * (1 - Math.min(distanceFromFront / 140, 1));
+      
 
         card.style.opacity = String(opacity);
-        card.style.filter = `brightness(${brightness})`;
+        card.style.filter = "none";
       });
 
       rafRef.current = requestAnimationFrame(tick);

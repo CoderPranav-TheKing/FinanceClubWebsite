@@ -46,7 +46,7 @@ export const competitions: Competition[] = [
 
     status: "upcoming",
 
-    registrationDeadline: "2026-07-10",
+    registrationDeadline: "2026-06-13",
 
     submissionDeadline: "2026-07-20",
 
@@ -84,7 +84,7 @@ export const competitions: Competition[] = [
 
     status: "upcoming",
 
-    registrationDeadline: "2026-07-15",
+    registrationDeadline: "2026-06-24",
 
     submissionDeadline: "2026-06-25",
 
@@ -122,7 +122,7 @@ export const competitions: Competition[] = [
 
     status: "active",
 
-    registrationDeadline: "2026-07-01",
+    registrationDeadline: "2026-09-26",
 
     submissionDeadline: "2026-04-15",
 
@@ -144,85 +144,6 @@ export const competitions: Competition[] = [
 
     image: "/competitions/erc.jpg",
   },
-
-  {
-    id: "2",
-
-    slug: "vc-case-2026",
-
-    name: "Venture Capital Case Competition",
-
-    shortDescription:
-      "Evaluate high-potential startups from a venture capital lens and build a compelling investment thesis.",
-
-    description:
-      "The Venture Capital Case Competition challenges participants to think like investors evaluating early-stage businesses. Teams analyse a startup's market opportunity, competitive positioning, business model, growth potential, financial requirements, and key risks before developing an investment thesis. Participants are expected to apply structured due diligence and communicate whether and how the venture should be funded, including recommendations on valuation, investment rationale, and potential deal terms.",
-
-    status: "active",
-
-    registrationDeadline: "2026-04-05",
-
-    submissionDeadline: "2026-04-20",
-
-    resultsDate: "2026-04-30",
-
-    rules: [
-      "Teams of 2–3 members are allowed.",
-      "The case material will be released according to the competition timeline.",
-      "Teams must evaluate the startup's market opportunity, business model, competitive position, and growth potential.",
-      "The final recommendation must include a clear investment thesis supported by analysis.",
-      "Teams may be required to provide valuation, funding, or term-sheet recommendations.",
-      "The final presentation must follow the prescribed format and submission deadline.",
-    ],
-
-    allowTeams: true,
-
-    maxTeamSize: 3,
-
-    image: "/competitions/vc-case.jpg",
-  },
-
-  {
-    id: "citadel-trader-2026",
-
-    slug: "citadel-trader-id",
-
-    name: "Citadel Trader ID Challenge",
-
-    shortDescription:
-      "Step into a simulated market-making environment and adapt your trading strategy to changing market conditions.",
-
-    description:
-      "The Citadel Securities Trader ID Challenge is a high-intensity trading simulation designed to replicate elements of real-world market-making and hedge fund environments. Participants take on the role of traders, identifying opportunities, managing positions dynamically, and adapting their strategies as market conditions evolve. The challenge provides hands-on exposure to trading psychology, market microstructure, and risk-aware decision-making in a competitive environment.",
-
-    status: "upcoming",
-
-    registrationDeadline: "2026-11-01",
-
-    submissionDeadline: "2026-11-20",
-
-    resultsDate: "2026-11-30",
-
-    rules: [
-      "Individual participation is required.",
-      "Participants will trade or make decisions through the designated competition platform.",
-      "Participants must identify opportunities and manage positions dynamically.",
-      "All participants must operate within the prescribed risk and platform constraints.",
-      "Trading strategies must be adapted independently to changing market conditions.",
-      "The final leaderboard will be determined according to the announced performance criteria.",
-    ],
-
-    allowTeams: false,
-
-    maxTeamSize: 1,
-
-    image: "/competitions/citadel.jpg",
-
-    partnerLogo: "/citadel.png",
-
-    partnerName: "Citadel",
-  },
-
   {
     id: "ibcc-2027",
 
@@ -238,7 +159,7 @@ export const competitions: Competition[] = [
 
     status: "upcoming",
 
-    registrationDeadline: "2027-01-05",
+    registrationDeadline: "2026-12-01",
 
     submissionDeadline: "2027-01-20",
 
@@ -275,7 +196,7 @@ export const competitions: Competition[] = [
 
     status: "past",
 
-    registrationDeadline: "2025-11-01",
+    registrationDeadline: "2027-01-17",
 
     submissionDeadline: "2025-11-10",
 
@@ -300,45 +221,44 @@ export const competitions: Competition[] = [
 
     partnerName: "CFA Institute",
   },
-
   {
-    id: "zerodha-varsity-2025",
+    id: "5",
 
-    slug: "zerodha-varsity-quiz",
+    slug: "finance-quiz-cfa-2025",
 
-    name: "Zerodha Varsity Quiz",
+    name: "Vittharth",
 
     shortDescription:
-      "A competitive team quiz based on Zerodha Varsity modules and real-world financial market knowledge.",
+      "Test your understanding of financial analysis, quantitative methods, and investment principles through a CFA-aligned challenge.",
 
     description:
-      "Hosted in collaboration with Zerodha, the Zerodha Varsity Quiz tests participants' understanding of financial markets, investing concepts, and real-world market developments. The competition draws on concepts covered in Zerodha Varsity modules while also challenging teams to apply their knowledge beyond textbook definitions. Participants compete in a fast-paced environment that rewards strong conceptual understanding, analytical thinking, market awareness, and quick decision-making.",
+      "The Finance Quiz — CFA Collaboration is a rigorous finance competition conducted in association with the CFA Institute. Structured as a CFA Scholarship Test, the competition evaluates participants across financial analysis, quantitative methods, investment principles, and other concepts aligned with the CFA Level I curriculum. The event is designed to test both conceptual understanding and the ability to apply financial knowledge under competitive conditions, while giving participants exposure to globally recognised standards in investment education.",
 
     status: "past",
 
-    registrationDeadline: "2026-08-01",
+    registrationDeadline: "2026-06-07",
 
-    submissionDeadline: "2025-08-10",
+    submissionDeadline: "2025-11-10",
 
-    resultsDate: "2025-08-20",
+    resultsDate: "2025-11-15",
 
     rules: [
-      "Teams of 2–3 members are allowed.",
-      "Questions are based on Zerodha Varsity modules and general financial knowledge.",
-      "Participants may be tested on current and historical market developments.",
-      "Teams must comply with the timing and answer-submission rules for each round.",
-      "The use of external assistance is prohibited unless explicitly permitted.",
-      "Final rankings will be determined according to the scoring rules announced for the quiz.",
+      "Individual participation is required.",
+      "The competition evaluates financial analysis, quantitative methods, and investment principles.",
+      "Questions are designed around concepts aligned with the CFA Level I curriculum.",
+      "Participants must follow the format and timing announced for each round or stage.",
+      "External assistance or unauthorised materials are prohibited unless explicitly permitted.",
+      "Top performers may be eligible for prizes, scholarships, or other announced rewards.",
     ],
 
-    allowTeams: true,
+    allowTeams: false,
 
-    maxTeamSize: 3,
+    maxTeamSize: 1,
 
-    image: "/competitions/zerodha.jpg",
+    image: "/competitions/quiz.jpg",
 
-    partnerLogo: "/zerodha.png",
+    partnerLogo: "/cfa_institute.png",
 
-    partnerName: "Zerodha",
+    partnerName: "CFA Institute",
   },
 ];
