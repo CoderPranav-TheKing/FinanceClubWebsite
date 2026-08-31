@@ -51,7 +51,7 @@ export default function AnnouncementsPage() {
                 <div className={`flex flex-col ${ann.image ? "md:flex-row" : ""}`}>
                   {ann.image && (
                     <div className="relative w-full md:w-64 h-52 md:h-auto shrink-0">
-                      <Image src={ann.image.startsWith('/') ? `..${ann.image}` : ann.image} alt={ann.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 256px" />
+                      <Image src={ann.image} alt={ann.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 256px" />
                     </div>
                   )}
                   <div className="flex-1 p-7">

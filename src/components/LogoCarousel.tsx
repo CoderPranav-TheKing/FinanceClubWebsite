@@ -76,7 +76,7 @@ export default function LogoCarousel() {
 >
   <div className="relative w-full h-32 rounded-xl bg-cream/95 flex items-center justify-center p-4">
     <Image
-      src={s.logo.startsWith('/') ? `.${s.logo}` : s.logo}
+      src={s.logo}
       alt={s.name}
       fill
       className="object-contain p-3"

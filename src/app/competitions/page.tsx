@@ -183,7 +183,7 @@ const typingDone = typed >= TYPED_TEXT.length;
 <section className="relative min-h-screen flex items-center pt-1 pb-20 px-6 lg:px-8 grain overflow-hidden">
   <div className="absolute inset-0">
     <Image
-      src="../partner_1.png"
+      src="/partner_1.png"
       alt="Finance Club events collage background"
       fill
       priority
@@ -265,7 +265,7 @@ const typingDone = typed >= TYPED_TEXT.length;
     <ScrollReveal>
       <div className="relative overflow-hidden rounded-3xl border border-cream/10 mb-12">
         <Image
-          src="../art7.jpg"
+          src="/art7.JPG"
           alt=""
           fill
           className="object-cover"
@@ -343,7 +343,7 @@ const typingDone = typed >= TYPED_TEXT.length;
         {event.partnerLogo ? (
           <div className="relative w-10 h-10">
             <Image
-              src={event.partnerLogo.startsWith('/') ? `..${event.partnerLogo}` : event.partnerLogo}
+              src={event.partnerLogo}
               alt={event.partnerName || "Partner"}
               fill
               className="object-contain"
@@ -428,7 +428,7 @@ const typingDone = typed >= TYPED_TEXT.length;
                       <div className="flex items-center gap-2 mb-3">
                         {comp.partnerLogo && (
                           <Image
-                            src={comp.partnerLogo.startsWith('/') ? `..${comp.partnerLogo}` : comp.partnerLogo}
+                            src={comp.partnerLogo}
                             alt={comp.partnerName || ""}
                             width={20}
                             height={20}

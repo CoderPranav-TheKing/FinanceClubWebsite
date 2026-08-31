@@ -257,7 +257,7 @@ export default function LearningRoadmap() {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <Image src="../logo.jpg" alt="Finance Club logo" fill className="object-cover" sizes="120px" />
+          <Image src="/logo.jpg" alt="Finance Club logo" fill className="object-cover" sizes="120px" />
         </div>
       </div>
 
@@ -275,7 +275,7 @@ export default function LearningRoadmap() {
   <div className="clear-both pt-4">
     <div className="relative overflow-hidden backdrop-blur-md border border-cream/10 rounded-2xl px-6 py-6 sm:px-8 sm:py-7 mb-8">
       <Image
-        src="../art1.jpg"
+        src="/art1.JPG"
         alt=""
         fill
         className="object-cover"

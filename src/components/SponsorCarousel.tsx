@@ -80,7 +80,7 @@ export default function SponsorCarousel({ items }: { items: typeof sponsors }) {
                 className="flex h-full w-full flex-col items-center justify-center gap-2 rounded-2xl bg-[#171111] border border-cream/10 px-4 py-4"
               >
                 <Image
-                  src={s.logo.startsWith('/') ? `..${s.logo}` : s.logo}
+                  src={s.logo}
                   alt={s.name}
                   width={180}
                   height={100}

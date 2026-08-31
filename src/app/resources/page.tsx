@@ -47,7 +47,7 @@ export default function ResourcesPage() {
       <section className="relative min-h-screen flex items-center pt-32 pb-20 px-6 lg:px-8 grain overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="../resources123.png"
+            src="/resources123.png"
             alt="Finance Club resources background"
             fill
             priority
@@ -154,7 +154,7 @@ export default function ResourcesPage() {
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <div className="relative overflow-hidden backdrop-blur-md border border-cream/10 rounded-3xl px-8 py-10 sm:px-12 sm:py-12 inline-block mb-14">
   <Image
-    src="../art8.jpg"
+    src="/art8.JPG"
     alt=""
     fill
     className="object-cover"

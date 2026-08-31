@@ -31,7 +31,7 @@ export default function AboutPage() {
 <section className="relative min-h-screen flex items-center pt-32 pb-20 px-6 lg:px-8 grain overflow-hidden">
   <div className="absolute inset-0">
     <Image
-      src="../aboutus.jpg"
+      src="/aboutus.JPG"
       alt="Finance Club about us background"
       fill
       priority
@@ -55,7 +55,7 @@ export default function AboutPage() {
   <div className="max-w-4xl mx-auto">
     <div className="relative overflow-hidden card-glow-gold p-8 sm:p-12">
       <Image
-        src="../art4.jpg"
+        src="/art4.JPG"
         alt=""
         fill
         className="object-cover opacity-[0.8] pointer-events-none select-none"
@@ -92,7 +92,7 @@ export default function AboutPage() {
 <section className="relative py-24 px-6 lg:px-8 grain overflow-hidden">
   <div className="absolute inset-0">
     <Image
-      src="../publi.jpg"
+      src="/publi.jpg"
       alt=""
       fill
       className="object-cover"
@@ -153,7 +153,7 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto text-center">
           <div className="gradient-border p-10 sm:p-14 bg-[#0D0A0A]">
             <Image
-                src="../art3.jpg"
+                src="/art3.JPG"
                 alt=""
                 fill
                 className="object-cover opacity-[0.08] pointer-events-none select-none"
