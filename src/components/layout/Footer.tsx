@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Instagram, Linkedin } from "lucide-react";
+import logoImg from "../../../public/logo.jpg";
 
 const footerLinks = [
   {
@@ -30,7 +31,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <div className="relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-gold/15">
-                <Image src="/logo.jpg" alt="Finance Club" fill className="object-cover" sizes="40px" />
+                <Image src={logoImg} alt="Finance Club" fill className="object-cover" sizes="40px" />
               </div>
               <div>
                 <span className="font-bold text-cream block text-lg" style={{ fontFamily: "var(--font-display)" }}>Finance Club</span>

@@ -54,7 +54,7 @@ export default function CompetitionDetailPage({
 
       <section className="relative w-full aspect-[2560/1170] overflow-hidden">
         <Image
-          src="/FinClubBanner.png"
+          src="../../FinClubBanner.png"
           alt=""
           fill
           priority

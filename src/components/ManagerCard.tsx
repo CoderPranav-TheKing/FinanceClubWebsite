@@ -5,7 +5,8 @@ import { Phone, Linkedin } from "lucide-react";
 import { teamMembers } from "@/data/team";
 
 export default function ManagerCard({ member, compact = false }: { member: typeof teamMembers[0]; compact?: boolean }) {
-  const photoSrc = member.photo.startsWith("/") ? member.photo : `/${member.photo.trim()}`;
+  const rawPhoto = member.photo.startsWith("/") ? member.photo : `/${member.photo.trim()}`;
+  const photoSrc = `..${rawPhoto}`;
   const sizeClass = compact ? "w-full h-full" : "w-[300px] h-[380px]";
 
   return (

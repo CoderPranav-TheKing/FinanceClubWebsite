@@ -9,7 +9,7 @@ const SECTORS = [
     icon: Trophy,
     title: "Competitions",
     desc: "Flagship events like ERC and FinSearch testing real-world finance skills against top institutions.",
-    image: "/partner_1.png",
+    image: "./partner_1.png",
     imageScale: 1,
     imageX: 0,
     imageY: 0,
@@ -18,7 +18,7 @@ const SECTORS = [
     icon: Users,
     title: "Sessions & Bootcamps",
     desc: "Intensive workshops on financial modeling, valuation and trading strategies.",
-    image: "/partner_2.jpeg",
+    image: "./partner_2.jpeg",
     imageScale: 1.1,
     imageX: 0,
     imageY: -5,
@@ -27,7 +27,7 @@ const SECTORS = [
     icon: Lightbulb,
     title: "Research",
     desc: "Deep-dive initiatives covering equity, macro and alternative investment analysis.",
-    image: "/partner_3.jpeg",
+    image: "./partner_3.jpeg",
     imageScale: 1.1,
     imageX: 5,
     imageY: 35,
@@ -36,7 +36,7 @@ const SECTORS = [
     icon: BookOpen,
     title: "Publications",
     desc: "Market reports, sector analysis and curated primers for every finance domain.",
-    image: "/partner_4.jpeg",
+    image: "./partner_4.jpeg",
     imageScale: 1.08,
     imageX: 0,
     imageY: -5,
@@ -45,7 +45,7 @@ const SECTORS = [
     icon: BarChart3,
     title: "Industry Connect",
     desc: "Guest lectures and sessions with professionals from leading financial firms.",
-    image: "/partner_5.jpeg",
+    image: "./partner_5.jpeg",
     imageScale: 1.05,
     imageX: 0,
     imageY: -5,
@@ -54,7 +54,7 @@ const SECTORS = [
     icon: Award,
     title: "Career Prep",
     desc: "Mock interviews, case studies and placement guidance for finance roles.",
-    image: "/partner_6.jpeg",
+    image: "./partner_6.jpeg",
     imageScale: 1.55,
     imageX: 0,
     imageY: -22,
@@ -217,7 +217,7 @@ export default function FinanceWheel() {
   }}
 >
   <Image
-    src="/logo.jpg"
+    src="./logo.jpg"
     alt="Finance Club logo"
     fill
     className="object-cover"

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const M: any = motion.div;
 
-const NOTE_IMAGES = ["/note-1.png", "/note-2.png", "/note-3.png", "/note-4.png"];
+const NOTE_IMAGES = ["./note-1.png", "./note-2.png", "./note-3.png", "./note-4.png"];
 const TYPED_TEXT = "Finance Club";
 const TYPE_SPEED_MS = 85;
 const SLOT_COUNT = 34; // evenly spaced columns across the pile width — guarantees no gaps

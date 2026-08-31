@@ -45,7 +45,7 @@ export default function BlogsPage() {
         {/* Background */}
         <div className="absolute inset-0">
           <Image
-            src="/art3.jpg"
+            src="../art3.jpg"
             alt="Finance Club blog background"
             fill
             priority

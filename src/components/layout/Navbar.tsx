@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import logoImg from "../../../public/logo.jpg";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -53,7 +54,7 @@ export default function Navbar() {
           >
             <div className="relative w-7 h-7 rounded-full overflow-hidden ring-1 ring-[rgba(245,183,49,0.15)]">
               <Image
-                src="/logo.jpg"
+                src={logoImg}
                 alt="Finance Club"
                 fill
                 className="object-cover"
