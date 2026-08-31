@@ -183,7 +183,7 @@ const typingDone = typed >= TYPED_TEXT.length;
 <section className="relative min-h-screen flex items-center pt-1 pb-20 px-6 lg:px-8 grain overflow-hidden">
   <div className="absolute inset-0">
     <Image
-      src="/partner_1.png"
+      src="/Finance-Club/partner_1.png"
       alt="Finance Club events collage background"
       fill
       priority
@@ -265,7 +265,7 @@ const typingDone = typed >= TYPED_TEXT.length;
     <ScrollReveal>
       <div className="relative overflow-hidden rounded-3xl border border-cream/10 mb-12">
         <Image
-          src="/art7.JPG"
+          src="/Finance-Club/art7.JPG"
           alt=""
           fill
           className="object-cover"

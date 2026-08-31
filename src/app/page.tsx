@@ -127,7 +127,7 @@ useEffect(() => {
   {/* Background Image Container */}
   <div className="absolute inset-0 w-full h-full">
     <Image
-      src="/bg1.png"
+      src="/Finance-Club/bg1.png"
       alt="Finance Club IIT Bombay"
       fill
       className="object-cover"
@@ -285,7 +285,7 @@ useEffect(() => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-12">
             <div className="relative overflow-hidden rounded-3xl border border-cream/10">
               <Image
-                src="/art5.JPG"
+                src="/Finance-Club/art5.JPG"
                 alt=""
                 fill
                 className="object-cover opacity-[0.8] pointer-events-none select-none"
@@ -375,13 +375,13 @@ useEffect(() => {
           <section className="relative py-32 px-6 lg:px-8 overflow-hidden">
             <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
               <div className="relative col-span-1 row-span-2">
-                <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
+                <Image src="/Finance-Club/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
               <div className="relative col-span-1 row-span-1">
-                <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
+                <Image src="/Finance-Club/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
               <div className="relative col-span-1 row-span-1">
-                <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+                <Image src="/Finance-Club/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
             </div>
 
@@ -420,13 +420,13 @@ useEffect(() => {
           <section className="relative py-16 px-6 lg:px-8 overflow-hidden">
             <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0">
               <div className="relative col-span-1 row-span-2">
-                <Image src="/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
+                <Image src="/Finance-Club/publi.jpg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
               <div className="relative col-span-1 row-span-1">
-                <Image src="/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
+                <Image src="/Finance-Club/finfestpubli.jpg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
               <div className="relative col-span-1 row-span-1">
-                <Image src="/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
+                <Image src="/Finance-Club/partner_3.jpeg" alt="" fill className="object-cover" sizes="50vw" />
               </div>
             </div>
 
@@ -502,7 +502,7 @@ useEffect(() => {
             <ScrollReveal>
               <div className="gradient-border relative overflow-hidden p-10 sm:p-16 bg-[#0D0A0A]">
                 <Image
-                  src="/art2.JPG"
+                  src="/Finance-Club/art2.JPG"
                   alt=""
                   fill
                   className="object-cover opacity-[0.08] pointer-events-none select-none"

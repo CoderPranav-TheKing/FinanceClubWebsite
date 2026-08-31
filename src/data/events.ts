@@ -99,7 +99,7 @@ export const clubEvents: ClubEvent[] = [
       "An insider look at quantitative trading, market-making and careers at Citadel Securities.",
     participationScale: "200+ attendees",
     outcome: "Understanding of quant trading infrastructure and recruiting pipeline.",
-    partnerLogo: "/citadel.png",
+    partnerLogo: "/Finance-Club/citadel.png",
     partnerName: "Citadel",
   },
 
@@ -121,7 +121,7 @@ export const clubEvents: ClubEvent[] = [
       "A fast-paced trading simulation inspired by real-world market-making environments.",
     participationScale: "150+ participants",
     outcome: "Hands-on exposure to trading psychology and market microstructure.",
-    partnerLogo: "/citadel.png",
+    partnerLogo: "/Finance-Club/citadel.png",
     partnerName: "Citadel",
   },
 
@@ -164,7 +164,7 @@ export const clubEvents: ClubEvent[] = [
       "A CFA-focused finance quiz testing investment, quantitative and analytical knowledge.",
     participationScale: "300+ participants",
     outcome: "Benchmarked readiness for globally recognised finance qualifications.",
-    partnerLogo: "/cfa_institute.png",
+    partnerLogo: "/Finance-Club/cfa_institute.png",
     partnerName: "CFA Institute",
   },
 
@@ -206,7 +206,7 @@ export const clubEvents: ClubEvent[] = [
       "A competitive quiz testing financial concepts, markets and real-world investing knowledge.",
     participationScale: "200+ participants",
     outcome: "Strengthened analytical thinking and applied market knowledge.",
-    partnerLogo: "/zerodha.png",
+    partnerLogo: "/Finance-Club/zerodha.png",
     partnerName: "Zerodha",
   },
 
@@ -340,7 +340,7 @@ export const clubEvents: ClubEvent[] = [
       "A guide to the CFA journey, finance careers, scholarships and professional certifications.",
     participationScale: "200+ attendees",
     outcome: "Clarity on career pathways and the role of professional certification in finance.",
-    partnerLogo: "/cfa_institute.png",
+    partnerLogo: "/Finance-Club/cfa_institute.png",
     partnerName: "CFA Institute",
   },
 

@@ -63,7 +63,7 @@ export default function TeamPage() {
         {/* ...your existing hero code stays exactly as-is... */}
         <div className="absolute inset-0">
     <Image
-      src="/team.JPG"
+      src="/Finance-Club/team.JPG"
       alt="Finance Club team background"
       fill
       priority

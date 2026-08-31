@@ -14,7 +14,7 @@ export const announcements: Announcement[] = [
     content: "Finance Club presents the Equity Research Competition! Pick a stock, analyse it, and pitch it. Open to teams of 1-3. No prerequisites required. A perfect window into stock analysis. Register now — link in bio!",
     date: "2026-03-10",
     category: "competition",
-    image: "/announcements/erc-poster.jpeg",
+    image: "/Finance-Club/announcements/erc-poster.jpeg",
   },
   {
     id: "2",
@@ -22,7 +22,7 @@ export const announcements: Announcement[] = [
     content: "Finance Club presents FinMUN as part of FinFest! Two committees — ECOFIN (UNGA Second Committee) and World Economic Forum (WEF). Prize pool: ₹40K. Join. Negotiate. Resolve. Registrations are open!",
     date: "2026-01-10",
     category: "event",
-    image: "/announcements/finmun-poster.jpeg",
+    image: "/Finance-Club/announcements/finmun-poster.jpeg",
   },
   {
     id: "3",

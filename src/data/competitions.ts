@@ -217,7 +217,7 @@ export const competitions: Competition[] = [
 
     image: "/competitions/quiz.jpg",
 
-    partnerLogo: "/cfa_institute.png",
+    partnerLogo: "/Finance-Club/cfa_institute.png",
 
     partnerName: "CFA Institute",
   },
@@ -257,7 +257,7 @@ export const competitions: Competition[] = [
 
     image: "/competitions/quiz.jpg",
 
-    partnerLogo: "/cfa_institute.png",
+    partnerLogo: "/Finance-Club/cfa_institute.png",
 
     partnerName: "CFA Institute",
   },

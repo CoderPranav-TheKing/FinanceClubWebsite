@@ -42,12 +42,12 @@ export default function PartnersPage() {
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
   const heroCollageImages = [
-    "/partner_1.png",
-    "/partner_2.jpeg",
-    "/partner_3.jpeg",
-    "/partner_4.jpeg",
-    "/partner_5.jpeg",
-    "/partner_6.jpeg",
+    "/Finance-Club/partner_1.png",
+    "/Finance-Club/partner_2.jpeg",
+    "/Finance-Club/partner_3.jpeg",
+    "/Finance-Club/partner_4.jpeg",
+    "/Finance-Club/partner_5.jpeg",
+    "/Finance-Club/partner_6.jpeg",
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,7 +115,7 @@ export default function PartnersPage() {
         </div>
         <div className="absolute inset-0 sm:hidden">
           <Image
-            src="/partner_1.png"
+            src="/Finance-Club/partner_1.png"
             alt="Partner collage background"
             fill
             priority
@@ -236,7 +236,7 @@ export default function PartnersPage() {
       {/* Past Partners */}
 <section className="py-24 px-6 lg:px-8 mesh-crimson grain relative overflow-hidden">
   <Image
-    src="/partner_1.png"
+    src="/Finance-Club/partner_1.png"
     alt=""
     fill
     className="object-cover opacity-[0.88] pointer-events-none select-none"
@@ -294,7 +294,7 @@ export default function PartnersPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="gallery-image relative h-72 md:h-96">
                 <Image
-                  src="/finfestpubli.jpg"
+                  src="/Finance-Club/finfestpubli.jpg"
                   alt="FinFest — Finance Club's flagship event"
                   fill
                   className="object-cover rounded-xl"
@@ -311,7 +311,7 @@ export default function PartnersPage() {
               </div>
               <div className="gallery-image relative h-72 md:h-96">
                 <Image
-                  src="/publi.jpg"
+                  src="/Finance-Club/publi.jpg"
                   alt="Finance Club event audience"
                   fill
                   className="object-cover rounded-xl"
@@ -341,7 +341,7 @@ export default function PartnersPage() {
           <ScrollReveal>
             <div className="gradient-border relative overflow-hidden p-8 sm:p-14 bg-[#0D0A0A]">
   <Image
-    src="/art1.JPG"
+    src="/Finance-Club/art1.JPG"
     alt=""
     fill
     className="object-cover opacity-[0.2] pointer-events-none select-none"
