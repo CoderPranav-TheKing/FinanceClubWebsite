@@ -55,19 +55,19 @@ export default function TickerGame() {
 
   // ── Persistent anonymous identity, generated once on first load ──
   useEffect(() => {
-  let id = localStorage.getItem("hft_session_id");
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem("hft_session_id", id);
-  }
-  setSessionId(id);
+    let id = localStorage.getItem("hft_session_id");
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem("hft_session_id", id);
+    }
+    setSessionId(id);
 
-  const savedName = localStorage.getItem("hft_trader_name");
-  if (savedName) {
-    setTraderName(savedName);
-    setNameLocked(true);
-  }
-}, []);
+    const savedName = localStorage.getItem("hft_trader_name");
+    if (savedName) {
+      setTraderName(savedName);
+      setNameLocked(true);
+    }
+  }, []);
 
   // ── Game engine lifecycle ──
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function TickerGame() {
         if (!sessionId) return;
 
         try {
-          await fetch("/api/hft/submit-score", {
+          await fetch("/Finance-Club/api/hft/submit-score", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -110,7 +110,7 @@ export default function TickerGame() {
             }),
           });
 
-          const res = await fetch(`/api/hft/leaderboard?sessionId=${sessionId}`);
+          const res = await fetch(`/Finance-Club/api/hft/leaderboard?sessionId=${sessionId}`);
           const data: LbResponse = await res.json();
           setRankInfo(data.user);
         } catch {
@@ -156,7 +156,7 @@ export default function TickerGame() {
     setLbLoading(true);
     setLbError(false);
 
-    fetch(`/api/hft/leaderboard?sessionId=${sessionId}`)
+    fetch(`/Finance-Club/api/hft/leaderboard?sessionId=${sessionId}`)
       .then((r) => r.json())
       .then((data: LbResponse) => setLeaderboard(data))
       .catch(() => setLbError(true))
@@ -170,7 +170,7 @@ export default function TickerGame() {
     setRegisterError(null);
 
     try {
-      const res = await fetch("/api/hft/register", {
+      const res = await fetch("/Finance-Club/api/hft/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId, username: traderName.trim() }),
@@ -185,8 +185,8 @@ export default function TickerGame() {
 
       setRegistering(false);
       localStorage.setItem("hft_trader_name", traderName.trim());
-setScreen("game");
-      
+      setScreen("game");
+
     } catch {
       setRegisterError("Network error — check your connection and try again.");
       setRegistering(false);
@@ -202,23 +202,23 @@ setScreen("game");
     setScreen("leaderboard");
   }
   function handleResetIdentity() {
-  const newId = crypto.randomUUID();
-  localStorage.setItem("hft_session_id", newId);
-  localStorage.removeItem("hft_trader_name");
-  setSessionId(newId);
-  setTraderName("");
-  setNameLocked(false);
-  setRegisterError(null);
-}
+    const newId = crypto.randomUUID();
+    localStorage.setItem("hft_session_id", newId);
+    localStorage.removeItem("hft_trader_name");
+    setSessionId(newId);
+    setTraderName("");
+    setNameLocked(false);
+    setRegisterError(null);
+  }
 
   const isWin = (gameSummary?.wins ?? 0) >= WIN_THRESHOLD;
   const recapTitle = !gameSummary
     ? ""
     : gameSummary.wins === 5
-    ? "PERFECT\nEXECUTION"
-    : isWin
-    ? "MARKET-MAKING\nADVANTAGE UNLOCKED"
-    : "HIGH SLIPPAGE\nDETECTED";
+      ? "PERFECT\nEXECUTION"
+      : isWin
+        ? "MARKET-MAKING\nADVANTAGE UNLOCKED"
+        : "HIGH SLIPPAGE\nDETECTED";
 
   const myNameUpper = traderName.trim().toUpperCase();
 
@@ -242,28 +242,28 @@ setScreen("game");
           <div className="name-card">
             <span className="name-lbl">▸ TRADER IDENTIFICATION</span>
             <input
-  className="name-inp"
-  id="trader-name"
-  type="text"
-  maxLength={18}
-  placeholder="e.g. ROHAN_K"
-  autoComplete="off"
-  spellCheck={false}
-  disabled={nameLocked}
-  value={traderName}
-  onChange={(e) => {
-    setTraderName(e.target.value);
-    setRegisterError(null);
-  }}
-/>
-{nameLocked && (
-  <button
-    onClick={handleResetIdentity}
-    style={{ background: "none", border: "none", color: "var(--dim)", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: 1, marginTop: 8, cursor: "pointer", textDecoration: "underline" }}
-  >
-    Not you? Reset identity
-  </button>
-)}
+              className="name-inp"
+              id="trader-name"
+              type="text"
+              maxLength={18}
+              placeholder="e.g. ROHAN_K"
+              autoComplete="off"
+              spellCheck={false}
+              disabled={nameLocked}
+              value={traderName}
+              onChange={(e) => {
+                setTraderName(e.target.value);
+                setRegisterError(null);
+              }}
+            />
+            {nameLocked && (
+              <button
+                onClick={handleResetIdentity}
+                style={{ background: "none", border: "none", color: "var(--dim)", fontFamily: "var(--mono)", fontSize: 10, letterSpacing: 1, marginTop: 8, cursor: "pointer", textDecoration: "underline" }}
+              >
+                Not you? Reset identity
+              </button>
+            )}
             {registerError && (
               <div style={{ color: "var(--red)", fontFamily: "var(--mono)", fontSize: 11, marginTop: 8 }}>
                 {registerError}
