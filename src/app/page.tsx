@@ -42,7 +42,7 @@ export default function HomePage() {
   const REAL_SPLIT = 7; 
   const LINE2 = "IIT BOMBAY";
 
-  const TYPE_SPEED = 80;
+  const TYPE_SPEED = 30;
   const PAUSE_BEFORE_FADE = 800;
   const FADE_DURATION = 400;
   const PAUSE_BEFORE_LINE2 = 300;
@@ -258,13 +258,13 @@ useEffect(() => {
                   What We Do
                 </div>
                 <h2
-                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[0.02em]"
+                  className="text-4xl sm:text-4xl lg:text-5xl font-extrabold tracking-[0.02em]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   Building{" "}
                   <span className="text-gradient-gold">Finance Acumen</span>
                 </h2>
-                <p className="text-cream/35 mt-5 text-2xl leading-relaxed max-w-4xl mx-auto">
+                <p className="text-cream/35 mt-5 text-xl lg:text-2xl lg:leading-relaxed max-w-4xl mx-auto">
                   From flagship competitions to published research - structured
                   pathways across every major finance discipline. Hover over any
                   sector to explore what it covers.
@@ -301,12 +301,12 @@ useEffect(() => {
                       Our Impact
                     </div>
                     <h2
-                      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight"
+                      className="text-4xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       Scale That <span className="text-gradient-gold">Matters</span>
                     </h2>
-                    <p className="text-cream/60 mt-5 text-2xl leading-relaxed max-w-md">
+                    <p className="text-cream/60 mt-5 text-xl lg:text-2xl lg:leading-relaxed max-w-md">
                       Year after year, our events and initiatives reach hundreds of
                       students and connect them with leading financial firms.
                     </p>
@@ -315,19 +315,19 @@ useEffect(() => {
                   <div className="grid grid-cols-2 gap-4">
                     {[
                       { value: "15+", label: "Events Annually", icon: Calendar, glow: "card-glow-gold" },
-                      { value: "800+", label: "Registrations", icon: Users, glow: "card-glow-crimson" },
+                      { value: "2000+", label: "Registrations", icon: Users, glow: "card-glow-crimson" },
                       { value: "8+", label: "Industry Partners", icon: Building2, glow: "card-glow-gold" },
                       { value: "20+", label: "Sessions and Workshops", icon: TrendingUp, glow: "card-glow-crimson" },
                     ].map((stat) => (
                       <div key={stat.label} className={`${stat.glow} p-6 text-center`}>
                         <stat.icon className="w-6 h-6 text-gold/60 mx-auto mb-3" />
                         <div
-                          className="text-3xl font-extrabold text-cream mb-1"
+                          className="text-3xl lg:text-3xl font-extrabold text-cream mb-1"
                           style={{ fontFamily: "var(--font-display)" }}
                         >
                           <AnimatedCounter value={stat.value} />
                         </div>
-                        <div className="text-lg text-cream/60">{stat.label}</div>
+                        <div className="text-sm lg:text-lg text-cream/60">{stat.label}</div>
                       </div>
                     ))}
                   </div>

@@ -44,12 +44,9 @@ function getCompetitionState(c: Competition): CompState {
   const cutoff = getAcademicCutoff(now);
 
   // Fully finished — actual date comparison, not month-name matching.
-  if (now > res) return { label: "Closed", tone: "closed" };
+  if (now > reg) return { label: "Closed", tone: "closed" };
 
   // Actively running right now.
-  if (now >= reg && now <= sub) return { label: "Live Now", tone: "live" };
-  if (now > sub && now <= res) return { label: "Judging", tone: "live" };
-
   // Hasn't started yet.
   if (now < reg) {
     if (reg < cutoff) return { label: "Upcoming", tone: "upcoming" };

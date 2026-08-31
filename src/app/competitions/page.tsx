@@ -118,7 +118,7 @@ function CompetitionCard({
         >
           {title}
         </h3>
-        <p className="text-xs text-cream/70 leading-relaxed mb-4 line-clamp-3">
+        <p className="text-lg text-cream/70 leading-relaxed mb-4 line-clamp-3">
           {description}
         </p>
       </div>

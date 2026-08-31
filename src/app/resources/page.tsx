@@ -111,10 +111,28 @@ export default function ResourcesPage() {
               ))}
             </div>
 
-            <a href="#finlearn-roadmap" className="badge-pill badge-gold cursor-pointer">
-              <Map className="w-3 h-3" />
-              View FinLearn Roadmap
-            </a>
+            <a
+  href="#finlearn-roadmap"
+  className="
+    inline-flex items-center gap-2
+    px-5 py-2.5
+    rounded-full
+    bg-gold
+    text-[#0D0A0A]
+    border border-gold
+    font-bold
+    text-sm
+    tracking-wide
+    shadow-[0_0_20px_rgba(245,183,49,0.35)]
+    hover:shadow-[0_0_30px_rgba(245,183,49,0.65)]
+    hover:scale-105
+    transition-all duration-300
+    cursor-pointer
+  "
+>
+  <Map className="w-4 h-4" />
+  View FinLearn Roadmap
+</a>
           </div>
 
           {/* Grid */}
