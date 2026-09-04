@@ -64,19 +64,19 @@ export default function AboutPage() {
       <div className="absolute inset-0 bg-gradient-to-br from-[#141010]/90 via-[#141010]/85 to-[#141010]/95 pointer-events-none" />
 
       <div className="relative z-10">
-        <h2 className="text-6xl font-extrabold text-gradient-gold mb-6" style={{ fontFamily: "var(--font-display)" }}>Who We Are</h2>
+        <h2 className="text-5xl lg:text-6xl font-extrabold text-gradient-gold mb-6" style={{ fontFamily: "var(--font-display)" }}>Who We Are</h2>
         <div className="space-y-4 text-cream/90 leading-relaxed">
-          <p className='text-xl'>
+          <p className='text-sm lg:text-xl'>
             Finance Club IIT Bombay is the institute&apos;s foremost student body dedicated to finance
             education, research and industry interaction. We are a team of passionate students cultivating
             financial literacy and analytical skills across the IITB community.
           </p>
-          <p className='text-xl'>
+          <p className='text-sm lg:text-xl'>
             Through competitions, bootcamps, guest lectures and publications, we provide hands-on
             exposure to real-world finance : from equity research and trading to private equity,
             venture capital and quantitative finance.
           </p>
-          <p className='text-xl'>
+          <p className='text-sm lg:text-xl'>
             Our events bring together an ambitious community of students at IIT Bombay, while our collaborations with leading financial firms create valuable opportunities for networking and industry engagement.
           </p>
         </div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
         What We <span className="text-gradient-crimson">Do</span>
       </h2>
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
   {[
     { icon: Target, title: "Competitions", desc: "Flagship events attracting hundreds from premier institutions.", color: "text-gold" },
     { icon: GraduationCap, title: "Bootcamps", desc: "Intensive sessions on financial modeling, valuation and trading.", color: "text-crimson-light" },
@@ -120,11 +120,11 @@ export default function AboutPage() {
   ].map((item) => (
     <div
       key={item.title}
-      className="card-premium p-8 group cursor-default hover:bg-[#141010] transition-colors duration-300"
+      className="card-premium p-4 sm:p-8 group cursor-default hover:bg-[#141010] transition-colors duration-300"
     >
-      <item.icon className={`w-6 h-6 ${item.color} mb-4 group-hover:scale-110 transition-transform`} />
-      <h3 className="font-bold text-2xl mb-2 text-cream" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
-      <p className="text-lg text-cream/60 leading-relaxed">{item.desc}</p>
+      <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${item.color} mb-2 sm:mb-4 group-hover:scale-110 transition-transform`} />
+      <h3 className="font-bold text-base sm:text-2xl mb-1.5 sm:mb-2 text-cream" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
+      <p className="text-xs sm:text-lg text-cream/60 leading-relaxed">{item.desc}</p>
     </div>
   ))}
 </div>

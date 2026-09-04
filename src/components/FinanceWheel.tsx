@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Trophy,
@@ -98,9 +98,16 @@ function wedgeClipPath(startAngle: number, endAngle: number) {
 
 export default function FinanceWheel() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   return (
-    <div className="relative mx-auto w-[320px] h-[320px] sm:w-[460px] sm:h-[460px] lg:w-[620px] lg:h-[620px]">
+    <div className="relative mx-auto w-[88vw] h-[88vw] max-w-[320px] max-h-[320px] sm:w-[460px] sm:h-[460px] sm:max-w-none sm:max-h-none lg:w-[620px] lg:h-[620px]">
 
       {/* =========================================================
           MAIN WHEEL
@@ -210,7 +217,7 @@ export default function FinanceWheel() {
 
         // Previously 64%.
         // 47% puts the cards much closer to the wheel.
-        const petalPos = polar(47, bisector);
+        const petalPos = polar(isMobile ? 36 : 47, bisector);
 
         const isHovered = hoveredIndex === i;
 
@@ -223,11 +230,12 @@ export default function FinanceWheel() {
                 : "opacity-0 scale-90 pointer-events-none"
             }`}
             style={{
-              left: `${petalPos.left}%`,
-              top: `${petalPos.top}%`,
-              transform: "translate(-50%, -50%)",
-              width: "44%",
-            }}
+  left: `${petalPos.left}%`,
+  top: `${petalPos.top}%`,
+  transform: "translate(-50%, -50%)",
+  width: isMobile ? "50%" : "44%",
+  maxWidth: isMobile ? "210px" : "none",
+}}
           >
             <div
               className="

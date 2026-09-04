@@ -123,8 +123,7 @@ useEffect(() => {
       <div>
         {/* ===== HERO — FULL SCREEN IMAGE ===== */}
         {/* ===== HERO — FULL SCREEN IMAGE ===== */}
-<section className="relative min-h-screen w-full flex items-start overflow-hidden">
-  {/* Background Image Container */}
+<section className="relative min-h-0 lg:min-h-screen w-full flex items-start overflow-hidden">  {/* Background Image Container */}
   <div className="absolute inset-0 w-full h-full">
     <Image
       src="/Finance-Club/bg1.png"
@@ -149,10 +148,10 @@ useEffect(() => {
   </div>
 
   {/* Content Layer */}
-  <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full pt-24 sm:pt-32 pb-16 xl:-translate-x-10">
+  <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full pt-24 sm:pt-32 pb-10 lg:pb-16 xl:-translate-x-10">
     {/* Badge */}
-<div className="badge-pill badge-gold mb-5 sm:mb-8 text-sm sm:text-base px-4 py-1.5">
-  <Sparkles className="w-7 h-7"/>
+<div className="badge-pill badge-gold mb-5 sm:mb-8 text-xs sm:text-sm lg:text-base px-3 py-1 sm:px-3.5 sm:py-1.5 lg:px-4 whitespace-nowrap">
+  <Sparkles className="w-3.5 h-3.5 sm:w-5 sm:h-5 lg:w-7 lg:h-7 shrink-0"/>
   IIT Bombay&apos;s Premier Finance Society
 </div>
 
@@ -205,7 +204,7 @@ useEffect(() => {
     {showRest && (
       <div className="animate-slide-up">
         {/* Paragraph */}
-        <p className="text-base sm:text-2xl text-cream/90 sm:text-cream/80 max-w-2xl mb-6 sm:mb-10 leading-relaxed font-normal">
+        <p className="text-lg sm:text-3xl lg:text-2xl text-cream/90 sm:text-cream/80 max-w-2xl mb-6 sm:mb-10 leading-relaxed font-normal">
           Building structured pathways into finance careers through
           world-class competitions, research and industry exposure.
         </p>
@@ -216,7 +215,7 @@ useEffect(() => {
           <div className="backdrop-blur-md bg-black/30 border border-cream/10 rounded-2xl py-4 sm:py-6 grid grid-cols-3 divide-x divide-cream/10 w-full lg:w-auto lg:min-w-[500px] shrink-0">
             {[
               { value: "15+", label: "Events Annually" },
-              { value: "1000+", label: "Registrations" },
+              { value: "2000+", label: "Registrations" },
               { value: "8+", label: "Industry Partners" },
             ].map((stat) => (
               <div key={stat.label} className="text-center px-1.5 sm:px-4">
@@ -232,16 +231,16 @@ useEffect(() => {
           </div>
 
           {/* Action Buttons: Side-by-side compact on mobile, original layout on desktop */}
-          <div className="flex flex-row items-center gap-3 sm:gap-4 justify-start lg:justify-end w-full lg:w-auto lg:pb-1 lg:pr-2 lg:px-85">
-            <Link href="/competitions" className="btn-gold flex-1 sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
-              <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-              <span>Explore Competitions</span>
-            </Link>
-            <Link href="/resources" className="btn-ghost flex-1 sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
-              <span>View Resources</span>
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-            </Link>
-          </div>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-start lg:justify-end w-full lg:w-auto lg:pb-1 lg:pr-2 lg:px-85">
+  <Link href="/competitions" className="btn-gold w-full sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
+    <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+    <span>Explore Competitions</span>
+  </Link>
+  <Link href="/resources" className="btn-ghost w-full sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
+    <span>View Resources</span>
+    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+  </Link>
+</div>
         </div>
       </div>
     )}
@@ -264,7 +263,7 @@ useEffect(() => {
                   Building{" "}
                   <span className="text-gradient-gold">Finance Acumen</span>
                 </h2>
-                <p className="text-cream/35 mt-5 text-xl lg:text-2xl lg:leading-relaxed max-w-4xl mx-auto">
+                <p className="text-cream/35 mt-5 text-sm sm:text-xl lg:text-2xl lg:leading-relaxed max-w-4xl mx-auto text-left sm:text-center">
                   From flagship competitions to published research - structured
                   pathways across every major finance discipline. Hover over any
                   sector to explore what it covers.
@@ -294,7 +293,7 @@ useEffect(() => {
               <div className="absolute inset-0 bg-gradient-to-br from-[#141010]/90 via-[#141010]/85 to-[#141010]/95 pointer-events-none" />
 
               <ScrollReveal>
-                <div className="grid lg:grid-cols-2 gap-16 items-center pt-12 pb-12 px-8 sm:px-12">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center pt-12 pb-12 px-6 sm:px-12">
                   <div>
                     <div className="badge-pill badge-gold mb-6">
                       <Zap className="w-3 h-3" />
@@ -306,7 +305,7 @@ useEffect(() => {
                     >
                       Scale That <span className="text-gradient-gold">Matters</span>
                     </h2>
-                    <p className="text-cream/60 mt-5 text-xl lg:text-2xl lg:leading-relaxed max-w-md">
+                    <p className="text-cream/60 mt-5 text-base sm:text-xl lg:text-2xl lg:leading-relaxed max-w-md">
                       Year after year, our events and initiatives reach hundreds of
                       students and connect them with leading financial firms.
                     </p>
