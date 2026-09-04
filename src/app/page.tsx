@@ -163,8 +163,8 @@ useEffect(() => {
   fontSize: "clamp(4.8rem, 7.5vw, 9rem)",
 }}
     >
-      <span 
-        className="inline-block transition-opacity duration-300 min-h-[1.1em]"
+       <span 
+        className="inline-block w-full transition-opacity duration-300 min-h-[2.4em] align-top"
         style={{ opacity: textOpacity }}
       >
         {isShowingPlaceholder ? (
@@ -201,49 +201,54 @@ useEffect(() => {
       </span>
     </h1>
 
-    {showRest && (
-      <div className="animate-slide-up">
-        {/* Paragraph */}
-        <p className="text-lg sm:text-3xl lg:text-2xl text-cream/90 sm:text-cream/80 max-w-2xl mb-6 sm:mb-10 leading-relaxed font-normal">
-          Building structured pathways into finance careers through
-          world-class competitions, research and industry exposure.
-        </p>
+     <div
+      aria-hidden={!showRest}
+      className={`transition-all duration-700 ease-out ${
+        showRest
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-6 pointer-events-none"
+      }`}
+    >
+      {/* Paragraph */}
+      <p className="text-lg sm:text-3xl lg:text-2xl text-cream/90 sm:text-cream/80 max-w-2xl mb-6 sm:mb-10 leading-relaxed font-normal">
+        Building structured pathways into finance careers through
+        world-class competitions, research and industry exposure.
+      </p>
 
-        {/* ===== ALIGNED METRICS & ACTIONS ROW ===== */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 max-w-15xl pt-10">
-          {/* Glass Stats Grid Box */}
-          <div className="backdrop-blur-md bg-black/30 border border-cream/10 rounded-2xl py-4 sm:py-6 grid grid-cols-3 divide-x divide-cream/10 w-full lg:w-auto lg:min-w-[500px] shrink-0">
-            {[
-              { value: "15+", label: "Events Annually" },
-              { value: "2000+", label: "Registrations" },
-              { value: "8+", label: "Industry Partners" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center px-1.5 sm:px-4">
-                <div
-                  className="text-2xl sm:text-3xl font-extrabold text-gold mb-0.5"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  <AnimatedCounter value={stat.value} />
-                </div>
-                <div className="text-[9px] sm:text-xs text-cream/50 uppercase tracking-wider font-medium">{stat.label}</div>
+      {/* ===== ALIGNED METRICS & ACTIONS ROW ===== */}
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 max-w-15xl pt-10">
+        {/* Glass Stats Grid Box */}
+        <div className="backdrop-blur-md bg-black/30 border border-cream/10 rounded-2xl py-4 sm:py-6 grid grid-cols-3 divide-x divide-cream/10 w-full lg:w-auto lg:min-w-[500px] shrink-0">
+          {[
+            { value: "15+", label: "Events Annually" },
+            { value: "2000+", label: "Registrations" },
+            { value: "8+", label: "Industry Partners" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center px-1.5 sm:px-4">
+              <div
+                className="text-2xl sm:text-3xl font-extrabold text-gold mb-0.5"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <AnimatedCounter value={stat.value} />
               </div>
-            ))}
-          </div>
+              <div className="text-[9px] sm:text-xs text-cream/50 uppercase tracking-wider font-medium">{stat.label}</div>
+            </div>
+          ))}
+        </div>
 
-          {/* Action Buttons: Side-by-side compact on mobile, original layout on desktop */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-start lg:justify-end w-full lg:w-auto lg:pb-1 lg:pr-2 lg:px-85">
-  <Link href="/competitions" className="btn-gold w-full sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
-    <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-    <span>Explore Competitions</span>
-  </Link>
-  <Link href="/resources" className="btn-ghost w-full sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
-    <span>View Resources</span>
-    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-  </Link>
-</div>
+        {/* Action Buttons: Side-by-side compact on mobile, original layout on desktop */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-start lg:justify-end w-full lg:w-auto lg:pb-1 lg:pr-2 lg:px-85">
+          <Link href="/competitions" className="btn-gold w-full sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
+            <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span>Explore Competitions</span>
+          </Link>
+          <Link href="/resources" className="btn-ghost w-full sm:flex-initial text-center justify-center whitespace-nowrap text-xs sm:text-base py-2.5 sm:py-3.5 px-4 sm:px-8">
+            <span>View Resources</span>
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+          </Link>
         </div>
       </div>
-    )}
+    </div>
   </div>
 </section>
         {/* ===== WHAT WE DO — WHEEL ===== */}
