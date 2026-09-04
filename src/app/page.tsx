@@ -160,11 +160,11 @@ useEffect(() => {
       className="whitespace-normal sm:whitespace-nowrap font-extrabold tracking-[0.03em] sm:tracking-[0.08em] leading-[1.2]  mb-4 sm:mb-6 select-none pt-2 sm:pt-3"
       style={{
   fontFamily: "var(--font-rocksalt)",
-  fontSize: "clamp(4.8rem, 7.5vw, 9rem)",
+  fontSize: "clamp(3.8rem, 7.5vw, 9rem)",
 }}
     >
-       <span 
-        className="inline-block w-full transition-opacity duration-300 min-h-[2.4em] align-top"
+      <span 
+        className="inline-block transition-opacity duration-300 min-h-[1.1em]"
         style={{ opacity: textOpacity }}
       >
         {isShowingPlaceholder ? (
