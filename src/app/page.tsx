@@ -37,54 +37,28 @@ export default function HomePage() {
   );
   const latestBlogs = blogPosts.slice(0, 3);
 
-  const PLACEHOLDER = "Think Finance?";
-  const REAL = "Finance Club";
+   const REAL = "Finance Club";
   const REAL_SPLIT = 7; 
   const LINE2 = "IIT BOMBAY";
 
-  const TYPE_SPEED = 30;
-  const PAUSE_BEFORE_FADE = 800;
-  const FADE_DURATION = 400;
+    const TYPE_SPEED = typeof window !== "undefined" && window.innerWidth < 640 ? 10 : 30;
+  const TYPE_SPEED_LINE1 = typeof window !== "undefined" && window.innerWidth < 640 ? 6 : 30;
   const PAUSE_BEFORE_LINE2 = 300;
   const PAUSE_BEFORE_REST = 1000;
 
-  // Phases: "type1" -> "fade1" -> "type2" -> "line2" -> "done"
-  const [phase, setPhase] = useState("type1");
-  const [typedPlaceholder, setTypedPlaceholder] = useState(0);
+  // Phases: "type2" -> "line2" -> "done"
+  const [phase, setPhase] = useState("type2");
   const [typedReal, setTypedReal] = useState(0);
   const [typedLine2, setTypedLine2] = useState(0);
-  const [textOpacity, setTextOpacity] = useState(1);
   const [showRest, setShowRest] = useState(false);
 
-  // Phase 1: Type "Peak club?"
-  useEffect(() => {
-    if (phase !== "type1") return;
-    if (typedPlaceholder < PLACEHOLDER.length) {
-      const t = setTimeout(() => setTypedPlaceholder((c) => c + 1), TYPE_SPEED);
-      return () => clearTimeout(t);
-    }
-    const t = setTimeout(() => {
-      setTextOpacity(0);
-      setPhase("fade1");
-    }, PAUSE_BEFORE_FADE);
-    return () => clearTimeout(t);
-  }, [phase, typedPlaceholder]);
-
-  // Phase 2: Wait for fade out, switch text config, fade back in
-  useEffect(() => {
-    if (phase !== "fade1") return;
-    const t = setTimeout(() => {
-      setTextOpacity(1);
-      setPhase("type2");
-    }, FADE_DURATION);
-    return () => clearTimeout(t);
-  }, [phase]);
+  // Phase 1: Type "Finance Club"
 
   // Phase 3: Type "Finance Club"
-  useEffect(() => {
+    useEffect(() => {
     if (phase !== "type2") return;
     if (typedReal < REAL.length) {
-      const t = setTimeout(() => setTypedReal((c) => c + 1), TYPE_SPEED);
+      const t = setTimeout(() => setTypedReal((c) => c + 1), TYPE_SPEED_LINE1);
       return () => clearTimeout(t);
     }
     const t = setTimeout(() => setPhase("line2"), PAUSE_BEFORE_LINE2);
@@ -114,8 +88,7 @@ useEffect(() => {
   return () => clearTimeout(t);
 }, [phase, typedLine2]);
 
-  const isShowingPlaceholder = phase === "type1" || phase === "fade1";
-  const line1Done = phase === "type2" || phase === "line2" || phase === "done";
+    const line1Done = phase === "type2" || phase === "line2" || phase === "done";
   const line2Done = typedLine2 >= LINE2.length;
 
   return (
@@ -163,32 +136,23 @@ useEffect(() => {
   fontSize: "clamp(3.8rem, 7.5vw, 9rem)",
 }}
     >
-     <span 
-  className="inline-block w-full transition-opacity duration-300 min-h-[2.4em] align-top"
-  style={{ opacity: textOpacity }}
+          <span 
+  className="inline-block w-full min-h-[2.4em] sm:min-h-[1.2em] align-top"
 >
-        {isShowingPlaceholder ? (
-          <span className="text-cream/50">
-            {PLACEHOLDER.slice(0, typedPlaceholder)}
-          </span>
-        ) : (
-          <>
-            <span className="text-gradient-gold">
+                    <span className="text-gradient-gold" style={{ willChange: "contents" }}>
               {REAL.slice(0, Math.min(typedReal, REAL_SPLIT))}
             </span>
-            <span className="text-cream">
-              {REAL.slice(REAL_SPLIT, typedReal)}
-            </span>
-          </>
-        )}
+        <span className="text-cream">
+          {REAL.slice(REAL_SPLIT, typedReal)}
+        </span>
         {!line1Done && (
           <span className="inline-block w-[4px] h-[0.85em] bg-gold ml-1 align-middle animate-[blink_0.9s_steps(1)_infinite]" />
         )}
       </span>
 
       <br />
-      <span
-        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-8 min-h-[1.2em] whitespace-nowrap"
+            <span
+        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-8 sm:pt-2 min-h-[1.2em] whitespace-nowrap"
         style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(1.75rem, 3.2vw, 3rem)",
