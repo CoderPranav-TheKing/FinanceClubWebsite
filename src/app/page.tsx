@@ -163,10 +163,10 @@ useEffect(() => {
   fontSize: "clamp(3.8rem, 7.5vw, 9rem)",
 }}
     >
-      <span 
-        className="inline-block transition-opacity duration-300 min-h-[1.1em]"
-        style={{ opacity: textOpacity }}
-      >
+     <span 
+  className="inline-block w-full transition-opacity duration-300 min-h-[2.4em] align-top"
+  style={{ opacity: textOpacity }}
+>
         {isShowingPlaceholder ? (
           <span className="text-cream/50">
             {PLACEHOLDER.slice(0, typedPlaceholder)}
@@ -188,7 +188,7 @@ useEffect(() => {
 
       <br />
       <span
-        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-8"
+        className="text-cream/60 font-semibold tracking-wider block mt-1 sm:mt-0 pt-8 min-h-[1.2em] whitespace-nowrap"
         style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(1.75rem, 3.2vw, 3rem)",
@@ -268,7 +268,7 @@ useEffect(() => {
                   Building{" "}
                   <span className="text-gradient-gold">Finance Acumen</span>
                 </h2>
-                <p className="text-cream/35 mt-5 text-sm sm:text-xl lg:text-2xl lg:leading-relaxed max-w-4xl mx-auto text-left sm:text-center">
+                <p className="text-cream/35 mt-5 text-lg sm:text-xl lg:text-2xl lg:leading-relaxed max-w-4xl mx-auto text-center sm:text-center">
                   From flagship competitions to published research - structured
                   pathways across every major finance discipline. Hover over any
                   sector to explore what it covers.
@@ -276,7 +276,7 @@ useEffect(() => {
             </ScrollReveal>
               
             <ScrollReveal delay={200}>
-              <div className="mt-24 sm:mt-28 pb-25">
+              <div className="mt-15 sm:mt-28 pb-25">
                 <FinanceWheel />
               </div>
             </ScrollReveal>
@@ -326,12 +326,12 @@ useEffect(() => {
                       <div key={stat.label} className={`${stat.glow} p-6 text-center`}>
                         <stat.icon className="w-6 h-6 text-gold/60 mx-auto mb-3" />
                         <div
-                          className="text-3xl lg:text-3xl font-extrabold text-cream mb-1"
+                          className="text-2xl lg:text-3xl font-extrabold text-cream mb-1"
                           style={{ fontFamily: "var(--font-display)" }}
                         >
                           <AnimatedCounter value={stat.value} />
                         </div>
-                        <div className="text-sm lg:text-lg text-cream/60">{stat.label}</div>
+                        <div className="text-xs lg:text-lg text-cream/60">{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -518,13 +518,13 @@ useEffect(() => {
                     Join the Community
                   </div>
                   <h2
-                    className="text-5xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight mb-5"
+                    className="text-4xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight mb-5"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     Ready to{" "}
                     <span className="text-gradient-gold">Level Up</span>?
                   </h2>
-                  <p className="text-cream/50 max-w-3xl mx-auto mb-10 leading-relaxed text-xl">
+                  <p className="text-cream/50 max-w-3xl mx-auto mb-10 leading-relaxed text-lg lg:text-xl">
                     Compete in flagship events, access curated resources and be
                     part of IIT Bombay&apos;s most active finance community.
                   </p>

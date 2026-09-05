@@ -28,7 +28,7 @@ export default function TypewriterAboutTitle() {
   return (
     <>
       <h1
-  className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[0.0em] leading-tight mb-6"
+  className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[0.0em] leading-tight mb-6"
   style={{ fontFamily: "var(--font-display)" }}
 >
         <span className="text-cream">{creamPart}</span>
@@ -39,7 +39,7 @@ export default function TypewriterAboutTitle() {
       </h1>
 
       <p
-        className={`text-2xl text-cream/95 max-w-2xl leading-relaxed transition-opacity duration-700 ${
+        className={`text-lg lg:text-2xl text-cream/95 max-w-2xl leading-relaxed transition-opacity duration-700 ${
           showParagraph ? "opacity-100" : "opacity-0"
         }`}
       >

@@ -210,7 +210,7 @@ const typingDone = typed >= TYPED_TEXT.length;
   )}
 </h1>
 <p
-  className={`text-2xl text-cream/85 max-w-2xl leading-relaxed transition-opacity duration-700 ${
+  className={`text-lg lg:text-2xl text-cream/85 max-w-2xl leading-relaxed transition-opacity duration-700 ${
     showParagraph ? "opacity-100" : "opacity-0"
   }`}
 >
@@ -288,33 +288,33 @@ const typingDone = typed >= TYPED_TEXT.length;
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-2 justify-center">
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`badge-pill cursor-pointer transition-all ${
-                activeTab === "all" ? "badge-gold" : "badge-cream"
-              }`}
-            >
-              All
-            </button>
-            {eventCategories.map((cat) => {
-              const Icon = categoryIcons[cat.id];
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() =>
-                    setActiveTab(cat.id === activeTab ? "all" : cat.id)
-                  }
-                  className={`badge-pill cursor-pointer transition-all ${
-                    activeTab === cat.id ? "badge-gold" : "badge-cream"
-                  }`}
-                >
-                  <Icon className="w-3 h-3" />
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
+          <div className="flex flex-wrap gap-2 justify-center max-sm:gap-1.5">
+  <button
+    onClick={() => setActiveTab("all")}
+    className={`badge-pill cursor-pointer transition-all max-sm:text-[10px] max-sm:px-2 max-sm:py-1 ${
+      activeTab === "all" ? "badge-gold" : "badge-cream"
+    }`}
+  >
+    All
+  </button>
+  {eventCategories.map((cat) => {
+    const Icon = categoryIcons[cat.id];
+    return (
+      <button
+        key={cat.id}
+        onClick={() =>
+          setActiveTab(cat.id === activeTab ? "all" : cat.id)
+        }
+        className={`badge-pill cursor-pointer transition-all max-sm:text-[10px] max-sm:px-2 max-sm:py-1 max-sm:gap-1 ${
+          activeTab === cat.id ? "badge-gold" : "badge-cream"
+        }`}
+      >
+        <Icon className="w-3 h-3 max-sm:w-2.5 max-sm:h-2.5" />
+        {cat.label}
+      </button>
+    );
+  })}
+</div>
         </div>
       </div>
     </ScrollReveal>

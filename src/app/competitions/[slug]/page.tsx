@@ -153,7 +153,7 @@ export default function CompetitionDetailPage({
       <section className="py-16 sm:py-20 px-6">
         <div className="max-w-6xl mx-auto text-left">
           <p
-            className="text-xl sm:text-2xl text-cream/60 max-w-6xl mx-auto leading-relaxed"
+            className="text-lg sm:text-2xl lg:text-xl text-cream/60 max-w-6xl mx-auto leading-relaxed"
             style={{
               fontFamily: "var(--font-body)",
             }}
@@ -192,7 +192,7 @@ export default function CompetitionDetailPage({
               </p>
 
               <p
-                className="text-4xl sm:text-4xl lg:text-5xl leading-none text-[#F5E6D0]"
+                className="text-3xl sm:text-4xl lg:text-5xl leading-none text-[#F5E6D0]"
                 style={{
                   fontFamily: "var(--font-body)",
                 }}
@@ -220,7 +220,7 @@ export default function CompetitionDetailPage({
           </h2>
 
           <p
-            className="max-w-3xl mx-auto text-xl sm:text-2xl leading-relaxed text-cream/55 mb-11"
+            className="max-w-3xl mx-auto text-lg sm:text-2xl lg:text-xl leading-relaxed text-cream/55 mb-11"
             style={{
               fontFamily: "var(--font-body)",
             }}

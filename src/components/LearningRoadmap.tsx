@@ -204,13 +204,11 @@ export default function LearningRoadmap() {
   const activeSection = SECTIONS.find((s) => s.id === activeId) ?? null;
 
   return (
-    <div className="relative">
-      <div className="relative mx-auto w-[380px] h-[380px] sm:w-[540px] sm:h-[540px] lg:w-[660px] lg:h-[660px]">
-        {SECTIONS.map((section, i) => {
+    <div className="relative flex justify-center">
+      <div className="relative w-[380px] h-[380px] sm:w-[540px] sm:h-[540px] lg:w-[660px] lg:h-[660px]">
+       {SECTIONS.map((section, i) => {
           const startAngle = START_OFFSET + i * ANGLE_STEP + GAP_DEG / 2;
           const endAngle = START_OFFSET + (i + 1) * ANGLE_STEP - GAP_DEG / 2;
-          const bisector = (startAngle + endAngle) / 2;
-          const labelPos = polar(INNER_RADIUS + (OUTER_RADIUS - INNER_RADIUS) * 0.48, bisector);
 
           return (
             <button
@@ -221,28 +219,40 @@ export default function LearningRoadmap() {
               aria-label={`Open ${section.label}`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#1C1616] to-[#141010] border border-gold/15 transition-colors duration-300 group-hover:from-[#231C1C] group-hover:border-gold/40" />
-
-              <div
-  className="absolute flex flex-col items-center text-center pointer-events-none px-1"
-  style={{
-    left: `${labelPos.left}%`,
-    top: `${labelPos.top}%`,
-    transform: "translate(-50%, -50%)",
-    width: "30%",
-  }}
->
-  <section.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-gold mb-2 transition-transform duration-300 group-hover:scale-110" />
-  <span
-    className="font-bold text-[11px] sm:text-[13px] lg:text-[15px] text-cream leading-[1.2]"
-    style={{ fontFamily: "var(--font-display)" }}
-  >
-    {section.label}
-  </span>
-  <span className="text-[10px] sm:text-[11px] text-gold/50 mt-1 uppercase tracking-wider">
-    {section.tagline}
-  </span>
-</div>
             </button>
+          );
+        })}
+
+        {/* Labels rendered as a separate, unclipped layer on top so text
+            is never sliced by a sector's angled edge */}
+        {SECTIONS.map((section, i) => {
+          const startAngle = START_OFFSET + i * ANGLE_STEP + GAP_DEG / 2;
+          const endAngle = START_OFFSET + (i + 1) * ANGLE_STEP - GAP_DEG / 2;
+          const bisector = (startAngle + endAngle) / 2;
+          const labelPos = polar(INNER_RADIUS + (OUTER_RADIUS - INNER_RADIUS) * 0.48, bisector);
+
+          return (
+            <div
+              key={`label-${section.id}`}
+              className="absolute flex flex-col items-center text-center pointer-events-none px-1"
+              style={{
+                left: `${labelPos.left}%`,
+                top: `${labelPos.top}%`,
+                transform: "translate(-50%, -50%)",
+                width: "28%",
+              }}
+            >
+              <section.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-gold mb-2" />
+              <span
+                className="font-bold text-[10px] sm:text-[13px] lg:text-[15px] text-cream leading-[1.15]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {section.label}
+              </span>
+              <span className="text-[9px] sm:text-[11px] text-gold/50 mt-1 uppercase tracking-wider">
+                {section.tagline}
+              </span>
+            </div>
           );
         })}
 

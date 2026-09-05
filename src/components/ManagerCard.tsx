@@ -6,8 +6,9 @@ import { teamMembers } from "@/data/team";
 
 export default function ManagerCard({ member, compact = false }: { member: typeof teamMembers[0]; compact?: boolean }) {
   const photoSrc = member.photo.startsWith("/") ? member.photo : `/${member.photo.trim()}`;
-  const sizeClass = compact ? "w-full h-full" : "w-[300px] h-[380px]";
-
+const sizeClass = compact
+    ? "w-full h-full"
+    : "w-[58vw] max-w-[300px] aspect-[300/380] sm:w-[300px] sm:h-[380px] sm:aspect-auto";
   return (
     <div className={`relative ${sizeClass} rounded-2xl overflow-hidden group border border-gold/20`}>
       <Image

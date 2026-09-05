@@ -17,16 +17,23 @@ export default function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+    useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    let revealed = false;
+    const reveal = () => {
+      if (revealed) return;
+      revealed = true;
+      setTimeout(() => {
+        el.classList.add("scroll-revealed");
+      }, delay);
+    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            el.classList.add("scroll-revealed");
-          }, delay);
+          reveal();
           observer.unobserve(el);
         }
       },
@@ -34,7 +41,16 @@ export default function ScrollReveal({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+
+    // Safety net: if this section is already on/near screen at load
+    // time but a layout shift (images, fonts, later content) means
+    // the observer never fires cleanly, don't leave it stuck hidden.
+    const fallback = setTimeout(reveal, 1200);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
   }, [delay, threshold]);
 
   return (

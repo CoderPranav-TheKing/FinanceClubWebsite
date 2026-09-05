@@ -108,7 +108,7 @@ export default function ResourcesPage() {
                 showRest ? "opacity-100" : "opacity-0"
               }`}
             >
-              <p className="text-2xl lg:text-2xl text-cream/85 max-w-2xl leading-relaxed mb-10">
+              <p className="text-xl lg:text-2xl text-cream/85 max-w-2xl leading-relaxed mb-10">
                 Curated guides, materials and references built by the team.
               </p>
 
@@ -132,11 +132,11 @@ export default function ResourcesPage() {
         <div className="max-w-6xl mx-auto">
 
           {/* Category pills + buttons */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
-            <div className="flex flex-wrap gap-2">
+             <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
+            <div className="flex flex-wrap gap-2 max-sm:gap-1.5">
               <button
                 onClick={() => setActiveCategory(null)}
-                className={`badge-pill cursor-pointer transition-all ${
+                className={`badge-pill cursor-pointer transition-all max-sm:text-[10px] max-sm:px-2.5 max-sm:py-1 ${
                   !activeCategory ? "badge-gold" : "badge-cream"
                 }`}
               >
@@ -151,7 +151,7 @@ export default function ResourcesPage() {
                       cat === activeCategory ? null : cat
                     )
                   }
-                  className={`badge-pill cursor-pointer capitalize transition-all ${
+                  className={`badge-pill cursor-pointer capitalize transition-all max-sm:text-[10px] max-sm:px-2.5 max-sm:py-1 ${
                     activeCategory === cat
                       ? "badge-gold"
                       : "badge-cream"
@@ -163,7 +163,7 @@ export default function ResourcesPage() {
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 max-sm:gap-2">
 
               {/* Visit LinkTree */}
               <a
@@ -171,23 +171,24 @@ export default function ResourcesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  inline-flex items-center gap-2
-                  px-5 py-2.5
+                  inline-flex items-center gap-2 max-sm:gap-1.5
+                  px-5 py-2.5 max-sm:px-3 max-sm:py-1.5
                   rounded-full
                   bg-gold
                   text-[#0D0A0A]
                   border border-gold
                   font-bold
-                  text-sm
+                  text-sm max-sm:text-xs
                   tracking-wide
                   shadow-[0_0_20px_rgba(245,183,49,0.35)]
                   hover:shadow-[0_0_30px_rgba(245,183,49,0.65)]
                   hover:scale-105
                   transition-all duration-300
                   cursor-pointer
+                  whitespace-nowrap
                 "
               >
-                <LinkIcon className="w-4 h-4" />
+                 <LinkIcon className="w-4 h-4 max-sm:w-3.5 max-sm:h-3.5 shrink-0" />
                 Visit LinkTree
               </a>
 
@@ -195,24 +196,26 @@ export default function ResourcesPage() {
               <a
                 href="#finlearn-roadmap"
                 className="
-                  inline-flex items-center gap-2
-                  px-5 py-2.5
+                  inline-flex items-center gap-2 max-sm:gap-1.5
+                  px-5 py-2.5 max-sm:px-3 max-sm:py-1.5
                   rounded-full
                   bg-gold
                   text-[#0D0A0A]
                   border border-gold
                   font-bold
-                  text-sm
+                  text-sm max-sm:text-xs
                   tracking-wide
                   shadow-[0_0_20px_rgba(245,183,49,0.35)]
                   hover:shadow-[0_0_30px_rgba(245,183,49,0.65)]
                   hover:scale-105
                   transition-all duration-300
                   cursor-pointer
+                  whitespace-nowrap
                 "
               >
-                <Map className="w-4 h-4" />
-                View FinLearn Roadmap
+                <Map className="w-4 h-4 max-sm:w-3.5 max-sm:h-3.5 shrink-0" />
+                <span className="max-sm:hidden">View FinLearn Roadmap</span>
+                <span className="hidden max-sm:inline"> View Finlearn Roadmap</span>
               </a>
 
             </div>
@@ -307,7 +310,7 @@ export default function ResourcesPage() {
                 </span>
               </h2>
 
-              <p className="text-cream/80 max-w-2xl mx-auto text-xl">
+              <p className="text-cream/80 max-w-2xl mx-auto text-lg lg:text-2xl leading-relaxed">
                 A curated path for students starting out in finance - from
                 market basics to placement-ready technicals and the CFA
                 track. Click any sector to explore.
