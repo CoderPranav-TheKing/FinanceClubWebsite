@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   Trophy,
@@ -9,6 +9,7 @@ import {
   BookOpen,
   BarChart3,
   Award,
+  X,
 } from "lucide-react";
 
 const SECTORS = [
@@ -97,40 +98,101 @@ function wedgeClipPath(startAngle: number, endAngle: number) {
 }
 
 export default function FinanceWheel() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    const checkMobile = () => {
+      const isTouchOrSmall =
+        typeof window !== "undefined" &&
+        (window.innerWidth < 768 ||
+          window.matchMedia("(hover: none)").matches ||
+          window.matchMedia("(pointer: coarse)").matches);
+      setIsMobile(isTouchOrSmall);
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-  return (
-    <div className="relative mx-auto w-[88vw] h-[88vw] max-w-[320px] max-h-[320px] sm:w-[460px] sm:h-[460px] sm:max-w-none sm:max-h-none lg:w-[620px] lg:h-[620px]">
 
+  // Close active card on mobile when tapping outside container
+  useEffect(() => {
+    if (!isMobile || activeIndex === null) return;
+
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setActiveIndex(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsideClick);
+    return () =>
+      document.removeEventListener("pointerdown", handleOutsideClick);
+  }, [isMobile, activeIndex]);
+
+  const handleSectorClick = (i: number) => {
+    if (isMobile) {
+      setActiveIndex((prev) => (prev === i ? null : i));
+    }
+  };
+
+  const handleMouseEnter = (i: number) => {
+    if (!isMobile) {
+      setActiveIndex(i);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setActiveIndex(null);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative mx-auto w-[88vw] h-[88vw] max-w-[320px] max-h-[320px] sm:w-[460px] sm:h-[460px] sm:max-w-none sm:max-h-none lg:w-[620px] lg:h-[620px]"
+    >
       {/* =========================================================
           MAIN WHEEL
       ========================================================= */}
       <div className="absolute inset-0 rounded-full overflow-hidden border-2 border-gold/25 shadow-[0_0_60px_-10px_rgba(245,183,49,0.25)]">
-
         {SECTORS.map((sector, i) => {
           const startAngle = START_OFFSET + i * ANGLE_STEP;
           const endAngle = startAngle + ANGLE_STEP;
           const bisector = startAngle + ANGLE_STEP / 2;
 
           const labelPos = polar(30, bisector);
-          const isHovered = hoveredIndex === i;
+          const isActive = activeIndex === i;
 
           return (
             <div
               key={sector.title}
-              className="absolute inset-0 cursor-default"
+              role={isMobile ? "button" : undefined}
+              tabIndex={isMobile ? 0 : undefined}
+              aria-label={`${sector.title}: ${sector.desc}`}
+              aria-pressed={isMobile ? isActive : undefined}
+              className={`absolute inset-0 select-none ${
+                isMobile
+                  ? "cursor-pointer active:scale-[0.98] transition-transform"
+                  : "cursor-pointer"
+              }`}
               style={{
                 clipPath: wedgeClipPath(startAngle, endAngle),
               }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => handleSectorClick(i)}
+              onMouseEnter={() => handleMouseEnter(i)}
+              onMouseLeave={handleMouseLeave}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleSectorClick(i);
+                }
+              }}
             >
               <Image
                 src={sector.image}
@@ -140,16 +202,16 @@ export default function FinanceWheel() {
                 style={{
                   transform: `
                     translate(${sector.imageX}%, ${sector.imageY}%)
-                    scale(${isHovered ? sector.imageScale + 0.08 : sector.imageScale})
+                    scale(${isActive ? sector.imageScale + 0.08 : sector.imageScale})
                   `,
                 }}
-                sizes="620px"
+                sizes="(max-width: 640px) 320px, (max-width: 1024px) 460px, 620px"
               />
 
               {/* Dark overlay */}
               <div
                 className={`absolute inset-0 transition-colors duration-300 ${
-                  isHovered ? "bg-black/40" : "bg-black/62"
+                  isActive ? "bg-black/35" : "bg-black/62"
                 }`}
               />
 
@@ -163,10 +225,16 @@ export default function FinanceWheel() {
                   width: "34%",
                 }}
               >
-                <sector.icon className="w-5 h-5 text-gold mb-1.5" />
+                <sector.icon
+                  className={`w-5 h-5 mb-1.5 transition-colors duration-300 ${
+                    isActive ? "text-gold-light scale-110" : "text-gold"
+                  }`}
+                />
 
                 <span
-                  className="font-bold text-sm sm:text-lg lg:text-xl text-cream leading-tight whitespace-nowrap"
+                  className={`font-bold text-xs sm:text-lg lg:text-xl leading-tight whitespace-nowrap transition-colors duration-300 ${
+                    isActive ? "text-gold-light" : "text-cream"
+                  }`}
                   style={{
                     fontFamily: "var(--font-display)",
                   }}
@@ -204,66 +272,120 @@ export default function FinanceWheel() {
       </div>
 
       {/* =========================================================
-          HOVER DESCRIPTION CARDS
-          
-          IMPORTANT:
-          47% brings them much closer to the wheel.
-          44% keeps them compact so they don't float far away.
-          They intentionally overlap the wheel slightly.
+          DESKTOP HOVER DESCRIPTION CARDS
       ========================================================= */}
-      {SECTORS.map((sector, i) => {
-        const startAngle = START_OFFSET + i * ANGLE_STEP;
-        const bisector = startAngle + ANGLE_STEP / 2;
+      {!isMobile &&
+        SECTORS.map((sector, i) => {
+          const startAngle = START_OFFSET + i * ANGLE_STEP;
+          const bisector = startAngle + ANGLE_STEP / 2;
+          const petalPos = polar(47, bisector);
+          const isHovered = activeIndex === i;
 
-        // Previously 64%.
-        // 47% puts the cards much closer to the wheel.
-        const petalPos = polar(isMobile ? 36 : 47, bisector);
-
-        const isHovered = hoveredIndex === i;
-
-        return (
-          <div
-            key={`petal-${sector.title}`}
-            className={`absolute transition-all duration-300 ease-out z-30 ${
-              isHovered
-                ? "opacity-100 scale-100 pointer-events-auto"
-                : "opacity-0 scale-90 pointer-events-none"
-            }`}
-            style={{
-              left: `${petalPos.left}%`,
-              top: `${petalPos.top}%`,
-              transform: "translate(-50%, -50%)",
-              width: "54%",
-            }}
-          >
+          return (
             <div
-              className="
-                card-glow-gold
-                rounded-2xl
-                p-4
-                sm:p-5
-                text-center
-                shadow-2xl
-                backdrop-blur-md
-                bg-black/65
-                border border-gold/20
-              "
+              key={`petal-${sector.title}`}
+              className={`absolute transition-all duration-300 ease-out z-30 ${
+                isHovered
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-90 pointer-events-none"
+              }`}
+              style={{
+                left: `${petalPos.left}%`,
+                top: `${petalPos.top}%`,
+                transform: "translate(-50%, -50%)",
+                width: "54%",
+              }}
             >
-              <p
+              <div
                 className="
-                  text-xs
-                  sm:text-base
-                  lg:text-lg
-                  text-cream/80
-                  leading-relaxed
+                  card-glow-gold
+                  rounded-2xl
+                  p-4
+                  sm:p-5
+                  text-center
+                  shadow-2xl
+                  backdrop-blur-md
+                  bg-black/75
+                  border border-gold/30
                 "
               >
-                {sector.desc}
-              </p>
+                <p
+                  className="
+                    text-xs
+                    sm:text-base
+                    lg:text-lg
+                    text-cream/90
+                    leading-relaxed
+                  "
+                >
+                  {sector.desc}
+                </p>
+              </div>
             </div>
+          );
+        })}
+
+      {/* =========================================================
+          MOBILE CLICK POPUP MODAL CARD
+      ========================================================= */}
+      {isMobile && activeIndex !== null && (
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center p-3 animate-in fade-in zoom-in-95 duration-200"
+          onClick={() => setActiveIndex(null)}
+        >
+          <div
+            className="
+              card-glow-gold
+              rounded-2xl
+              p-4
+              text-center
+              shadow-2xl
+              backdrop-blur-xl
+              bg-[#141010]/95
+              border border-gold/40
+              w-full
+              max-w-[280px]
+              relative
+            "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveIndex(null)}
+              className="absolute top-2.5 right-2.5 p-1 rounded-full text-cream/60 hover:text-gold hover:bg-gold/10 transition-colors"
+              aria-label="Close details"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            {(() => {
+              const sector = SECTORS[activeIndex];
+              const IconComponent = sector.icon;
+              return (
+                <>
+                  <div className="w-8 h-8 rounded-full bg-gold/15 border border-gold/30 flex items-center justify-center mx-auto mb-2 text-gold">
+                    <IconComponent className="w-4 h-4" />
+                  </div>
+                  <h4
+                    className="font-bold text-sm text-gold mb-1.5"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {sector.title}
+                  </h4>
+                  <p className="text-xs text-cream/85 leading-relaxed">
+                    {sector.desc}
+                  </p>
+                  <div className="mt-3 pt-2 border-t border-gold/10 flex items-center justify-center">
+                    <span className="text-[10px] text-gold/70 uppercase tracking-widest font-medium">
+                      Tap anywhere to close
+                    </span>
+                  </div>
+                </>
+              );
+            })()}
           </div>
-        );
-      })}
+        </div>
+      )}
 
       {/* =========================================================
           CENTER HUB

@@ -229,8 +229,10 @@ useEffect(() => {
                 </h2>
                 <p className="text-cream/35 mt-5 text-lg sm:text-xl lg:text-2xl lg:leading-relaxed max-w-4xl mx-auto text-center sm:text-center">
                   From flagship competitions to published research - structured
-                  pathways across every major finance discipline. Hover over any
-                  sector to explore what it covers.
+                  pathways across every major finance discipline.{" "}
+                  <span className="hidden sm:inline">Hover over</span>
+                  <span className="sm:hidden">Tap</span> any sector to explore
+                  what it covers.
                 </p>
             </ScrollReveal>
               
