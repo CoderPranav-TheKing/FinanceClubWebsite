@@ -41,8 +41,14 @@ export default function HomePage() {
   const REAL_SPLIT = 7; 
   const LINE2 = "IIT BOMBAY";
 
-    const TYPE_SPEED = typeof window !== "undefined" && window.innerWidth < 640 ? 10 : 30;
-  const TYPE_SPEED_LINE1 = typeof window !== "undefined" && window.innerWidth < 640 ? 6 : 30;
+    const [typeSpeed, setTypeSpeed] = useState(30);
+const [typeSpeedLine1, setTypeSpeedLine1] = useState(30);
+
+useEffect(() => {
+  const mobile = window.innerWidth < 640;
+  setTypeSpeed(mobile ? 10 : 30);
+  setTypeSpeedLine1(mobile ? 6 : 30);
+}, []);
   const PAUSE_BEFORE_LINE2 = 300;
   const PAUSE_BEFORE_REST = 1000;
 
@@ -56,38 +62,27 @@ export default function HomePage() {
 
   // Phase 3: Type "Finance Club"
     useEffect(() => {
-    if (phase !== "type2") return;
-    if (typedReal < REAL.length) {
-      const t = setTimeout(() => setTypedReal((c) => c + 1), TYPE_SPEED_LINE1);
-      return () => clearTimeout(t);
-    }
-    const t = setTimeout(() => setPhase("line2"), PAUSE_BEFORE_LINE2);
-    return () => clearTimeout(t);
-  }, [phase, typedReal]);
-
-  // Phase 4: Type "IIT BOMBAY" and unlock the rest of the page
-  // Phase 4: Type "IIT BOMBAY", then pause before revealing the rest
-useEffect(() => {
-  if (phase !== "line2") return;
-
-  if (typedLine2 < LINE2.length) {
-    const t = setTimeout(
-      () => setTypedLine2((c) => c + 1),
-      TYPE_SPEED
-    );
-
+  if (phase !== "type2") return;
+  if (typedReal < REAL.length) {
+    const t = setTimeout(() => setTypedReal((c) => c + 1), typeSpeedLine1);
     return () => clearTimeout(t);
   }
+  const t = setTimeout(() => setPhase("line2"), PAUSE_BEFORE_LINE2);
+  return () => clearTimeout(t);
+}, [phase, typedReal, typeSpeedLine1]);
 
-  // Give the completed title some breathing room
+useEffect(() => {
+  if (phase !== "line2") return;
+  if (typedLine2 < LINE2.length) {
+    const t = setTimeout(() => setTypedLine2((c) => c + 1), typeSpeed);
+    return () => clearTimeout(t);
+  }
   const t = setTimeout(() => {
     setPhase("done");
     setShowRest(true);
   }, PAUSE_BEFORE_REST);
-
   return () => clearTimeout(t);
-}, [phase, typedLine2]);
-
+}, [phase, typedLine2, typeSpeed]);
     const line1Done = phase === "type2" || phase === "line2" || phase === "done";
   const line2Done = typedLine2 >= LINE2.length;
 

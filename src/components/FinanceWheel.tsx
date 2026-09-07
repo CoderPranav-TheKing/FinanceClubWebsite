@@ -230,12 +230,11 @@ export default function FinanceWheel() {
                 : "opacity-0 scale-90 pointer-events-none"
             }`}
             style={{
-  left: `${petalPos.left}%`,
-  top: `${petalPos.top}%`,
-  transform: "translate(-50%, -50%)",
-  width: isMobile ? "50%" : "44%",
-  maxWidth: isMobile ? "210px" : "none",
-}}
+              left: `${petalPos.left}%`,
+              top: `${petalPos.top}%`,
+              transform: "translate(-50%, -50%)",
+              width: "54%",
+            }}
           >
             <div
               className="
@@ -290,3 +289,4 @@ export default function FinanceWheel() {
     </div>
   );
 }
+
