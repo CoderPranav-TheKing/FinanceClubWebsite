@@ -174,7 +174,7 @@ export default function PartnersPage() {
         </span>
       </h1>
       <p
-        className={`text-2xl text-cream/85 max-w-2xl leading-relaxed transition-all duration-1200 ease-out ${
+        className={` text-lg sm:text-2xl text-cream/85 max-w-2xl leading-relaxed transition-all duration-1200 ease-out ${
           typingDone ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >
@@ -406,7 +406,7 @@ export default function PartnersPage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        placeholder="you@company.com"
+                        placeholder="you@gmail.com"
                         className="w-full px-4 py-3 rounded-xl bg-[rgba(20,16,16,0.6)] border border-cream/[0.06] text-cream placeholder:text-cream/20 focus:border-gold/20 focus:outline-none transition-colors text-sm"
                       />
                     </div>

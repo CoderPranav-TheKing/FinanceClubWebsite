@@ -66,17 +66,17 @@ export default function AboutPage() {
       <div className="relative z-10">
         <h2 className="text-5xl lg:text-6xl font-extrabold text-gradient-gold mb-6" style={{ fontFamily: "var(--font-display)" }}>Who We Are</h2>
         <div className="space-y-4 text-cream/90 leading-relaxed">
-          <p className='text-sm lg:text-xl'>
+          <p className='text-lg lg:text-xl'>
             Finance Club IIT Bombay is the institute&apos;s foremost student body dedicated to finance
             education, research and industry interaction. We are a team of passionate students cultivating
             financial literacy and analytical skills across the IITB community.
           </p>
-          <p className='text-sm lg:text-xl'>
+          <p className='text-lg lg:text-xl'>
             Through competitions, bootcamps, guest lectures and publications, we provide hands-on
             exposure to real-world finance : from equity research and trading to private equity,
             venture capital and quantitative finance.
           </p>
-          <p className='text-sm lg:text-xl'>
+          <p className='text-lg lg:text-xl'>
             Our events bring together an ambitious community of students at IIT Bombay, while our collaborations with leading financial firms create valuable opportunities for networking and industry engagement.
           </p>
         </div>
